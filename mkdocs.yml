@@ -1,4 +1,5 @@
 site_name: Computer Engineering KB
+docs_dir: .
 theme:
   name: material
   palette:
@@ -7,6 +8,12 @@ theme:
   features:
     - navigation.tabs
     - search.share
+
+exclude_patterns:
+  - "*.py"
+  - ".github/**/*"
+  - "requirements.txt"
+  - ".vscode/**/*"
 
 nav:
   - Home: index.md
