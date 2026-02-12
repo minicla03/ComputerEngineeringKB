@@ -1,12 +1,19 @@
 site_name: Computer Engineering KB
+site_url: https://minicla03.github.io/ComputerEngineeringKB/
 theme:
   name: material
+  icon:
+    logo: material/library
+  #favicon: assets/favicon.png # Assicurati di avere un file favicon.png in assets
   palette:
     scheme: slate
     primary: indigo
   features:
     - navigation.tabs
     - search.share
+
+extra:
+  manifest: manifest.webmanifest
 
 exclude_patterns:
   - "*.py"
