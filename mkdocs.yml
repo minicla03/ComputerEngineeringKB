@@ -1,5 +1,4 @@
 site_name: Computer Engineering KB
-docs_dir: .
 theme:
   name: material
   palette:
@@ -14,15 +13,6 @@ exclude_patterns:
   - ".github/**/*"
   - "requirements.txt"
   - ".vscode/**/*"
-
-nav:
-  - Home: index.md
-  - Theory: 10_Theory/
-  - Languages: 20_Languages/
-  - Frameworks: 30_Frameworks_Tools/
-  - Design_Patterns: 40_Design_Patterns/
-  - Project_Journal: 50_Project_Journal/
-  - Meta: 99_Meta/
 
 plugins:
   - search

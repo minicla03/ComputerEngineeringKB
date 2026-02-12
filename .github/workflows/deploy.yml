@@ -18,8 +18,16 @@ jobs:
           python-version: "3.x"
 
       - name: Install dependencies
+        run: pip install mkdocs-material
+
+      - name: Staging Docs
         run: |
-          pip install mkdocs-material
+          mkdir docs
+          # Copia l'indice e le cartelle numerate nella cartella temporanea docs
+          cp index.md docs/
+          cp -r [0-9][0-9]_* docs/ 2>/dev/null || true
+          # Copia la cartella assets se esiste
+          cp -r assets docs/ 2>/dev/null || true
 
       - name: Build and Deploy
         run: |
