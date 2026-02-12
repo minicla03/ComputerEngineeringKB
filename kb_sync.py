@@ -2,6 +2,8 @@ import subprocess
 import datetime
 import sys
 
+from kb_stats import update_readme_stats
+
 def run_git_command(command):
     try:
         result = subprocess.run(command, check=True, capture_output=True, text=True)
@@ -15,6 +17,8 @@ def sync_kb():
 
     # 1. Git Add
     run_git_command(["git", "add", "."])
+
+    update_readme_stats()
 
     # 2. Git Commit
     # Se l'utente passa un messaggio come argomento, lo usa; altrimenti usa un timestamp.
