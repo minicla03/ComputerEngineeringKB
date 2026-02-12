@@ -1,19 +1,23 @@
-name: Deploy Quartz Site
+name: Deploy KB Site
 on:
   push:
     branches:
-      - main # Si attiva ad ogni push su main
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - run: npm install # Installa Quartz
-      - run: npx quartz build # Trasforma Markdown in HTML
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public # Pubblica il risultato online
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          pip install mkdocs-material
+
+      - name: Build and Deploy
+        run: mkdocs gh-pages --force

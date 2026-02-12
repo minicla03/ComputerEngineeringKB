@@ -1,0 +1,21 @@
+site_name: Computer Engineering KB
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: indigo
+  features:
+    - navigation.tabs
+    - search.share
+
+nav:
+  - Home: index.md
+  - Theory: 10_Theory/
+  - Languages: 20_Languages/
+  - Frameworks: 30_Frameworks_Tools/
+  - Design_Patterns: 40_Design_Patterns/
+  - Project_Journal: 50_Project_Journal/
+  - Meta: 99_Meta/
+
+plugins:
+  - search
