@@ -4,6 +4,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write # Fondamentale per permettere il push sul ramo gh-pages
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,11 +25,9 @@ jobs:
 
       - name: Staging Docs
         run: |
-          mkdir docs
-          # Copia l'indice e le cartelle numerate nella cartella temporanea docs
-          cp index.md docs/
+          mkdir -p docs
+          cp index.md docs/ 2>/dev/null || true
           cp -r [0-9][0-9]_* docs/ 2>/dev/null || true
-          # Copia la cartella assets se esiste
           cp -r assets docs/ 2>/dev/null || true
 
       - name: Build and Deploy
