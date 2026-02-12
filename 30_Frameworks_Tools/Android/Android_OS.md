@@ -1,4 +1,4 @@
-# Android OS
+# Android_OS
 
 Android è un sistema operativo sviluppato da Google basato su Linux e progettato per dispositivi mobile è un sistema operativo open source . Quindi il suo codice sorgente è pubblico e può essere modificato da sviluppatori e produttori di hardware per creare la propria versione di Android e adattarlo a loro dispositivo, Il problema di questo è che ciò porta a una frammentazione eccessiva delle versioni e questo causa problemi quando dobbiamo sviluppare delle applicazioni, perché dobbiamo individuare il numero di dispositivi compatibili con la versione che dovremo sviluppare.
 Android cerca di risolvere il problema di compatibilità creando degli appositi librerie che si possono utilizzare con andiamo a sviluppare il codice
