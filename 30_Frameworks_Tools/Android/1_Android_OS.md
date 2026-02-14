@@ -1,9 +1,11 @@
-# Android_OS
+# Android
 
 Android è un sistema operativo sviluppato da Google basato su Linux e progettato per dispositivi mobile è un sistema operativo open source . Quindi il suo codice sorgente è pubblico e può essere modificato da sviluppatori e produttori di hardware per creare la propria versione di Android e adattarlo a loro dispositivo, Il problema di questo è che ciò porta a una frammentazione eccessiva delle versioni e questo causa problemi quando dobbiamo sviluppare delle applicazioni, perché dobbiamo individuare il numero di dispositivi compatibili con la versione che dovremo sviluppare.
 Android cerca di risolvere il problema di compatibilità creando degli appositi librerie che si possono utilizzare con andiamo a sviluppare il codice
 
 Google gestisce il rilascio delle nuove versioni di Android sia per i propri dispositivi, la cui distribuzione avviene in maniera abbastanza rapida sia per gli altri dispositivi di altri produttori. Il sistema operativo di questi seguire. Deve seguire un **processo di qualifica** da parte di Google. Questo vuol dire che ogni qualvolta che Google rilascia un aggiornamento ogni produttore deve adattarlo al proprio hardware del dispositivo e questo richiede molto tempo perché modificano anche l’interfaccia. Una volta che hanno effettuato queste modifiche la versione deve essere approvata da Google per garantire che soddisfi standard di qualità compatibilità e sicurezza se si superano questi test al loro i produttori potranno rilasciare il loro aggiornamento per i loro dispositivi.
+
+## Android OS
 
 Il sistema Android è interamente sviluppato sopra al kernel Linux. Il motivo di questa scelta è dovuto al fatto che non sarebbero mai stati in grado di sviluppare un sistema completamente funzionante in tempi rapidi per poter entrare nel mercato. Linux era già un sistema operativo pienamente funzionante sotto ogni aspetto e che funzionava in modo molto efficiente e quindi l’idea di Google fu quello di estendere il sistema operativo Linux per adattarlo ai dispositivi mobile.
 

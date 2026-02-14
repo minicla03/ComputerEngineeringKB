@@ -1,4 +1,4 @@
-# **COMPILAZIONE APP ANDROID**
+# **Compilazione app Android**
 
 Per quanto riguarda la compilazione di un app android prima di generare il bytecode, le risorse usate nel processo vengono analizzate indicizzate e compilate in bytecode, ottimizzato per la piattaforma punto la componente. La componente che si occupa di fare questo è **AAPT2** che opera il modo **incrementale** cioè compila le risorse e linka tutti i file intermedi generati dalla compilazione. Produce la classe **R.java** che contiene tutte le risorse compilate a cui sono associate un ID con il quale si può far riferimento alla risorsa.
 
@@ -50,7 +50,7 @@ Se i due hash corrispondono, l’app è autentica e non è stata manomessa → v
 
 ![compilazione_app_schema](assets/compilazione_app_schema.png)
 
-# **AVVIO DI UN APPLICAZIONE ANDROID**
+# **Avvio di un'applicazione Android**
 
 Il processo di avvio di un'applicazione Android inizia quando l'utente o un altro componente di sistema richiede l'esecuzione di un componente dell’app. Se l'applicazione non è già in esecuzione, il sistema Android avvia un nuovo processo per essa.
 

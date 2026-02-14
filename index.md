@@ -31,7 +31,7 @@ Linguaggi di programmazione e sintassi core.
 
 Ecosistemi di sviluppo e strumenti specifici.
 
-- [[Android_MOC]], [[Spring_MOC]].
+- [[0_Android_MOC]], [[Spring_MOC]].
 
 ### 4. [[40_Design_Patterns_MOC]]
 
@@ -39,12 +39,16 @@ Architettura del software e qualità del codice.
 
 - [[SOLID_Principles]].
 
+### 5. [[50_Artificial_Intelligence_MOC]]
+
+Machine Learning, Deep Learning e AI .
+
 ---
 
 ## 📝 Operatività Quotidiana
 
 - **[[00_Inbox]]**: Note rapide e bozze da elaborare.
-- **[[50_Project_Journal]]**: Log delle decisioni tecniche e post-mortem dei progetti.
+- **[[98_Project_Journal]]**: Log delle decisioni tecniche e post-mortem dei progetti.
 
 ---
 

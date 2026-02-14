@@ -4,9 +4,9 @@ tags: [android, mobile, kotlin, java]
 created: 2026-02-12
 ---
 
-# [[Android_OS]]of Content
+# Android MOC
 
-![Android](assets/android_logo.png)
+![Android](\assets\adroid_logo.png)
 
 > Stato: #growing
 > MOC Genitore: [[30_Frameworks_Tools_MOC]]
@@ -15,26 +15,26 @@ created: 2026-02-12
 
 Concetti di base sull'architettura e il funzionamento del sistema operativo.
 
-- [[Android_OS]] – _Note sull'architettura del kernel e del runtime._
-- [[Compilazione_app]] – _Panoramica generale sulla compilazione app android._
+- [[1_Android_OS]] – _Note sull'architettura del kernel e del runtime._
+- [[2_Compilazione_app]] – _Panoramica generale sulla compilazione app android._
 
 ## 🧱 Componenti Core
 
 Le fondamenta di ogni app Android.
 
-- [[Activity_e_Fragment]] – \_Gestione dell'interfaccia utente.
-- [[Service]] – \_Operazioni in background.
-- [[Broadcast_Receiver]] – \_Comunicazione tra app e sistema.
-- [[Content_Provider]] – \_Gestione e condivisione dei dati.
-- [[Intent]] - \_Comunicazione interena fra applicazione e fra applicazioni diverse
-- [[Notifiche]] -
-- [[Setting]] -
+- [[3_Activity_e_Fragment]] – _Gestione dell'interfaccia utente._
+- [[4_Service]] – _Operazioni in background._
+- [[5_Broadcast_Receiver]] – _Comunicazione tra app e sistema._
+- [[6_Content_Provider]] – _Gestione e condivisione dei dati._
+- [[7_Intent]] - _Comunicazione tra componenti._
+- [[8_Notifiche]] - _Comunicazione con l'utente._
+- [[9_Setting]] - _Gestione delle impostazioni dell'app._
 
 ## 🎨 Fondamenti di UI
 
-- [[Gestione_UI_Android]] -
-- [[Layout]] -
-- [[Modelli_navigazionali]] -
+- [[10_Gestione_UI_Android]] - _Principi di progettazione e gestione dell'interfaccia utente._
+- [[11_Layout]] - _Struttura e organizzazione degli elementi UI._
+- [[12_Modelli_navigazionali]] - _Best practice per la navigazione tra schermate._
 
 ## 🎨 UI & User Experience
 
