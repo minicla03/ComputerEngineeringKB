@@ -15,31 +15,31 @@ Benvenuto nel punto di ingresso centrale del tuo secondo cervello tecnico. Quest
 
 ## 🏗️ Aree Principali
 
-### 1. [[10_Theory_MOC]]
+### 1. [[Theory_MOC]]
 
 Fondamenta scientifiche e teoriche.
 
 - Algoritmi, Strutture Dati, Sistemi Operativi e Reti.
 
-### 2. [[20_Languages_MOC]]
+### 2. [[Languages_MOC]]
 
 Linguaggi di programmazione e sintassi core.
 
 - [[Python_MOC]], [[Java_MOC]]
 
-### 3. [[30_Frameworks_Tools_MOC]]
+### 3. [[Frameworks_Tools_MOC]]
 
 Ecosistemi di sviluppo e strumenti specifici.
 
 - [[0_Android_MOC]], [[Spring_MOC]].
 
-### 4. [[40_Design_Patterns_MOC]]
+### 4. [[Design_Patterns_MOC]]
 
 Architettura del software e qualità del codice.
 
 - [[SOLID_Principles]].
 
-### 5. [[50_Artificial_Intelligence_MOC]]
+### 5. [[Artificial_Intelligence_MOC]]
 
 Machine Learning, Deep Learning e AI .
 
