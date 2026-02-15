@@ -1,0 +1,3926 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://minicla03.github.io/ComputerEngineeringKB/00_Inbox/draft_BLE/BLE/">
+      
+      
+        <link rel="prev" href="../../">
+      
+      
+        <link rel="next" href="../../../10_Theory/Theory_MOC/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>BLE - Computer Engineering KB</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ble" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Computer Engineering KB" class="md-header__button md-logo" aria-label="Computer Engineering KB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computer Engineering KB
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BLE
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🌐 Engineering KB: Master MOC
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  00 Inbox
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../10_Theory/Theory_MOC/" class="md-tabs__link">
+          
+  
+  
+  10 Theory
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../20_Languages/Languages_MOC/" class="md-tabs__link">
+          
+  
+  
+  20 Languages
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../30_Frameworks_Tools/Frameworks_Tools_MOC/" class="md-tabs__link">
+          
+  
+  
+  30 Frameworks Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../40_Software_Engineering/Software_Engineering_MOC/" class="md-tabs__link">
+          
+  
+  
+  40 Software Engineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../50_Artificial_Intelligence/Artificial_Intelligence_MOC/" class="md-tabs__link">
+          
+  
+  
+  50 Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../98_Project_Journal/2026_Learning_Log/" class="md-tabs__link">
+          
+  
+  
+  98 Project Journal
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../99_Meta/Templates/Technical_Note_Template/" class="md-tabs__link">
+          
+  
+  
+  99 Meta
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Computer Engineering KB" class="md-nav__button md-logo" aria-label="Computer Engineering KB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Computer Engineering KB
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Engineering KB: Master MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    00 Inbox
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    00 Inbox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    README
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    draft BLE
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    draft BLE
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLE
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#limiti-di-ble" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limiti di BLE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topologia-di-rete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topologia di rete
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Topologia di rete">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#broadcasting-e-osservazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcasting e osservazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connessioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connessioni
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocolli-e-profili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocolli e profili
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocollo-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocollo Base
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protocollo Base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#physical-layer-phy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical Layer (PHY)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#link-layer-ll" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Link Layer (LL)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Link Layer (LL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-di-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase di Discovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-di-connessione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase di connessione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#host-controller-interface-hci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host Controller Interface (HCI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-link-control-and-adaptation-protocol-l2cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logical Link Control and Adaptation Protocol (L2CAP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attribute-protocol-att" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribute Protocol (ATT)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Attribute Protocol (ATT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operazioni-att" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operazioni ATT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-manager-protocol-smp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Manager Protocol (SMP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Manager Protocol (SMP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-fasi-del-pairing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le fasi del Pairing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Profili
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Profili">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic-access-profile-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generic Access Profile (GAP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generic Access Profile (GAP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ruoli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ruoli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modalita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modalità
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generic-attribute-profile-gatt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generic Attribute Profile (GATT)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generic Attribute Profile (GATT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mtu-exchange-e-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MTU Exchange e Throughput
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 Theory
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    10 Theory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Theory_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Theory MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Algorithms/Complexity_Basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Complexity Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Data_Structures/Trees_and_Graphs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trees and Graphs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Reti/Reti_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Reti (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sicurezza
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sicurezza
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Sicurezza/Sicurezza_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Sicurezza (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20 Languages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    20 Languages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_Languages/Languages_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Languages MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_Languages/Java/Java_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Java (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_Languages/Python/Python_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30 Frameworks Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    30 Frameworks Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Frameworks_Tools_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frameworks Tools MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Android
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/0_Android_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/10_Gestione_UI_Android/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INTERFACCIA UTENTE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/11_Layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11 Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/12_Modelli_navigazionali/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12 Modelli navigazionali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/1_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/2_Compilazione_app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilazione app Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/3_Activity_e_Fragment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/4_Service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SERVICE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/5_Broadcast_Receiver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 Broadcast Receiver
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/6_Content_Provider/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CONTENET PROVIDER
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/7_Intent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INTENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/8_Notifiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOTIFICHE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/9_Setting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 Setting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/Android/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    COMPUTAZIONE PERVASIVA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/UI%20Testing%20%28Espresso%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Testing (Espresso)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/Unit%20Testing%20%28JUnit%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit Testing (JUnit)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Spring/Spring_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Spring (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    40 Software Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    40 Software Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/Software_Engineering_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Engineering MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DevOps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/DevOps/DevOps_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ DevOps (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/Software_Design/Software_Design_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Software Design (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versioning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Versioning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/Versioning/Versioning_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Versioning (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50 Artificial Intelligence
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    50 Artificial Intelligence
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Artificial_Intelligence_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Artificial Intelligence MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Deep_Learning/Deep_Learning_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Deep Learning (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Machine Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Machine_Learning/Machine_Learning_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Machine Learning (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    98 Project Journal
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    98 Project Journal
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../98_Project_Journal/2026_Learning_Log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 Learning Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    99 Meta
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    99 Meta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Templates
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../99_Meta/Templates/Technical_Note_Template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Note Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#limiti-di-ble" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limiti di BLE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topologia-di-rete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topologia di rete
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Topologia di rete">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#broadcasting-e-osservazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcasting e osservazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connessioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connessioni
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocolli-e-profili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocolli e profili
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocollo-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocollo Base
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protocollo Base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#physical-layer-phy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical Layer (PHY)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#link-layer-ll" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Link Layer (LL)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Link Layer (LL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-di-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase di Discovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-di-connessione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase di connessione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#host-controller-interface-hci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host Controller Interface (HCI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-link-control-and-adaptation-protocol-l2cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logical Link Control and Adaptation Protocol (L2CAP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attribute-protocol-att" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attribute Protocol (ATT)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Attribute Protocol (ATT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operazioni-att" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operazioni ATT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-manager-protocol-smp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Manager Protocol (SMP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Manager Protocol (SMP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-fasi-del-pairing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le fasi del Pairing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#profili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Profili
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Profili">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic-access-profile-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generic Access Profile (GAP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generic Access Profile (GAP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ruoli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ruoli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modalita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modalità
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generic-attribute-profile-gatt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generic Attribute Profile (GATT)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generic Attribute Profile (GATT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mtu-exchange-e-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MTU Exchange e Throughput
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ble">BLE</h1>
+<p>Il Bluetooth SIG ha introdotto il Bluetooth Low Energy con la versione 4.0 delle specifiche Bluetooth Core. Il Bluetooth Low Energy (BLE) è stato progettato per fornire una connettività wireless a basso consumo energetico per dispositivi che richiedono una lunga durata della batteria, come sensori, dispositivi indossabili e dispositivi IoT. BLE consente ai dispositivi di comunicare tra loro utilizzando meno energia rispetto al Bluetooth classico, rendendolo ideale per applicazioni che richiedono una connessione continua o frequente.</p>
+<p>La specifica Bluetooth copre sia il Bluetooth classico (il noto standard wireless che è ormai diffuso in molti dispositivi di consumo da diversi anni) sia il Bluetooth Low Energy (il nuovo standard wireless altamente ottimizzato introdotto nella versione 4.0). Questi due standard di comunicazione wireless non sono direttamente compatibili e i dispositivi Bluetooth qualificati su qualsiasi versione di specifica precedente alla 4.0 non possono comunicare in alcun modo con un dispositivo BLE. Il protocollo on-air, i livelli di protocollo superiori e le applicazioni sono diversi e incompatibili tra le due tecnologie.</p>
+<p>La specifica Bluetooth (versione 4.0 e successive) definisce due tecnologie wireless:</p>
+<ul>
+<li>BR/EDR (Bluetooth classico): Lo standard wireless che si è evoluto con la specifica Bluetooth a partire dalla versione 1.0.</li>
+<li>BLE (Bluetooth Low Energy): Lo standard wireless a basso consumo introdotto con la versione 4.0 della specifica.</li>
+</ul>
+<p>E questi sono i due tipi di dispositivi che possono essere utilizzati con queste configurazioni:</p>
+<ul>
+<li>Dispositivo monomodale (BLE, Bluetooth Smart): Un dispositivo che implementa BLE, in grado di comunicare con dispositivi monomodali e bimodali, ma non con dispositivi che supportano solo BR/EDR.</li>
+<li>Dispositivo bimodale (BR/EDR/LE, Bluetooth Smart Ready): Un dispositivo che implementa sia BR/EDR che BLE, in grado di comunicare con qualsiasi dispositivo Bluetooth</li>
+</ul>
+<p><img alt="alt text" src="../Screenshot_20260215-092117.png" /></p>
+<p>i tre elementi costitutivi principali di ogni dispositivo Bluetooth:</p>
+<ol>
+<li>Applicazione: L'applicazione utente che si interfaccia con lo stack di protocolli Bluetooth per coprire un particolare caso d'uso.</li>
+<li>Host: I livelli superiori dello stack di protocolli Bluetooth.</li>
+<li>Controller: I livelli inferiori dello stack di protocolli Bluetooth, inclusa la radio.</li>
+</ol>
+<p>Inoltre, la specifica fornisce un protocollo di comunicazione standard tra l'host e il controller, l'Host Controller Interface (HCI), per consentire l'interoperabilità tra host e controller prodotti da aziende diverse.
+Questi livelli possono essere implementati in un singolo circuito integrato (IC) o chip, oppure possono essere suddivisi in diversi IC collegati tramite un livello di comunicazione (UART, USB, SPI o altro).
+Queste sono le tre configurazioni più comuni presenti nei prodotti attualmente disponibili in commercio:</p>
+<ol>
+<li>SoC (system on chip) Un singolo IC esegue l'applicazione, l'host e il controller.</li>
+<li>Doppio circuito integrato su HCI Un circuito integrato esegue l'applicazione e l'host e comunica tramite HCI con un secondo circuito integrato che gestisce il controller. Il vantaggio di questo approccio è che, poiché l'HCI è definito dalle specifiche Bluetooth, qualsiasi host può essere combinato con qualsiasi controller, indipendentemente dal produttore.</li>
+<li>Doppio circuito integrato con dispositivo di connettività Un circuito integrato esegue l'applicazione e comunica tramite un protocollo proprietario con un secondo circuito integrato che gestisce sia l'host che il controller. Poiché le specifiche non includono tale protocollo, l'applicazione deve essere adattata al protocollo specifico del fornitore scelto.</li>
+</ol>
+<p><img alt="alt text" src="../Screenshot_20260215-092422.png" /></p>
+<h2 id="limiti-di-ble">Limiti di BLE</h2>
+<ul>
+<li>
+<p><strong>Data Throughput</strong> La velocità di modulazione della radio Bluetooth Low Energy è impostata dalle specifiche a 1 Mbps costante. Questo stabilisce il limite superiore teorico per la velocità di trasmissione che BLE può fornire, ma in termini reali, questo limite viene in genere abbassato in modo significativo da una varietà di fattori, inclusi ma non limitati al traffico bidirezionale, sovraccarico del protocollo, limitazioni della CPU e della radio e restrizioni software artificiali</p>
+</li>
+<li>
+<p><strong>Range</strong> il Bluetooth Low Energy si concentra sulle comunicazioni a corto raggio.
+  La potenza di trasmissione (tipicamente misurata in dBm) è solitamente configurabile su un certo intervallo (solitamente tra -30 e 0 dBm), ma maggiore è la potenza di trasmissione (migliore portata), maggiore è il carico sulla batteria, riducendone la durata utile.
+  È possibile creare e configurare un dispositivo BLE in grado di trasmettere dati in modo affidabile a 30 metri o più di distanza in linea d'aria, ma una portata operativa tipica è probabilmente più vicina ai 2-5 metri, con uno sforzo consapevole per ridurre la portata e risparmiare la durata della batteria senza che la distanza di trasmissione diventi un fastidio per l'utente finale.</p>
+</li>
+</ul>
+<h2 id="topologia-di-rete">Topologia di rete</h2>
+<p>Un dispositivo Bluetooth Low Energy può comunicare con il mondo esterno in due modi: broadcasting o connessioni. Ogni meccanismo presenta vantaggi e limitazioni, ed entrambi sono soggetti alle linee guida stabilite dal Generic Access Profile (GAP)</p>
+<h3 id="broadcasting-e-osservazione">Broadcasting e osservazione</h3>
+<p>Utilizzando il broadcasting senza connessione, è possibile inviare dati a qualsiasi dispositivo di scansione o ricevitore nel raggio di ascolto inviariando dati in un'unica direzione a chiunque o qualsiasi cosa sia in grado di captare i dati trasmessi.</p>
+<p><img alt="alt text" src="../Screenshot_20260215-093321.png" /></p>
+<p>Il broadcasting definisce due ruoli distinti:</p>
+<ol>
+<li>Broadcaster Invia periodicamente nonconnectable advertising package a chiunque sia disposto a riceverli.</li>
+<li>Osservatore Esegue ripetutamente la scansione delle frequenze preimpostate per ricevere eventuali nonconnectable advertising package attualmente trasmessi.</li>
+</ol>
+<p>L'advertising standar package contiene un payload di 31 byte utilizzato per includere dati che descrivono il broadcaster e le sue capacità, ma può anche includere qualsiasi informazione personalizzata che si desidera trasmettere ad altri dispositivi. Se questo payload standard di 31 byte non è sufficientemente grande da contenere tutti i dati richiesti, BLE supporta anche un payload pubblicitario secondario opzionale (chiamato Scan Response), che consente ai dispositivi che rilevano un dispositivo broadcaster di richiedere un secondo frame pubblicitario con un altro payload di 31 byte, per un massimo di 62 byte totali.</p>
+<p>Una delle principali limitazioni del broadcasting, rispetto a una connessione tradizionale, è l'assenza di misure di sicurezza o privacy (qualsiasi dispositivo osservatore è in grado di ricevere i dati trasmessi), quindi potrebbe non essere adatto per i dati sensibili.</p>
+<h3 id="connessioni">Connessioni</h3>
+<p>Se è necessario trasmettere dati in entrambe le direzioni, o se si dispone di più dati di quanti i due advertising package possano gestire, è necessario utilizzare una connessione.
+Una <strong>connessione</strong> è uno scambio di dati permanente e periodico di pacchetti tra due dispositivi. È quindi intrinsecamente privata (i dati vengono inviati e ricevuti solo dai due peer coinvolti nella connessione e da nessun altro dispositivo, a meno che non stia effettuando uno sniffing indiscriminato).</p>
+<p>Le connessioni implicano due ruoli distinti:</p>
+<ol>
+<li>Centrale (master) Esegue ripetutamente la scansione delle frequenze preimpostate alla ricerca di pacchetti pubblicitari collegabili e, se necessario, avvia una connessione. Una volta stabilita la connessione, la centrale gestisce la temporizzazione e avvia gli scambi di dati periodici.</li>
+<li>Periferica (slave) Un dispositivo che invia periodicamente pacchetti pubblicitari collegabili e accetta connessioni in entrata. Una volta stabilita una connessione attiva, la periferica segue i tempi della centrale e scambia dati regolarmente con essa.</li>
+</ol>
+<p>Per avviare una connessione, un dispositivo centrale preleva i pacchetti di advertising collegabili da una periferica e invia quindi una richiesta alla periferica per stabilire una connessione esclusiva tra i due dispositivi. Una volta stabilita la connessione, la periferica interrompe l'advertising e i due dispositivi possono iniziare a scambiare dati in entrambe le direzioni. La connessione rimane attiva finché uno dei due dispositivi non decide di disconnettersi, a quel punto la periferica riprende l'advertising e la centrale torna alla scansione alla ricerca di altri dispositivi a cui connettersi.</p>
+<p>A partire dalla versione 4.1 della specifica, tutte le restrizioni sulle combinazioni di ruoli sono state rimosse e sono possibili le seguenti funzioni:</p>
+<ul>
+<li>Un dispositivo può fungere contemporaneamente da centrale e periferica.</li>
+<li>Una centrale può essere collegata a più periferiche.</li>
+<li>Una periferica può essere collegata a più centrali.</li>
+</ul>
+<p>organizzare i dati con un controllo molto più dettagliato su ciascun campo o proprietà attraverso l'uso di livelli di protocollo aggiuntivi e, più specificamente, del Generic Attribute Profile (GATT). I dati sono organizzati in unità chiamate servizi e caratteristiche.
+I servizi possono contenere più caratteristiche, ciascuna con i propri diritti di accesso e metadati descrittivi. Ulteriori vantaggi includono una maggiore produttività, la possibilità di stabilire un collegamento crittografato sicuro e la negoziazione dei parametri di connessione per adattarli al modello di dati.</p>
+<p>Le connessioni consentono un modello di dati molto più ricco e stratificato. Hanno anche il potenziale di consumare molta meno energia rispetto alla modalità broadcast perché possono estendere ulteriormente il ritardo tra gli eventi di connessione o inviare grandi quantità di dati solo quando sono disponibili nuovi valori, anziché dover annunciare continuamente l'intero payload a una velocità specifica senza sapere chi sta ascoltando o con quale frequenza. Non solo, ma il fatto che entrambi i peer sappiano quando si verificheranno gli eventi di connessione in futuro consente di spegnere la radio più a lungo, risparmiando potenzialmente la batteria rispetto alla trasmissione.
+Infine, queste topologie possono essere combinate liberamente in una rete BLE più ampia. Un dispositivo compatibile con BR/EDR/LE può collegare connessioni BLE e BR/EDR, e il numero di combinazioni e partecipanti sulla rete è limitato solo dalle limitazioni delle radio e degli stack di protocollo di ciascun dispositivo che vi partecipa.</p>
+<p><img alt="alt text" src="../Screenshot_20260215-094041.png" /></p>
+<h3 id="protocolli-e-profili">Protocolli e profili</h3>
+<p>Il Bluetooth Low Energy è progettato per essere un protocollo di comunicazione wireless generico, ma le specifiche Bluetooth forniscono anche una serie di profili e protocolli standardizzati che definiscono casi d'uso specifici e modelli di dati per applicazioni comuni. Questi profili e protocolli standardizzati consentono l'interoperabilità tra dispositivi di diversi produttori e semplificano lo sviluppo di applicazioni Bluetooth Low Energy.</p>
+<p><strong>Protocolli</strong> Elementi costitutivi utilizzati da tutti i dispositivi conformi alle specifiche Bluetooth, i protocolli sono i livelli che implementano i diversi formati di pacchetto, routing, multiplexing, codifica e decodifica che consentono l'invio efficace dei dati tra peer.
+<strong>Profili</strong>
+funzionalità che coprono sia le modalità operative di base richieste da tutti i dispositivi (Profilo di accesso generico, Profilo di attributi generico) sia casi d'uso specifici (Profilo di prossimità, Profilo del glucosio), i profili definiscono essenzialmente come i protocolli dovrebbero essere utilizzati per raggiungere un obiettivo particolare, generico o specifico.</p>
+<h2 id="protocollo-base">Protocollo Base</h2>
+<p><img alt="alt text" src="../Screenshot_20260215-094605.png" /></p>
+<p>Single mode BLE: Controller, host e applicazione.</p>
+<ol>
+<li>Applicazione
+   L'applicazione, come in tutti gli altri tipi di sistemi, è il livello più elevato ed è responsabile della logica, dell'interfaccia utente e della gestione dei dati di tutto ciò che riguarda il caso d'uso effettivo implementato dall'applicazione. L'architettura di un'applicazione dipende fortemente da ogni specifica implementazione.</li>
+<li>Host
+   Include i seguenti livelli:
+   • Generic Access Profile (GAP) • Generic Attribute Profile (GATT) • Logical Link Control and Adaptation Protocol (L2CAP) • Attribute Protocol (ATT)
+   • Security Manager (SM) • Host Controller Interface (HCI), lato host</li>
+<li>Controller
+   Include i seguenti livelli
+   Interfaccia Host Controller (HCI), lato controller • Livello di collegamento (LL)
+   • Livello fisico (PHY)</li>
+</ol>
+<h3 id="physical-layer-phy">Physical Layer (PHY)</h3>
+<p>Lo strato fisico (PHY) è la parte che contiene i circuiti di comunicazione analogici, in grado di modulare e demodulare i segnali analogici e trasformarli in simboli digitali.
+La radio utilizza la banda ISM (Industrial, Scientific and Medical) a 2,4 GHz per comunicare e la divide in 40 canali da 2,4000 GHz a 2,4835 GHz. 37 di questi canali sono utilizzati per i dati di connessione e gli ultimi tre canali (37, 38 e 39) sono utilizzati come canali advertising per stabilire connessioni e inviare dati di trasmissione.</p>
+<p>Lo standard utilizza una tecnica chiamata <strong>frequency hopping spread spectrum</strong>, in cui la radio salta tra i canali a ogni evento di connessione utilizzando la seguente formula:</p>
+<p><em>canale = (canale_corrente + salto) mod 37</em></p>
+<p>Il valore del salto viene comunicato al momento dello stabilimento della connessione ed è quindi diverso per ogni nuova connessione stabilita. Questa tecnica riduce al minimo l'effetto di qualsiasi interferenza radio potenzialmente presente nella banda dei 2,4 GHz su qualsiasi singolo canale, soprattutto perché il WiFi e il Bluetooth classico sono prevalenti in questa banda e i dispositivi potrebbero subire forti interferenze in prossimità di dispositivi con un'elevata potenza di trasmissione.
+La modulazione scelta per codificare il flusso di bit via etere è la <strong>Gaussian Frequency Shift Keying (GFSK)</strong>, la stessa modulazione utilizzata dal Bluetooth classico e da molti altri protocolli wireless proprietari a basso consumo. La velocità di modulazione per Bluetooth Low Energy è fissata a 1 Mbit/s, che rappresenta quindi il limite fisico massimo di throughput per la tecnologia.</p>
+<p>Nota: A partire dalle specifiche del Bluetooth 5.0, il Physical Layer è stato espanso introducendo il LE 2M PHY (che raddoppia la velocità di modulazione a 2 Mbit/s per un throughput maggiore) e il LE Coded PHY (che riduce la velocità a 500 o 125 kbps inserendo codici di correzione d'errore per aumentare drasticamente il range di trasmissione senza aumentare la potenza radio).</p>
+<h3 id="link-layer-ll">Link Layer (LL)</h3>
+<p>Il Link Layer è la parte che si interfaccia direttamente con il PHY e solitamente è implementato come una combinazione di hardware e software personalizzati. È anche l'unico livello con vincoli rigidi in tempo reale dell'intero stack protocollare, poiché è responsabile del rispetto di tutti i requisiti di temporizzazione definiti dalle specifiche. è solitamente mantenuto isolato dai livelli superiori dello stack protocollare tramite un'interfaccia standard che nasconde la complessità del Link Layer e consente a qualsiasi implementazione di essere utilizzata con qualsiasi host, a condizione che entrambi supportino l'interfaccia standard (HCI).</p>
+<p>Implementate nell'hardware dai fornitori di silicio per evitare di sovraccaricare l'unità di elaborazione centrale che gestisce tutti i livelli software dello stack. Questa funzionalità solitamente include:
+• Framing di preambolo, indirizzo di accesso e protocollo aereo • Generazione e verifica CRC
+• Whitening dei dati • Generazione di numeri casuali • Crittografia AES</p>
+<p>La metà software del Link Layer gestisce lo stato del collegamento radio, ovvero il modo in cui il dispositivo si connette ad altri dispositivi. Un dispositivo BLE può essere master, slave o entrambi, a seconda del caso d'uso e dei requisiti.</p>
+<p>Un master può connettersi a più slave e uno slave può essere connesso a più master.</p>
+<p>Il Bluetooth Low Energy presenta un'asimmetria intrinseca nei suoi livelli inferiori tra dispositivi master e slave, poiché richiede più risorse per fungere da master.</p>
+<p>Il Link Layer definisce i seguenti ruoli:</p>
+<ol>
+<li>Advertiser Un dispositivo che invia gli advertising package per stabilire connessioni o inviare dati di trasmissione.</li>
+<li>
+<p>Scanner Un dispositivo che esegue la scansione degli advertising package.</p>
+</li>
+<li>
+<p>Master Un dispositivo che avvia una connessione e la gestisce in seguito.</p>
+</li>
+<li>Slave Un dispositivo che accetta una richiesta di connessione e segue le tempistiche del master.</li>
+</ol>
+<h4 id="fase-di-discovery">Fase di Discovery</h4>
+<p>BLE ha un solo formato di pacchetto e due tipi di pacchetti (pacchetti pubblicitari e pacchetti dati), il che semplifica l'implementazione dello stack di protocollo. Gli advertising package servono a due scopi:</p>
+<ol>
+<li>trasmettere dati per applicazioni che non necessitano del sovraccarico di una connessione completa</li>
+<li>Individuare gli slave e connettersi a essi</li>
+</ol>
+<p>Ogni pacchetto pubblicitario può trasportare fino a 31 byte di payload di dati pubblicitari, insieme alle informazioni di base dell'intestazione (incluso l'indirizzo del dispositivo Bluetooth).
+Tali pacchetti vengono semplicemente trasmessi in modalità cieca dall'advertiser, senza la previa conoscenza della presenza di alcun dispositivo di scansione. Vengono inviati a una velocità fissa definita dall'intervallo pubblicitario, che varia da 20 ms a 10,24 s.
+Più breve è l'intervallo, maggiore è la frequenza di trasmissione dei pacchetti pubblicitari, con conseguente maggiore probabilità che tali pacchetti vengano ricevuti da uno scanner, ma maggiori quantità di pacchetti trasmessi si traducono anche in un maggiore consumo energetico.</p>
+<p>Poiché l'advertising utilizza un massimo di tre canali di frequenza e l'advertiser e lo scanner non sono sincronizzati in alcun modo, un pacchetto pubblicitario verrà ricevuto correttamente dallo scanner solo quando si sovrappongono casualmente.</p>
+<p><img alt="alt text" src="../Screenshot_20260215-100029.png" /></p>
+<p>I parametri intervallo di scansione e finestra di scansione definiscono la frequenza e la durata di ascolto di un dispositivo scanner per potenziali advertising pakage.</p>
+<p>Come per l'intervallo di pubblicità, questi valori hanno un impatto significativo sul consumo energetico, poiché sono direttamente correlati al tempo di accensione della radio.
+La specifica definisce due tipi fondamentali di procedure di scansione:</p>
+<ol>
+<li>Scansione passiva Lo scanner si limita ad ascoltare i pacchetti pubblicitari e l'advertiser non si accorge mai che uno o più pacchetti sono stati effettivamente ricevuti da uno scanner.</li>
+<li>Scansione attiva Lo scanner emette un pacchetto di richiesta di scansione dopo aver ricevuto un advertising package. L'advertiser lo riceve e risponde con un pacchetto di risposta alla scansione. Questo pacchetto aggiuntivo raddoppia il carico utile effettivo che l'advertiser è in grado di inviare allo scanner, ma è importante notare che ciò non fornisce allo scanner alcun mezzo per inviare dati utente all'advertiser.</li>
+</ol>
+<p>Modificando questi tre parametri (Advertising Interval, Scan Interval e Scan Window), puoi decidere se vuoi che il tuo dispositivo consumi pochissima batteria (intervalli lunghi, finestre corte) al costo di metterci molto tempo a farsi trovare, oppure se vuoi che si colleghi istantaneamente (intervalli brevissimi, finestre lunghe) sacrificando però la batteria.</p>
+<p>I tipi di pacchetti pubblicitari possono essere classificati in base a tre diverse proprietà. La prima è la connettibilità:
+Connettibile
+Uno scanner può avviare una connessione alla ricezione di tale pacchetto pubblicitario.
+Non connettibile
+Uno scanner non può avviare una connessione (questo pacchetto è destinato esclusivamente alla trasmissione).
+La ​​seconda proprietà è la scansionabilità: Scansionabile
+Uno scanner può emettere una richiesta di scansione alla ricezione di tale pacchetto pubblicitario.
+Non scansionabile
+Uno scanner non può emettere una richiesta di scansione alla ricezione di tale pacchetto pubblicitario.
+La terza è la direzionalità: Diretto
+Un pacchetto di questo tipo contiene solo gli indirizzi Bluetooth dell'inserzionista e dello scanner di destinazione nel suo payload. Non sono ammessi dati utente. Tutti i pacchetti pubblicitari diretti sono quindi connettibili.
+Non diretto
+Un pacchetto di questo tipo non è destinato a nessuno scanner in particolare e può contenere dati utente nel suo payload.</p>
+<h4 id="fase-di-connessione">Fase di connessione</h4>
+<p>Una volta che lo Scanner (il dispositivo Centrale) ha "visto" l'Advertiser (la Periferica) durante la fase di Discovery e decide che vuole stabilire una comunicazione bidirezionale e privata, la procedura passa dal Broadcasting alla vera e propria Connessione.</p>
+<p>Subito dopo aver ricevuto un pacchetto di advertising sul canale 37, 38 o 39, lo Scanner non aspetta il ciclo successivo, ma risponde immediatamente (entro pochi microsecondi) con un pacchetto speciale chiamato Connection Request (o CONNECT_IND) che contiene:</p>
+<ul>
+<li>Intervallo di connessione Tempo tra l'inizio di due eventi di connessione consecutivi. Questo valore varia da 7,5 ms (throughput elevato) a 4 s (throughput minimo possibile ma anche minimo consumo energetico).</li>
+<li>Latenza slave Numero di eventi di connessione che uno slave può scegliere di saltare senza rischiare una disconnessione.</li>
+<li>Timeout di supervisione della connessione Tempo massimo tra due pacchetti di dati validi ricevuti prima che una connessione venga considerata persa.</li>
+</ul>
+<p>Il pacchetto di richiesta di connessione include l'incremento di frequenza del salto, che determina la sequenza di salto che sia il master che lo slave seguiranno durante la durata della connessione. ntrambi i dispositivi smettono immediatamente di usare i 3 canali di advertising. Si spostano sui restanti 37 canali dati della banda a 2.4 GHz.
+Per evitare interferenze con il Wi-Fi e altri dispositivi Bluetooth, usano una tecnica chiamata Adaptive Frequency Hopping (AFH): ad ogni Connection Interval, i due dispositivi saltano insieme in modo sincronizzato su un canale diverso, seguendo un algoritmo pseudocasuale.</p>
+<p>Ora i dispositivi sono connessi a livello radio (Link Layer). Non tengono però la radio sempre accesa. Si danno semplicemente "appuntamento" ad ogni Connection Interval. Durante questo brevissimo istante (chiamato Connection Event), il Centrale invia un pacchetto, la Periferica risponde, ed entrambi spengono immediatamente le radio fino all'appuntamento successivo. Questo è il vero segreto del "Low Energy" del BLE.</p>
+<p><img alt="alt text" src="../Screenshot_20260215-101058.png" /></p>
+<p>Liste bianche
+Una funzionalità importante disponibile nei controller BLE, le liste bianche consentono agli host di filtrare i dispositivi durante l'annuncio, la scansione e la creazione di connessioni su entrambi i lati. Le liste bianche sono semplicemente array di indirizzi di dispositivi Bluetooth che vengono compilati dall'host e memorizzati e utilizzati nel controller.
+Un dispositivo che esegue la scansione o avvia una connessione può utilizzare una lista bianca per limitare il numero di dispositivi che verranno rilevati o con cui può connettersi, e il dispositivo che annuncia può utilizzare una lista bianca per specificare da quali peer accetterà una connessione in ingresso. L'impostazione che definisce se utilizzare o meno una lista bianca è chiamata politica di filtro. Questa funge essenzialmente da interruttore per attivare e disattivare il filtro della lista bianca.</p>
+<p>I pacchetti di dati hanno un payload di dati utilizzabile di 27 byte, ma protocolli aggiuntivi più in alto nello stack in genere limitano la quantità effettiva di dati utente a 20 byte per pacchetto, sebbene ciò dipenda logicamente dal protocollo utilizzato.
+È importante notare che il livello di collegamento funge da portatore di dati affidabile. Tutti i pacchetti ricevuti vengono controllati con un CRC a 24 bit e vengono richieste ritrasmissioni quando il controllo degli errori rileva un errore di trasmissione. Non esiste un limite massimo per le ritrasmissioni; il livello di collegamento reinvierà il pacchetto finché non verrà finalmente riconosciuto dal ricevitore.</p>
+<p>Il Link Layer è anche responsabile di diverse procedure di controllo, inclusi questi due processi critici:</p>
+<ul>
+<li>Modifica dei parametri di connessione
+  Ogni connessione viene stabilita con un set di parametri di connessione impostato dal master, ma condizioni e requisiti potrebbero cambiare durante il ciclo di vita della connessione. Uno slave potrebbe improvvisamente richiedere un throughput maggiore per un breve burst di dati o, al contrario, potrebbe rilevare che nel prossimo futuro un intervallo di connessione più lungo sarà sufficiente a mantenere attiva la connessione. Il Link Layer consente al master e allo slave di richiedere nuovi parametri di connessione e, nel caso del master, di impostarli unilateralmente in qualsiasi momento. In questo modo, ogni connessione può essere ottimizzata per fornire il miglior equilibrio tra throughput e consumo energetico.</li>
+<li>Crittografia
+  La sicurezza è fondamentale in BLE e il Link Layer fornisce i mezzi per scambiare dati in modo sicuro su un collegamento crittografato. Le chiavi vengono generate e gestite dall'host, ma il Link Layer esegue la crittografia e la decrittografia dei dati in modo trasparente per i livelli superiori.</li>
+</ul>
+<h3 id="host-controller-interface-hci">Host Controller Interface (HCI)</h3>
+<p>L'Host Controller Interface (HCI) è il livello di demarcazione cruciale all'interno dello stack Bluetooth. Poiché le specifiche consentono diverse configurazioni hardware, l'HCI funge da protocollo di comunicazione standard che permette l'interoperabilità tra un Host (i livelli superiori dello stack e l'applicazione) e un Controller (i livelli inferiori, come Link Layer e PHY) prodotti anche da aziende diverse (ad esempio, uno stack Host di Microsoft o Apple che comunica con un chip radio Controller di Broadcom o Qualcomm).</p>
+<p>Esempi tipici di questa configurazione (definita a "doppio circuito integrato") includono la maggior parte degli smartphone, tablet e personal computer. In questi dispositivi la divisione dei compiti è netta:</p>
+<ul>
+<li>
+<p>Host e Applicazione: Vengono eseguiti dal processore principale (CPU) del dispositivo, dove c'è abbondanza di memoria e potenza di calcolo.</p>
+</li>
+<li>
+<p>Controller: Si trova in un chip hardware dedicato e separato (il modulo radio Bluetooth).</p>
+</li>
+</ul>
+<p>Per far dialogare queste due entità, la specifica Bluetooth definisce l'HCI attraverso tre elementi fondamentali:</p>
+<ul>
+<li>
+<p>Comandi ed Eventi: Un set standardizzato di istruzioni. L'Host invia Comandi al Controller (es. "Inizia la scansione", "Connettiti a questo MAC address"), e il Controller risponde con Eventi verso l'Host (es. "Scansione terminata", "Dispositivo connesso", "Connessione persa").</p>
+</li>
+<li>
+<p>Pacchetti Dati: Un formato rigoroso per incapsulare i dati utente (payload) da trasmettere o appena ricevuti via etere. L'HCI include anche un insieme di regole per il controllo di flusso, evitando che l'Host invii dati più velocemente di quanto il Controller (che ha buffer più piccoli) possa trasmetterli.</p>
+</li>
+<li>
+<p>Trasporti (Transports): La specifica definisce diversi livelli di trasporto fisico che veicolano e potenziano il protocollo HCI a livello hardware. I trasporti più comuni utilizzati per collegare fisicamente la CPU al chip radio sono interfacce seriali standard come UART, USB, SPI o SDIO.</p>
+</li>
+</ul>
+<h3 id="logical-link-control-and-adaptation-protocol-l2cap">Logical Link Control and Adaptation Protocol (L2CAP)</h3>
+<p>Il protocollo L2CAP (Logical Link Control and Adaptation Protocol), fornisce due funzionalità principali.</p>
+<p>Funge da <strong>multiplexer di protocollo</strong> che riceve più protocolli dai livelli superiori, assegnando a ciascun pacchetto un Channel Identifier (CID), un numero identificativo del canale, li incapsula nel formato standard del pacchetto BLE e li incanala nell'unica connessione HCI verso il controller. Sul percorso di ricezione, riceve pacchetti HCI dal controller, estrae il CID e li inoltra al protocollo appropriato nei livelli superiori dell'host.</p>
+<p>In BLE, L2CAP utilizza principalmente canali fissi predefiniti:</p>
+<ul>
+<li>CID 0x0004: Canale riservato all'Attribute Protocol (ATT), ovvero lo scambio dei dati utente.</li>
+<li>CID 0x0005: Canale di segnalazione L2CAP (per gestire i parametri di connessione).</li>
+<li>CID 0x0006: Canale riservato al Security Manager Protocol (SMP), per la crittografia e il pairing.</li>
+</ul>
+<p>Oltre a ciò, e a partire dalla versione 4.1 della specifica, L2CAP può creare canali personalizzati orientati alla connessione (LE Data Channels). Questi utilizzano un sistema "a crediti": il ricevitore comunica al trasmettitore quanti pacchetti è in grado di immagazzinare nel suo buffer. Il trasmettitore invia dati solo se possiede "crediti" sufficienti, evitando così di sovraccaricare la memoria di dispositivi con risorse molto limitate, perdendo pacchetti.</p>
+<p>Esegue anche la <strong>frammentazione</strong> e la <strong>ricombinazione</strong>, un processo mediante il quale preleva pacchetti di grandi dimensioni dai livelli superiori e li suddivide in blocchi che rientrano nella dimensione massima del payload di 27 byte, o fino a 251 byte con le estensioni più recenti, dei pacchetti BLE sul lato trasmissione.</p>
+<p>L2CAP si occupa di prendere i grossi blocchi di dati provenienti dai livelli superiori, "tagliarli" in frammenti più piccoli compatibili con la massima unità di trasmissione (MTU) del controller radio, e aggiungere un'intestazione (header) per indicarne la lunghezza e il canale. Sul dispositivo ricevente, L2CAP esegue l'operazione inversa, riassemblando i frammenti nell'esatto ordine prima di consegnarli al livello superiore.</p>
+<p>L'intestazione del pacchetto L2CAP occupa quattro byte, il che significa che la lunghezza effettiva del payload utente è 27 - 4 = 23 byte (dove 27 byte è la dimensione del payload del LL, o 251 byte con le estensioni più recenti).</p>
+<p>L2CAP garantisce un instradamento affidabile dei dati, ma sui canali fissi predefiniti (come l'ATT) non fornisce alcun meccanismo intrinseco di controllo del flusso o ritrasmissione in caso di errore (questi compiti sono demandati al Link Layer sottostante o al protocollo di livello superiore). Al contrario, per i canali personalizzati (LE Data Channels), il controllo di flusso è attivamente gestito tramite il sopracitato sistema a crediti</p>
+<h3 id="attribute-protocol-att">Attribute Protocol (ATT)</h3>
+<p>L'Attribute Protocol (ATT) è il protocollo di livello superiore che definisce il modo in cui i dati vengono rappresentati, archiviati e scambiati all'interno di un dispositivo BLE. Viaggia sul canale L2CAP dedicato fisso (CID 0x0004) ed è la base su cui si costruisce l'intera applicazione utente.</p>
+<p>L'ATT si basa su una rigorosa architettura Client/Server, che è indipendente dai ruoli GAP (Centrale e Periferica).</p>
+<ul>
+<li>ATT Server: È il dispositivo che possiede e memorizza fisicamente i dati (gli "attributi"). Accetta le richieste dal Client. (Esempio: un sensore di temperatura).</li>
+<li>ATT Client: È il dispositivo che desidera accedere ai dati. Invia richieste al Server per leggere, scrivere o essere avvisato dei cambiamenti. (Esempio: lo smartphone che legge la temperatura).</li>
+</ul>
+<p>Il protocollo è rigoroso in termini di sequenziamento: se una richiesta è ancora in sospeso (non è stata ancora ricevuta alcuna risposta), non è possibile inviare ulteriori richieste finché la risposta non viene ricevuta ed elaborata. Questo vale in entrambe le direzioni in modo indipendente nel caso in cui due peer agiscano sia come client che come server.</p>
+<p>Ogni server contiene dati organizzati sotto forma di <strong>attributi</strong>, composto da quattro elementi:</p>
+<ol>
+<li>Attribute Handle (Gestore): È l'indirizzo a 16 bit dell'attributo (es. 0x001A). Funge da indice nel database. Il Client usa questo numero per dire al Server: "Voglio leggere il dato all'indirizzo 0x001A".</li>
+<li>Attribute Type (UUID): È un identificatore univoco universale (UUID) che spiega al Client cosa rappresenta quel dato. Il Bluetooth SIG definisce UUID standard a 16 bit per i dati comuni (es. 0x2A37 significa sempre "Heart Rate Measurement"), ma gli sviluppatori possono creare UUID personalizzati a 128 bit per i propri dati proprietari.</li>
+<li>Attribute Value (Valore): È il payload effettivo, ovvero il dato vero e proprio. Può essere un singolo numero a 8 bit, una stringa di caratteri o un array di byte (fino a 512 byte massimi in base alla frammentazione).</li>
+<li>Attribute Permissions (Permessi): Definiscono chi può fare cosa con questo attributo. I permessi non possono essere letti dal Client, ma sono applicati dal Server. Stabiliscono se un attributo è di sola lettura, di lettura/scrittura, e se richiede una connessione crittografata (tramite il livello SMP) per essere accessibile.</li>
+</ol>
+<p>Quando un client desidera leggere o scrivere valori di attributo da o verso un server, invia una richiesta di lettura o scrittura al server con l'handle. Il server risponderà con il valore dell'attributo o una conferma. Nel caso di un'operazione di lettura, spetta al client analizzare il valore e comprendere il tipo di dati in base all'UUID dell'attributo. D'altra parte, durante un'operazione di scrittura, ci si aspetta che il client fornisca dati coerenti con il tipo di attributo e il server è libero di rifiutare l'operazione in caso contrario.</p>
+<h4 id="operazioni-att">Operazioni ATT</h4>
+<p>L'Attribute Protocol definisce anche i metodi (o comandi) con cui il Client e il Server interagiscono tra loro per manipolare questi attributi. Le operazioni principali sono:</p>
+<ul>
+<li>Read Request / Response: Il Client chiede di leggere il Valore di un attributo tramite il suo Handle. Il Server risponde con il dato.</li>
+<li>Write Request / Response: Il Client invia un dato al Server per scriverlo in un attributo specifico e attende una conferma (Response) dell'avvenuta scrittura.</li>
+<li>Write Command: Come la Write Request, ma il Client non attende alcuna conferma dal Server (utile per inviare flussi di dati molto veloci).</li>
+<li>Notification (Notifica): Inviata dal Server al Client in modo asincrono quando un dato cambia (es. il battito cardiaco aumenta). Non richiede conferma da parte del Client. È il metodo più utilizzato in BLE per risparmiare energia.</li>
+<li>Indication (Indicazione): Simile alla Notifica, ma il Server richiede che il Client risponda con una conferma di ricezione (più affidabile, ma più lenta).</li>
+</ul>
+<h3 id="security-manager-protocol-smp">Security Manager Protocol (SMP)</h3>
+<p>Il Security Manager Protocol (SMP) è il livello dello stack Bluetooth Low Energy responsabile della sicurezza della connessione. Definisce i metodi e i protocolli necessari per accoppiare due dispositivi in modo sicuro, autenticarsi reciprocamente, crittografare il collegamento radio e scambiarsi le chiavi di sicurezza. L'SMP viaggia sul canale dedicato L2CAP (CID 0x0006).</p>
+<p>Il Security Manager definisce due ruoli:</p>
+<ol>
+<li>Initiator Corrisponde sempre al Link Layer master e quindi alla centrale GAP.</li>
+<li>Responder Corrisponde sempre allo Link Layer slave e quindi alla periferica GAP.</li>
+</ol>
+<p>Sebbene spetti sempre all'iniziatore attivare l'inizio di una procedura, il risponditore può richiedere in modo asincrono l'avvio di una qualsiasi delle procedure sicurezza. Non vi è alcuna garanzia per il risponditore che l'iniziatore ascolterà effettivamente la richiesta, fungendo più da suggerimento che da vera e propria richiesta vincolante. Questa richiesta di sicurezza può logicamente essere emessa solo dallo slave o dalla periferica della connessione.</p>
+<p>Accoppiamento
+Procedura mediante la quale viene generata una chiave di crittografia di sicurezza comune temporanea per poter passare a una connessione sicura e crittografata. Questa chiave temporanea non viene memorizzata e pertanto non è riutilizzabile nelle connessioni successive.
+Bonding
+Sequenza di accoppiamento seguita dalla generazione e dallo scambio di chiavi di sicurezza permanenti, destinate a essere memorizzate nella memoria non volatile e quindi a creare un collegamento permanente tra due dispositivi, che consentirà loro di impostare rapidamente una connessione sicura nelle connessioni successive senza dover eseguire nuovamente una procedura di collegamento.
+Ripristino della crittografia
+Al termine di una procedura di collegamento, le chiavi potrebbero essere state memorizzate su entrambi i lati della connessione. Se le chiavi di crittografia sono state memorizzate, questa procedura definisce come utilizzare tali chiavi nelle connessioni successive per ristabilire una connessione sicura e crittografata senza dover ripetere la procedura di accoppiamento (o collegamento).</p>
+<h4 id="le-fasi-del-pairing">Le fasi del Pairing</h4>
+<p><img alt="alt text" src="../Screenshot_20260215-104052.png" /></p>
+<p>Il processo di sicurezza in BLE si divide tipicamente in tre fasi sequenziali:</p>
+<p>Fase 1: Negoziazione delle funzionalità (Feature Exchange)
+I due dispositivi si scambiano informazioni sulle proprie capacità di input/output (I/O capabilities). Ad esempio, un dispositivo dichiara se possiede un display (per mostrare un PIN), una tastiera (per inserirlo) o solo un pulsante "Sì/No". Questa negoziazione determina quale metodo di accoppiamento verrà utilizzato nella Fase 2.</p>
+<p>Fase 2: Generazione della chiave (Key Generation)
+In base alle capacità di I/O negoziate, i dispositivi utilizzano uno dei seguenti metodi per autenticarsi e generare la chiave di crittografia (Short Term Key in BLE Legacy, o Long Term Key in LE Secure Connections):</p>
+<ul>
+<li>
+<p>Just Works: Usato quando i dispositivi non hanno display o tastiere (es. auricolari wireless). La connessione viene crittografata, ma non offre protezione contro gli attacchi Man-In-The-Middle (MITM).</p>
+</li>
+<li>
+<p>Passkey Entry: Un dispositivo mostra un PIN a 6 cifre sul display e l'utente lo digita sulla tastierina dell'altro dispositivo. Offre protezione MITM.</p>
+</li>
+<li>
+<p>Numeric Comparison: Introdotto con LE Secure Connections (BLE 4.2+), entrambi i dispositivi mostrano un codice a 6 cifre. L'utente deve solo confermare (tramite un pulsante "Sì") che i due codici corrispondono. Offre altissima sicurezza e protezione MITM.</p>
+</li>
+<li>
+<p>Out of Band (OOB): Le chiavi di sicurezza vengono scambiate utilizzando una tecnologia wireless completamente diversa, come l'NFC (Near Field Communication). È estremamente sicuro.</p>
+</li>
+</ul>
+<p>Fase 3: Distribuzione delle chiavi (Key Distribution)
+Una volta che il canale è crittografato, i dispositivi possono scambiarsi chiavi aggiuntive per funzionalità specifiche. Le più importanti sono:</p>
+<ul>
+<li>
+<p>Informazioni di crittografia (chiave a lungo termine o LTK) e identificazione master (EDIV, Rand)
+  Si tratta di una chiave di crittografia a 128 bit condivisa da entrambe le parti (LTK) insieme a due valori (EDIV, Rand) che fungono da identificativo, poiché un dispositivo può essere associato a più peer.</p>
+</li>
+<li>
+<p>Identity Resolving Key (IRK): Fondamentale per la privacy. Consente a un dispositivo di cambiare continuamente il proprio indirizzo MAC pubblico (MAC Randomization) per non essere tracciato da scanner malevoli, permettendo però al dispositivo "bondato" (che possiede la IRK) di riconoscerlo ugualmente.</p>
+</li>
+<li>
+<p>Connection Signature Resolving Key (CSRK): Permette di firmare i dati e verificarne l'autenticità senza dover necessariamente crittografare l'intera connessione (utile per risparmiare energia in scenari specifici).</p>
+</li>
+</ul>
+<p>Ognuna di queste chiavi o set di chiavi è asimmetrica e unidirezionale: può essere utilizzata solo nella stessa configurazione di ruolo in cui è stata originariamente generata. Se i dispositivi desiderano scambiare i ruoli del Link Layer (master e slave) nelle connessioni successive, ciascuna parte deve distribuire il proprio set di chiavi per ciascun tipo di chiave. I dispositivi negoziano il numero di chiavi distribuite in ciascuna direzione, che può variare da zero a tutti e tre i tipi di chiave in ciascuna direzione, per un totale di sei chiavi distribuite tra i peer (tre dallo slave al master e tre dal master allo slave).</p>
+<p>L'SM specifica i seguenti tre tipi di meccanismi di sicurezza che possono essere utilizzati per applicare vari livelli di sicurezza durante una connessione o durante la procedura pubblicitaria.</p>
+<p>Crittografia
+Questo meccanismo consiste nella crittografia completa di tutti i pacchetti trasmessi su una connessione stabilita.
+Privacy
+La funzione di privacy consente a un inserzionista di nascondere il proprio indirizzo Bluetooth pubblico utilizzando indirizzi temporanei, generati casualmente, che possono essere riconosciuti da uno scanner associato al dispositivo pubblicitario.
+Firma
+Con questo meccanismo, un dispositivo può inviare un pacchetto non crittografato su una connessione stabilita, firmato digitalmente (ovvero, la cui origine può essere verificata)</p>
+<h2 id="profili">Profili</h2>
+<p>I profili definiscono come i protocolli sottostanti debbano essere utilizzati per garantire l'interoperabilità tra dispositivi sviluppati da fornitori diversi. Nello stack Bluetooth Low Energy, due profili generici sono obbligatori e fondamentali per qualsiasi applicazione:</p>
+<ul>
+<li>
+<p>Generic Access Profile (GAP): È il livello di controllo più elevato del BLE. Gestisce la topologia della rete, definendo i ruoli dei dispositivi (Broadcaster/Observer, Central/Peripheral) e le procedure per la scoperta (discovery), l'advertising, l'instaurazione delle connessioni e la gestione della sicurezza.</p>
+</li>
+<li>
+<p>Generic Attribute Profile (GATT): È il livello dei dati più elevato del BLE. Basato sul protocollo ATT, stabilisce un modello gerarchico per formattare e scambiare i dati tra dispositivi connessi, definendo le regole standard per rilevare, leggere, scrivere e notificare le informazioni utente.</p>
+</li>
+</ul>
+<h3 id="generic-access-profile-gap">Generic Access Profile (GAP)</h3>
+<p>Il Generic Access Profile (GAP) è il framework fondamentale che garantisce l'interoperabilità tra i dispositivi BLE. Definisce le regole universali con cui i dispositivi si scoprono a vicenda, trasmettono dati in broadcast e stabiliscono connessioni sicure. Poiché gestisce queste operazioni di base, il GAP rappresenta quasi sempre il punto di ingresso principale (API) per gli sviluppatori di applicazioni.</p>
+<p>Il GAP governa le interazioni definendo due concetti chiave: i Ruoli e le Modalità.</p>
+<h4 id="ruoli">Ruoli</h4>
+<p>Un dispositivo può operare in uno o più ruoli contemporaneamente. I ruoli definiscono il comportamento di base del dispositivo e, solitamente, sono strettamente legati al suo scopo hardware (e quindi raramente cambiano).</p>
+<ul>
+<li>Broadcaster: Trasmette pacchetti pubblicitari (advertising) ma non accetta connessioni.</li>
+<li>Observer: Ascolta i pacchetti pubblicitari (scanning) ma non avvia connessioni.</li>
+<li>Peripheral (Periferica): Trasmette pacchetti pubblicitari e accetta connessioni in ingresso. Una volta connesso, assume il ruolo di Slave nel Link Layer.</li>
+<li>Central (Centrale): Ascolta i pacchetti pubblicitari e avvia connessioni verso le periferiche. Una volta connesso, assume il ruolo di Master nel Link Layer.</li>
+</ul>
+<h4 id="modalita">Modalità</h4>
+<p>A differenza dei ruoli, che sono spesso statici, le modalità sono stati temporanei.
+Un dispositivo entra in una specifica modalità solo per un certo periodo di tempo, al fine di permettere a un altro dispositivo di interagire con esso. Il cambio di modalità avviene frequentemente e può essere attivato automaticamente dal sistema o da un'azione dell'utente (es. la pressione di un tasto per avviare il pairing).</p>
+<p>Le modalità più comuni nel GAP sono:</p>
+<ul>
+<li><strong>Discoverable Mode</strong> (Modalità Scopribile): Il dispositivo trasmette advertising package, permettendo ad altri dispositivi di scoprirlo durante la scansione.</li>
+<li><strong>Connectable Mode</strong> (Modalità Connettibile): Il dispositivo accetta richieste di connessione in ingresso da altri dispositivi.</li>
+<li><strong>Bondable Mode</strong> (Modalità Associabile): Il dispositivo consente il pairing e il bonding con altri dispositivi, memorizzando le chiavi di sicurezza per connessioni future.</li>
+</ul>
+<pre><code class="language-mermaid">stateDiagram-v2
+    direction LR
+
+    state &quot;Standby (Idle)&quot; as Standby
+    state &quot;Advertising&quot; as Adv
+    state &quot;Connected&quot; as Conn
+
+    [*] --&gt; Standby : Accensione dispositivo
+
+    Standby --&gt; Adv : Azione utente (es. pressione tasto)
+
+    Adv --&gt; Standby : Timeout (es. 60s senza richieste)
+    Adv --&gt; Conn : Ricezione CONNECT_REQ (da uno Scanner)
+
+    Conn --&gt; Standby : Disconnessione / Timeout Link Layer
+</code></pre>
+<h3 id="generic-attribute-profile-gatt">Generic Attribute Profile (GATT)</h3>
+<p>Il Generic Attribute Profile (GATT) stabilisce in dettaglio come scambiare i dati utente su una connessione BLE. Utilizza l'Attribute Protocol (ATT) come protocollo di trasporto sottostante, organizzando i dati grezzi (gli attributi) in una struttura gerarchica ben precisa.</p>
+<p>Il GATT entra in gioco esclusivamente dopo che è stata stabilita una connessione (quando il dispositivo è nello stato Connected del GAP).</p>
+<p>GATT fornisce inoltre il quadro di riferimento per tutti i profili basati su GATT, che coprono casi d'uso precisi e garantiscono l'interoperabilità tra dispositivi di diversi fornitori. Tutti i profili BLE standard sono quindi basati su GATT e devono essere conformi ad esso per funzionare correttamente.</p>
+<p>Il GATT definisce due ruoli per l'interazione dei dati, che sono completamente indipendenti dai ruoli GAP (Centrale/Periferica):</p>
+<ul>
+<li>GATT Server: È il dispositivo che possiede il "database" dei dati e accetta le richieste. Esempio: Un sensore di temperatura (Periferica GAP) che memorizza il valore misurato. Riceve richieste da un client e invia risposte. Invia anche aggiornamenti avviati dal server quando configurato per farlo, ed è il ruolo responsabile dell'archiviazione e della messa a disposizione dei dati utente al client, organizzati in attributi. Ogni dispositivo BLE venduto deve includere almeno un server GATT di base in grado di rispondere alle richieste del client, anche solo per restituire una risposta di errore.</li>
+<li>GATT Client: È il dispositivo che invia richieste al Server per leggere, scrivere o essere notificato sui dati. Esempio: Uno smartphone (Centrale GAP) che legge il valore dal sensore. Il client GATT non sa nulla in anticipo sugli attributi del server, quindi deve prima informarsi sulla presenza e la natura di tali attributi eseguendo la scoperta del servizio (Service Discovery) prima di poter interagire con i dati.</li>
+</ul>
+<p>Il GATT organizza i dati come una matrioska, strutturandoli in tre livelli principali: Profili, Servizi e Caratteristiche.</p>
+<ol>
+<li>Profile (Profilo): Non esiste fisicamente sul dispositivo, ma è un documento concettuale (una specifica) definito dal Bluetooth SIG o dallo sviluppatore. Un Profilo è una raccolta di Servizi predefiniti che descrivono un caso d'uso specifico. Esempio: Il "Heart Rate Profile" stabilisce che il dispositivo deve obbligatoriamente contenere il Servizio Heart Rate e il Servizio Device Information.</li>
+<li>Service (Servizio): È un raggruppamento logico di dati correlati tra loro per compiere una specifica funzione. Ogni servizio è identificato in modo univoco da un UUID (Universally Unique Identifier).</li>
+<li>UUID a 16-bit: Riservati ai servizi standard definiti dal Bluetooth SIG (es. 0x180D per l'Heart Rate Service).</li>
+<li>UUID a 128-bit: Utilizzati per servizi proprietari/personalizzati creati dallo sviluppatore (es. 12345678-1234-5678-1234-56789abcdef0).</li>
+</ol>
+<p>Servizio Primario (Primary Service): Rappresenta la funzionalità principale del dispositivo (es. il servizio Heart Rate in un cardiofrequenzimetro). Può essere scoperto direttamente dal Client.</p>
+<p>Servizio Secondario (Secondary Service): Contiene funzionalità ausiliarie e ha senso solo se referenziato (incluso) da un altro servizio primario. Non può essere scoperto direttamente dal Client per scopi principali.</p>
+<ol>
+<li>Characteristic (Caratteristica): È il contenitore effettivo del dato utente e il concetto più importante del GATT. Un Servizio può contenere una o più Caratteristiche. Ogni Caratteristica è composta a sua volta da tre elementi:</li>
+<li>Declaration (Dichiarazione): I metadati. Definisce le proprietà della caratteristica (sola lettura, scrittura, notifica), il suo UUID e il suo indirizzo (Handle).</li>
+<li>Value (Valore): Il dato vero e proprio (es. il numero 60 che rappresenta i battiti al minuto, o una stringa di testo).</li>
+<li>Descriptor (Descrittore - opzionale): Fornisce informazioni aggiuntive sulla caratteristica. Il più importante è il CCCD (Client Characteristic Configuration Descriptor), che agisce come un interruttore: il Client deve scriverci dentro un "1" per abilitare la ricezione delle Notifiche da parte del Server.</li>
+</ol>
+<p><img alt="alt text" src="../Screenshot_20260215-110519.png" />
+<img alt="alt text" src="../Screenshot_20260215-110721.png" /></p>
+<p>Tramite l'architettura Client/Server, il GATT espone i metodi dell'ATT per interagire con le Caratteristiche. Le operazioni fondamentali che un programmatore utilizzerà sono:</p>
+<ul>
+<li>Read: Il Client chiede di leggere il Valore di una Caratteristica.</li>
+<li>Write: Il Client invia un dato per sovrascrivere il Valore di una Caratteristica.</li>
+<li>Write (Request): Il Client invia un dato e attende un pacchetto di conferma (ACK) dal Server. È un'operazione affidabile ma più lenta.</li>
+<li>
+<p>Write Without Response (Command): Il Client "spara" il dato al Server senza attendere conferme (Fire-and-forget). È meno affidabile, ma indispensabile per trasmettere flussi continui e veloci di dati (es. streaming audio compresso o aggiornamenti firmware OTA).</p>
+</li>
+<li>
+<p>Notify (Notifica): Il Server invia automaticamente il Valore al Client non appena questo cambia. È il meccanismo più efficiente e usato in BLE perché evita al Client di dover richiedere continuamente il dato (polling), risparmiando moltissima batteria.</p>
+</li>
+<li>Indicate (Indicazione): Come la notifica, ma richiede una conferma di ricezione (ACK) da parte del Client.</li>
+</ul>
+<h4 id="mtu-exchange-e-throughput">MTU Exchange e Throughput</h4>
+<p>L'ATT MTU definisce la dimensione massima (in byte) di un pacchetto Attribute Protocol che può essere scambiato tra un Client e un Server GATT. Secondo le specifiche Bluetooth, ogni connessione BLE si avvia sempre con un MTU predefinito di 23 byte, per garantire l'assoluta retrocompatibilità con i primissimi dispositivi BLE 4.0.</p>
+<p>Tuttavia, ogni operazione GATT (come inviare una Write o ricevere una Notify) richiede obbligatoriamente un'intestazione (header) ATT di 3 byte:</p>
+<ul>
+<li>1 byte per l'Opcode (il tipo di operazione).</li>
+<li>2 byte per l'Attribute Handle (l'indirizzo del dato).</li>
+</ul>
+<p>Sottraendo questi 3 byte di overhead ai 23 byte di MTU, otteniamo esattamente 20 byte di payload utile. Se un'applicazione tenta di inviare una stringa di 25 byte senza aver prima negoziato l'MTU, i 5 byte in eccesso verranno inesorabilmente troncati.</p>
+<p>Per superare questo limite, il GATT Client può avviare la procedura di MTU Exchange. Questa operazione può essere eseguita una sola volta per connessione e funziona secondo la rigorosa "regola del minimo":</p>
+<ol>
+<li>Il Client invia un pacchetto Exchange MTU Request al Server, dichiarando la dimensione massima del proprio buffer di ricezione (ad esempio, 512 byte).</li>
+<li>Il Server risponde con un pacchetto Exchange MTU Response, dichiarando a sua volta la propria capacità massima (ad esempio, 256 byte).</li>
+<li>L'MTU effettivo per l'intera durata della connessione sarà impostato sul valore minimo tra i due dichiarati (in questo esempio, 256 byte).</li>
+</ol>
+<p>Con un MTU negoziato a 256 byte, il payload utente per singolo pacchetto sale a 253 byte (256 - 3). Il limite massimo teorico consentito dalle specifiche per l'MTU è di 512 byte (509 byte di payload utile).</p>
+<p>È fondamentale non confondere l'MTU (che è una restrizione logica a livello Host/L2CAP) con le dimensioni del pacchetto radio a livello Link Layer (Controller).</p>
+<p>Se negozi un MTU di 512 byte su un vecchio hardware BLE 4.0 (che a livello radio supporta solo pacchetti da 27 byte), il livello L2CAP sarà costretto a compiere una massiccia frammentazione, spezzettando il tuo grosso pacchetto GATT in decine di minuscoli pacchetti Link Layer per trasmetterli via etere.
+Per ottenere un reale aumento del throughput, un MTU elevato deve essere accompagnato dalla Data Length Extension (DLE), una funzionalità introdotta con il BLE 4.2 che espande il payload fisico del Link Layer da 27 fino a 251 byte. Quando DLE e un grande MTU lavorano in sinergia, il dispositivo può trasmettere enormi quantità di dati con un overhead minimo, aprendo la strada ad applicazioni come l'aggiornamento firmware over-the-air (OTA) o lo streaming di audio compresso.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
