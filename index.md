@@ -19,25 +19,17 @@ Benvenuto nel punto di ingresso centrale del tuo secondo cervello tecnico. Quest
 
 Fondamenta scientifiche e teoriche.
 
-- Algoritmi, Strutture Dati, Sistemi Operativi e Reti.
-
 ### 2. [[Languages_MOC]]
 
 Linguaggi di programmazione e sintassi core.
-
-- [[Python_MOC]], [[Java_MOC]]
 
 ### 3. [[Frameworks_Tools_MOC]]
 
 Ecosistemi di sviluppo e strumenti specifici.
 
-- [[0_Android_MOC]], [[Spring_MOC]].
-
-### 4. [[Design_Patterns_MOC]]
+### 4. [[Software_Engineering_MOC]]
 
 Architettura del software e qualità del codice.
-
-- [[SOLID_Principles]].
 
 ### 5. [[Artificial_Intelligence_MOC]]
 
