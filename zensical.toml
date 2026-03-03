@@ -1,0 +1,19 @@
+[project]
+name = "Computer Engineering KB"
+url = "https://minicla03.github.io/ComputerEngineeringKB/"
+
+[theme]
+name = "material"
+
+[theme.palette]
+scheme = "slate"
+primary = "indigo"
+
+[theme.features]
+navigation_tabs = true
+code_copy = true
+
+[content]
+admonitions = true # Abilita !!! note
+math = "katex"     # Matematica ultra-veloce nativa
+wikilinks = true   # Sostituisce roamlinks nativamente
