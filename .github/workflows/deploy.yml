@@ -5,40 +5,42 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4 # Aggiornato alla v4 per migliori performance
-        with:
-          fetch-depth: 1
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.14" # Allineato alla versione che stai già usando
+          python-version: "3.14"
 
       - name: Install Zensical
-        run: |
-          pip install zensical
+        run: pip install zensical
 
       - name: Staging Docs
         run: |
-          # Creazione struttura per la build
           mkdir -p docs
           cp index.md docs/ 2>/dev/null || true
-          # Copia le cartelle numerate (es. 01_Note, 02_Esercizi)
           cp -r [0-9][0-9]_* docs/ 2>/dev/null || true
           cp -r assets docs/ 2>/dev/null || true
-          # Se hai file javascript personalizzati (come quello per MathJax)
-          mkdir -p docs/javascripts
-          cp -r javascripts/* docs/javascripts/ 2>/dev/null || true
 
-      - name: Build and Deploy
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          # Zensical genera il sito e può effettuare il push su gh-pages automaticamente
-          zensical gh-deploy --force
+      - name: Build Site
+        run: zensical build # Crea la cartella 'site' con tutto il contenuto
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site # Carica la cartella generata
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
