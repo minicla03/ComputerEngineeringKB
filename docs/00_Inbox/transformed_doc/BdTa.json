@@ -1,0 +1,347 @@
+[
+  {
+    "sid": "/big-data-e-data-science",
+    "title": "BIG DATA E DATA SCIENCE",
+    "level": 1,
+    "children": [
+      {
+        "sid": "/12-data-centricai",
+        "title": "1.2 Data CentricAI",
+        "level": 2,
+        "parent": "/big-data-e-data-science",
+        "children": [
+          {
+            "sid": "/121-data-collection",
+            "title": "1.2.1 Data Collection",
+            "level": 3,
+            "parent": "/12-data-centricai",
+            "children": []
+          },
+          {
+            "sid": "/122-data-exploration--validation",
+            "title": "1.2.2 Data Exploration & Validation",
+            "level": 3,
+            "parent": "/12-data-centricai",
+            "children": []
+          },
+          {
+            "sid": "/123-data-wrangling",
+            "title": "1.2.3 Data Wrangling",
+            "level": 3,
+            "parent": "/12-data-centricai",
+            "children": []
+          },
+          {
+            "sid": "/124-data-visualization",
+            "title": "1.2.4 DATA VISUALIZATION",
+            "level": 3,
+            "parent": "/12-data-centricai",
+            "children": []
+          },
+          {
+            "sid": "/125-data-preparation",
+            "title": "1.2.5 DATA PREPARATION",
+            "level": 3,
+            "parent": "/12-data-centricai",
+            "children": [
+              {
+                "sid": "/feature-selection",
+                "title": "FEATURE SELECTION",
+                "level": 4,
+                "parent": "/125-data-preparation",
+                "children": []
+              },
+              {
+                "sid": "/feature-discretization",
+                "title": "FEATURE DISCRETIZATION",
+                "level": 4,
+                "parent": "/125-data-preparation",
+                "children": []
+              },
+              {
+                "sid": "/proiezione",
+                "title": "PROIEZIONE",
+                "level": 4,
+                "parent": "/125-data-preparation",
+                "children": []
+              },
+              {
+                "sid": "/sampling",
+                "title": "SAMPLING",
+                "level": 4,
+                "parent": "/125-data-preparation",
+                "children": []
+              }
+            ]
+          },
+          {
+            "sid": "/126-data-labeling",
+            "title": "1.2.6 Data Labeling",
+            "level": 3,
+            "parent": "/12-data-centricai",
+            "children": []
+          },
+          {
+            "sid": "/125-data-storage-e-retrieval",
+            "title": "1.2.5 Data Storage e retrieval",
+            "level": 3,
+            "parent": "/12-data-centricai",
+            "children": []
+          },
+          {
+            "sid": "/126-inferenza",
+            "title": "1.2.6 Inferenza",
+            "level": 3,
+            "parent": "/12-data-centricai",
+            "children": []
+          }
+        ]
+      },
+      {
+        "sid": "/13-generalizzazione",
+        "title": "1.3 Generalizzazione",
+        "level": 2,
+        "parent": "/big-data-e-data-science",
+        "children": []
+      }
+    ]
+  },
+  {
+    "sid": "/modelli-di-machine-learnig",
+    "title": "MODELLI DI MACHINE LEARNIG",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-valutazione-dei-modelli",
+    "title": "3. VALUTAZIONE DEI MODELLI",
+    "level": 1,
+    "children": [
+      {
+        "sid": "/31-metriche-di-valutazione-per-modelli-di-classificazione",
+        "title": "3.1 Metriche di valutazione per modelli di classificazione",
+        "level": 2,
+        "parent": "/3-valutazione-dei-modelli",
+        "children": []
+      },
+      {
+        "sid": "/32-metriche-di-valutazione-per-modelli-di-regressione",
+        "title": "3.2 Metriche di valutazione per modelli di regressione",
+        "level": 2,
+        "parent": "/3-valutazione-dei-modelli",
+        "children": []
+      },
+      {
+        "sid": "/33-metriche-di-valutazione-per-gli-algoritmi-di-clustering",
+        "title": "3.3 Metriche di valutazione per gli algoritmi di clustering",
+        "level": 2,
+        "parent": "/3-valutazione-dei-modelli",
+        "children": []
+      }
+    ]
+  },
+  {
+    "sid": "/explainable-ai",
+    "title": "EXPLAINABLE AI",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/fairness",
+    "title": "FAIRNESS",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/frequent-itemset-analysis-and-association-rule-mining",
+    "title": "FREQUENT ITEMSET ANALYSIS AND ASSOCIATION RULE MINING",
+    "level": 1,
+    "children": [
+      {
+        "sid": "/41-processo-di-mining",
+        "title": "4.1 Processo di Mining",
+        "level": 2,
+        "parent": "/frequent-itemset-analysis-and-association-rule-mining",
+        "children": [
+          {
+            "sid": "/triangular-matrix",
+            "title": "Triangular Matrix",
+            "level": 4,
+            "parent": "/41-processo-di-mining",
+            "children": []
+          },
+          {
+            "sid": "/metodo-triples",
+            "title": "Metodo Triples",
+            "level": 4,
+            "parent": "/41-processo-di-mining",
+            "children": []
+          },
+          {
+            "sid": "/apriori-algorithm",
+            "title": "APRIORI ALGORITHM",
+            "level": 4,
+            "parent": "/41-processo-di-mining",
+            "children": []
+          },
+          {
+            "sid": "/pcy-park-chen-and-yu-algorithm",
+            "title": "PCY (Park, Chen, and Yu) ALGORITHM",
+            "level": 4,
+            "parent": "/41-processo-di-mining",
+            "children": []
+          },
+          {
+            "sid": "/limited-pass-algortihm",
+            "title": "LIMITED-PASS ALGORTIHM",
+            "level": 4,
+            "parent": "/41-processo-di-mining",
+            "children": []
+          },
+          {
+            "sid": "/son-savasere-omiecinski-and-navathe-algorithm",
+            "title": "SON (Savasere, Omiecinski, and Navathe) ALGORITHM",
+            "level": 4,
+            "parent": "/41-processo-di-mining",
+            "children": []
+          },
+          {
+            "sid": "/toivonens-algorithm",
+            "title": "Toivonen’s Algorithm",
+            "level": 4,
+            "parent": "/41-processo-di-mining",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sid": "/finding-similar-items",
+    "title": "Finding Similar Items",
+    "level": 1,
+    "children": [
+      {
+        "sid": "/51-shingling",
+        "title": "5.1 Shingling",
+        "level": 2,
+        "parent": "/finding-similar-items",
+        "children": []
+      },
+      {
+        "sid": "/52-hashing-shingles",
+        "title": "5.2 Hashing Shingles",
+        "level": 2,
+        "parent": "/finding-similar-items",
+        "children": []
+      },
+      {
+        "sid": "/53-locality-sensitive-hashing",
+        "title": "5.3 Locality-Sensitive Hashing",
+        "level": 2,
+        "parent": "/finding-similar-items",
+        "children": []
+      }
+    ]
+  },
+  {
+    "sid": "/text-analysis",
+    "title": "Text Analysis",
+    "level": 1,
+    "children": [
+      {
+        "sid": "/61-modello-booleano",
+        "title": "6.1 MODELLO BOOLEANO",
+        "level": 2,
+        "parent": "/text-analysis",
+        "children": []
+      },
+      {
+        "sid": "/62-modello-a-spazi-vettoriali",
+        "title": "6.2 MODELLO A SPAZI VETTORIALI",
+        "level": 2,
+        "parent": "/text-analysis",
+        "children": []
+      },
+      {
+        "sid": "/63-modelli-probabilistici",
+        "title": "6.3 MODELLI PROBABILISTICI",
+        "level": 2,
+        "parent": "/text-analysis",
+        "children": [
+          {
+            "sid": "/631-language-model",
+            "title": "6.3.1 Language model",
+            "level": 3,
+            "parent": "/63-modelli-probabilistici",
+            "children": []
+          },
+          {
+            "sid": "/632-the-query-likelihood-retrieval-model",
+            "title": "6.3.2 The Query Likelihood Retrieval Model",
+            "level": 3,
+            "parent": "/63-modelli-probabilistici",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sid": "/computational-lexical-semantics",
+    "title": "Computational Lexical Semantics",
+    "level": 1,
+    "children": [
+      {
+        "sid": "/71-wordnet",
+        "title": "7.1 WORDNET",
+        "level": 2,
+        "parent": "/computational-lexical-semantics",
+        "children": [
+          {
+            "sid": "/711-word-sense-disambiguation",
+            "title": "7.1.1 Word Sense Disambiguation",
+            "level": 3,
+            "parent": "/71-wordnet",
+            "children": []
+          }
+        ]
+      },
+      {
+        "sid": "/72-vector-semantics-and-embeddings",
+        "title": "7.2 Vector semantics and embeddings",
+        "level": 2,
+        "parent": "/computational-lexical-semantics",
+        "children": [
+          {
+            "sid": "/721-rappresentazione-vettoriali-sparse",
+            "title": "7.2.1 Rappresentazione vettoriali sparse",
+            "level": 3,
+            "parent": "/72-vector-semantics-and-embeddings",
+            "children": []
+          },
+          {
+            "sid": "/722-latent-semantic-analysis",
+            "title": "7.2.2 Latent semantic analysis",
+            "level": 3,
+            "parent": "/72-vector-semantics-and-embeddings",
+            "children": []
+          },
+          {
+            "sid": "/723-word-embeddings",
+            "title": "7.2.3 Word embeddings",
+            "level": 3,
+            "parent": "/72-vector-semantics-and-embeddings",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sid": "/llm",
+    "title": "LLM",
+    "level": 1,
+    "children": []
+  }
+]

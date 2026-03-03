@@ -1,0 +1,386 @@
+[
+  {
+    "sid": "/1-aggiungere-diversi-campi-aggiuntivi-a-ciascuna-tabella-e-consentire-ai-clienti-di-utilizzarli-come-desiderano",
+    "title": "1. Aggiungere diversi campi aggiuntivi a ciascuna tabella e consentire ai clienti di utilizzarli come desiderano.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-aggiungere-un-campo-a-ciascuna-tabella-che-identifichi-una-tabella-di-estensione-separata-e-consentire-ai-clienti-di-creare-queste-tabelle-di-estensione-in-base-alle-proprie-esigenze",
+    "title": "2. Aggiungere un campo a ciascuna tabella che identifichi una \"tabella di estensione\" separata e consentire ai clienti di creare queste tabelle di estensione in base alle proprie esigenze.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-è-difficile-sapere-quante-colonne-aggiuntive-includere",
+    "title": "1. È difficile sapere quante colonne aggiuntive includere",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-clienti-diversi-necessitino-di-tipi-diversi-di-colonne",
+    "title": "2. Clienti diversi necessitino di tipi diversi di colonne",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-sistemi-multi-istanza-basati-su-vm-listanza-software-e-il-database-di-ciascun-cliente-vengono-eseguiti-sulla-propria-macchina-virtuale-tutti-gli-utenti-dello-stesso-cliente-possono-accedere-al-database-di-sistema-condiviso",
+    "title": "1. Sistemi multi-istanza basati su VM L'istanza software e il database di ciascun cliente vengono eseguiti sulla propria macchina virtuale. Tutti gli utenti dello stesso cliente possono accedere al database di sistema condiviso.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-sistemi-multi-istanza-basati-su-container-ogni-utente-dispone-di-una-versione-isolata-del-software-e-del-database-in-esecuzione-in-un-set-di-container-generalmente-il-software-utilizza-unarchitettura-a-microservizi-con-ogni-servizio-eseguito-in-un-container-e-che-gestisce-il-proprio-database",
+    "title": "2. Sistemi multi-istanza basati su container Ogni utente dispone di una versione isolata del software e del database in esecuzione in un set di container. Generalmente, il software utilizza un'architettura a microservizi, con ogni servizio eseguito in un container e che gestisce il proprio database.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-come-sistema-multi-tenant-condiviso-da-tutti-i-clienti-del-tuo-prodotto-questo-può-essere-ospitato-nel-cloud-utilizzando-server-di-grandi-dimensioni-e-potenti",
+    "title": "1. Come sistema multi-tenant, condiviso da tutti i clienti del tuo prodotto. Questo può essere ospitato nel cloud utilizzando server di grandi dimensioni e potenti.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-come-sistema-multi-istanza-con-ogni-database-cliente-in-esecuzione-sulla-propria-macchina-virtuale",
+    "title": "2. Come sistema multi-istanza, con ogni database cliente in esecuzione sulla propria macchina virtuale.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-come-sistema-multi-istanza-con-ogni-database-in-esecuzione-nel-proprio-contenitore-il-database-cliente-può-essere-distribuito-su-più-contenitori",
+    "title": "3. Come sistema multi-istanza, con ogni database in esecuzione nel proprio contenitore. Il database cliente può essere distribuito su più contenitori.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-repliche-del-software-e-dei-dati-sono-conservate-in-luoghi-diversi",
+    "title": "1. Repliche del software e dei dati sono conservate in luoghi diversi.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-gli-aggiornamenti-del-database-sono-replicati-attraverso-il-mirroring-in-modo-che-il-database-in-standby-sia-una-copia-precisa-del-database-attivo",
+    "title": "2. Gli aggiornamenti del database sono replicati attraverso il mirroring, in modo che il database in standby sia una copia precisa del database attivo.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-un-monitor-di-sistema-verifica-continuamente-lo-stato-e-può-passare-automaticamente-al-sistema-in-standby-se-quello-attivo-si-guasta",
+    "title": "3. Un monitor di sistema verifica continuamente lo stato, e può passare automaticamente al sistema in standby se quello attivo si guasta.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-ogni-servizio-viene-prima-pubblicato-in-un-registro-che-funge-da-catalogo-dove-è-descritto-cosa-fa-e-come-può-essere-utilizzato",
+    "title": "1. Ogni servizio viene prima pubblicato in un registro che funge da catalogo, dove è descritto cosa fa e come può essere utilizzato.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-le-applicazioni-che-hanno-bisogno-di-quel-servizio-possono-cercarlo-in-questo-registro-scoprirne-linterfaccia-e",
+    "title": "2. Le applicazioni che hanno bisogno di quel servizio possono cercarlo in questo registro, scoprirne l’interfaccia e",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-poi-invocarlo-per-utilizzarne-le-funzionalità-questo-processo-avviene-in-modo-dinamico-e-trasparente-e-può-essere-gestito-da-un-componente-centrale-chiamato-enterprise-service-bus-esb-che-si-occupa-di-mediare-trasformare-e-instradare-i-messaggi-tra-i-vari-servizi",
+    "title": "3. poi invocarlo per utilizzarne le funzionalità. Questo processo avviene in modo dinamico e trasparente, e può essere gestito da un componente centrale chiamato Enterprise Service Bus (ESB), che si occupa di mediare, trasformare e instradare i messaggi tra i vari servizi.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-dopo-qualsiasi-modifica-è-necessario-effettuare-nuovamente-la-build-dellintero-sistema-il-suo-testing-e-il-suo-deployment-questo-processo-può-essere-lento-dal-momento-che-le-modifiche-a-una-parte-del-sistema-possono-influire-negativamente-su-altri-componenti-risulta-quindi-impossibile-aggiornare-frequentemente-lapplicazione",
+    "title": "1. dopo qualsiasi modifica è necessario effettuare nuovamente la build dell’intero sistema, il suo testing e il suo deployment. Questo processo può essere lento, dal momento che le modifiche a una parte del sistema possono influire negativamente su altri componenti. Risulta quindi impossibile aggiornare frequentemente l’applicazione.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-se-le-richieste-al-sistema-aumentano-è-necessario-scalare-lintero-sistema-anche-se-le-richieste-sono-limitate-a-un-piccolo-numero-di-componenti-del-sistema-che-implementano-le-funzioni-più-usate-a-seconda-di-come-viene-gestita-la-virtualizzazione-lavvio-di-un-server-grande-può-richiedere-diversi-minuti-il-servizio-del-sistema-è-degradato-fino-a-quando-il-nuovo-server-non-è-attivo-e-funzionante",
+    "title": "2. Se le richieste al sistema aumentano, è necessario scalare l’intero sistema anche se le richieste sono limitate a un piccolo numero di componenti del sistema che implementano le funzioni più usate.. A seconda di come viene gestita la virtualizzazione, l’avvio di un server grande può richiedere diversi minuti; il servizio del sistema è degradato fino a quando il nuovo server non è attivo e funzionante.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-bilanciare-funzionalità-a-grana-fine-e-prestazioni-del-sistema",
+    "title": "1. Bilanciare funzionalità a grana fine e prestazioni del sistema",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-principio-della-chiusura-comune",
+    "title": "2. Principio della chiusura comune",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-associare-servizi-a-competenze-di-business",
+    "title": "3. Associare servizi a competenze di business",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/4-progettare-servizi-che-accedono-solo-ai-dati-di-cui-hanno-bisogno",
+    "title": "4. Progettare servizi che accedono solo ai dati di cui hanno bisogno",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-linterazione-dei-servizi-dovrebbe-essere-sincrona-o-asincrona",
+    "title": "1. L’interazione dei servizi dovrebbe essere sincrona o asincrona?",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-i-servizi-dovrebbero-comunicare-direttamente-o-attraverso-un-middleware-che-funga-da-broker-dei-messaggi",
+    "title": "2. I servizi dovrebbero comunicare direttamente o attraverso un middleware che funga da broker dei messaggi?",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-quali-protocolli-dovrebbero-essere-usati-per-lo-scambio-di-messaggi-tra",
+    "title": "3. Quali protocolli dovrebbero essere usati per lo scambio di messaggi tra",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-occorre-isolare-i-dati-allinterno-di-ciascun-servizio-del-sistema-con-il-minor-numero-possibile-di-dati-condivisi",
+    "title": "1. Occorre isolare i dati all’interno di ciascun servizio del sistema, con il minor numero possibile di dati condivisi.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-se-la-condivisione-dei-dati-è-inevitabile-i-microservizi-dovrebbero-essere-progettati-in-modo-che-la-maggior-parte-della-condivisione-sia-in-sola-lettura-e-che-laggiornamento-dei-dati-sia-responsabilità-di-un-numero-limitato-di-servizi",
+    "title": "2. Se la condivisione dei dati è inevitabile, i microservizi dovrebbero essere progettati in modo che la maggior parte della condivisione sia in sola lettura, e che l’aggiornamento dei dati sia responsabilità di un numero limitato di servizi.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-se-nel-sistema-ci-sono-servizi-replicati-è-necessario-un-meccanismo-che-mantenga-consistenti-le-copie-del-database-utilizzate-dalle-repliche",
+    "title": "3. Se nel sistema ci sono servizi replicati, è necessario un meccanismo che mantenga consistenti le copie del database utilizzate dalle repliche",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-inconsistenza-di-dati-dipendenti-le-azioni-o-i-guasti-di-un-servizio-possono-causare-lincoerenza-dei-dati-gestiti-da-un-altro-servizio",
+    "title": "1. Inconsistenza di dati dipendenti Le azioni o i guasti di un servizio possono causare l’incoerenza dei dati gestiti da un altro servizio.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-inconsistenza-delle-repliche-è-possibile-che-siano-in-esecuzione-concorrente-più-repliche-dello-stesso-servizio-tutte-le-repliche-hanno-una-propria-copia-del-database-e-ogni-replica-aggiorna-la-propria-copia-dei-dati-è-necessario-un-modo-per-rendere-consistenti-alla-fine-tutti-questi-database-così-che-tutte-le-repliche-operino-sugli-stessi-dati",
+    "title": "2. Inconsistenza delle repliche È possibile che siano in esecuzione concorrente più repliche dello stesso servizio. Tutte le repliche hanno una propria copia del database e ogni replica aggiorna la propria copia dei dati. È necessario un modo per rendere “consistenti alla fine” tutti questi database, così che tutte le repliche operino sugli stessi dati",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-fallimento-del-servizio-interno-una-condizione-rilevata-dal-servizio-che-può-essere-segnalata-al-richiedente-in-un-messaggio-derrore",
+    "title": "1. Fallimento del servizio interno Una condizione rilevata dal servizio che può essere segnalata al richiedente in un messaggio d’errore",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-fallimento-del-servizio-esterno-un-fallimento-con-una-causa-esterna-che-influisce-sulla-disponibilità-di-un-servizio-il-fallimento-può-far-sì-che-il-servizio-smetta-di-rispondere-ed-è-necessario-intraprendere-delle-azioni-per-riavviarlo",
+    "title": "2. Fallimento del servizio esterno Un fallimento con una causa esterna che influisce sulla disponibilità di un servizio. Il fallimento può far sì che il servizio smetta di rispondere ed è necessario intraprendere delle azioni per riavviarlo.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-fallimento-prestazionale-del-servizio-le-prestazioni-del-servizio-degradano-fino-a-un-livello-inaccettabile-la-causa-può-essere-un-carico-eccessivo-o-un-problema-interno-del-servizio-per-rilevare-fallimenti-legati-alle-prestazioni-e-servizi-che-non-rispondono-può-essere-utilizzato-un-monitoraggio-esterno-dei-servizi",
+    "title": "3. Fallimento prestazionale del servizio Le prestazioni del servizio degradano fino a un livello inaccettabile. La causa può essere un carico eccessivo o un problema interno del servizio. Per rilevare fallimenti legati alle prestazioni e servizi che non rispondono può essere utilizzato un monitoraggio esterno dei servizi.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-errori-di-programmazione-il-programmatore-ha-inavvertitamente-inserito-dei-difetti-nel-codice",
+    "title": "1. Errori di programmazione Il programmatore ha inavvertitamente inserito dei difetti nel codice.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-errori-di-comprensione-il-programmatore-ha-frainteso-o-non-è-stato-informato-su-alcuni-dettagli-relativi-a-ciò-che-il-sistema-dovrebbe-fare",
+    "title": "2. Errori di comprensione Il programmatore ha frainteso o non è stato informato su alcuni dettagli relativi a ciò che il sistema dovrebbe fare.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-fault-detection-scoprire-quanti-più-errori-possibile",
+    "title": "1. Fault detection: scoprire quanti più errori possibile",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-fault-avoidance-usare-metodologie-per-evitare-lʼinsorgere-di-errori",
+    "title": "2. Fault avoidance: usare metodologie per evitare lʼinsorgere di errori",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-fault-tollerance-programmare-sapendo-che-ci-sono-errori-ma-minimizzando-i-bug",
+    "title": "3. Fault tollerance: programmare sapendo che ci sono errori, ma minimizzando i bug",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-è-impossibile-testare-tutto-questo-è-un-problema-sia-pratico-il-numero-di-prove-sarebbe-infinito-sia-teorico",
+    "title": "1. È impossibile testare tutto Questo è un problema sia pratico (il numero di prove sarebbe infinito) sia teorico.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-il-testing-può-mostrare-la-presenza-di-errori-non-la-loro-assenza-dijkstra",
+    "title": "2. Il testing può mostrare la presenza di errori, non la loro assenza (Dijkstra)",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-fare-testing-cost-tempo-e-denaro-vanno-progettati",
+    "title": "3. Fare testing cost tempo e denaro, vanno progettati",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-alpha-testing-gli-utenti-lavorano-insieme-agli-sviluppatori-per-testare-il-sistema-lobiettivo-è-scoprire-se-gli-utenti-desiderano-davvero-le-feature-pianificate-per-il-prodotto-idealmente-gli-utenti-dovrebbero-essere-coinvolti-nello-sviluppo-già-nelle-fasi-iniziali-in-modo-da-ottenere-un-feedback-sullutilità-delle-feature-del-prodotto",
+    "title": "1. Alpha testing Gli utenti lavorano insieme agli sviluppatori per testare il sistema. L’obiettivo è scoprire se gli utenti desiderano davvero le feature pianificate per il prodotto. Idealmente gli utenti dovrebbero essere coinvolti nello sviluppo già nelle fasi iniziali, in modo da ottenere un feedback sull’utilità delle feature del prodotto.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-beta-testing-vengono-distribuite-agli-utenti-le-prime-versioni-del-software-per-raccogliere-commenti-il-beta-testing-risponde-anche-agli-interrogativi-sullutilità-delle-feature-ma-di-solito-è-più-focalizzato-sullusabilità-del-prodotto-e-sullefficacia-del-suo-funzionamento-nellambiente-in-cui-opera-lutente",
+    "title": "2. Beta testing Vengono distribuite agli utenti le prime versioni del software per raccogliere commenti. Il beta testing risponde anche agli interrogativi sull’utilità delle feature, ma di solito è più focalizzato sull’usabilità del prodotto e sull’efficacia del suo funzionamento nell’ambiente in cui opera l’utente",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-test-di-interazione-verificano-le-interazioni-tra-le-unità-che-implementano-la-feature-lintegrazione-può-anche-rivelare-bug-nelle-unità-che-non-sono-stati-rilevati-dai-test-di-unità",
+    "title": "1. Test di interazione Verificano le interazioni tra le unità che implementano la feature. L’integrazione può anche rivelare bug nelle unità che non sono stati rilevati dai test di unità.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-test-di-utilità-verificano-che-la-feature-implementi-ciò-che-gli-utenti-potrebbero-desiderare",
+    "title": "2. Test di utilità Verificano che la feature implementi ciò che gli utenti potrebbero desiderare.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-scoprire-se-esistono-interazioni-inattese-e-indesiderate-tra-le-feature-del-sistema-possono-verificarsi-perché-i-progettisti-delle-feature-possono-avere-idee-diverse-rispetto-al-loro-funzionamento",
+    "title": "1. Scoprire se esistono interazioni inattese e indesiderate tra le feature del sistema. Possono verificarsi perché i progettisti delle feature possono avere idee diverse rispetto al loro funzionamento",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-scoprire-se-le-feature-del-sistema-cooperano-in-modo-efficace-a-supporto-di-ciò-che-gli-utenti-vogliono-realmente-fare-con-il-sistema",
+    "title": "2. Scoprire se le feature del sistema cooperano in modo efficace a supporto di ciò che gli utenti vogliono realmente fare con il sistema.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-accertarsi-che-il-sistema-operi-nel-modo-atteso-nei-diversi-ambienti-in-cui-sarà-utilizzato",
+    "title": "3. Accertarsi che il sistema operi nel modo atteso nei diversi ambienti in cui sarà utilizzato.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/4-testare-reattività-throughput-sicurezza-e-altri-attributi-di-qualità-del-sistema",
+    "title": "4. Testare reattività, throughput, sicurezza e altri attributi di qualità del sistema.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-test-funzionale-che-serve-a-controllare-che-il-sistema-faccia-quello-che-deve-fare-si-prendono-i-requisiti-funzionali-e-si-verifica-che-queste-funzioni-siano-effettivamente-presenti-e-funzionanti",
+    "title": "1. Test funzionale, che serve a controllare che il sistema faccia quello che deve fare. Si prendono i requisiti funzionali e si verifica che queste funzioni siano effettivamente presenti e funzionanti.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-test-di-accettazione-orientati-allutente-finale-e-servono-a-dimostrare-che-il-sistema-soddisfa-le-aspettative-del-cliente-o-degli-utenti-per-cui-è-stato-costruito-a-volte-questi-test-vengono-svolti-direttamente-da-chi-ha-commissionato-il-software-oppure-da-utenti-reali-in-una-fase-di-beta-testing",
+    "title": "2. Test di accettazione, orientati all’utente finale e servono a dimostrare che il sistema soddisfa le aspettative del cliente o degli utenti per cui è stato costruito. A volte, questi test vengono svolti direttamente da chi ha commissionato il software, oppure da utenti reali in una fase di beta testing.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-il-test-di-regressione-è-svolto-ogni-volta-che-si-apporta-una-modifica-al-sistema-per-assicurarsi-che-il-resto-del-software-non-ne-risenta-e-quindi-a-verificare-che-le-vecchie-funzionalità-continuino-a-comportarsi-come-prima-senza-che-siano-stati-introdotti-errori-inattesi",
+    "title": "3. Il test di regressione, è svolto ogni volta che si apporta una modifica al sistema per assicurarsi che il resto del software non ne risenta e quindi a verificare che le vecchie funzionalità continuino a comportarsi come prima, senza che siano stati introdotti errori inattesi",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/4-i-mutation-testing-servono-a-per-valutare-lefficacia-dei-test-automatici-cioè-per-capire-quanto-siano-davvero-buoni-i-test-che-abbiamo-scritto-si-modifica-intenzionalmente-il-codice-in-modo-piccolo-e-controllato-per-introdurre-errori-artificiali-poi-si-eseguono-i-test-se-i-test-falliscono-cioè-si-accorgono-che-qualcosa-è-cambiato-allora-sono-considerati-buoni-se-invece-i-test-continuano-a-passare-nonostante-il-codice-sia-stato-corrotto-vuol-dire-che-non-sono-abbastanza-sensibili-e-potrebbero-non-accorgersi-nemmeno-di-un-vero-bug",
+    "title": "4. I mutation testing servono a per valutare l’efficacia dei test automatici, cioè per capire quanto siano davvero buoni i test che abbiamo scritto. Si modifica intenzionalmente il codice, in modo piccolo e controllato, per introdurre errori artificiali. Poi si eseguono i test: se i test falliscono (cioè si accorgono che qualcosa è cambiato), allora sono considerati buoni; se invece i test continuano a passare nonostante il codice sia stato \"corrotto\", vuol dire che non sono abbastanza sensibili e potrebbero non accorgersi nemmeno di un vero bug.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/5-gli-scenario-test-based-è-un-modalità-di-testing-in-cui-si-presenta-uno-scenario-di-funzionamento-del-sistema-in-modo-da-testare-feature-sistema-ecc-trasformiamo-le-user-stories-in-casi-di-test",
+    "title": "5. Gli scenario test based è un modalità di testing in cui si presenta uno scenario di funzionamento del sistema in modo da testare feature, sistema ecc. Trasformiamo le user stories in casi di test",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-il-testing-di-rilascio-verifica-il-sistema-nel-suo-ambiente-operativo-reale-anziché-in-un-ambiente-di-test",
+    "title": "1. Il testing di rilascio verifica il sistema nel suo ambiente operativo reale, anziché in un ambiente di test",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-lobiettivo-del-testing-di-rilascio-è-decidere-se-il-sistema-è-nella-condizione-di-essere-rilasciato-non-di-rilevare-bug-quindi-si-possono-ignorare-alcuni-test-che-falliscono-se-hanno-conseguenze-minime-per-la-maggior-parte-degli-utenti",
+    "title": "2. L’obiettivo del testing di rilascio è decidere se il sistema è nella condizione di essere rilasciato, non di rilevare bug, quindi si possono ignorare alcuni test che falliscono se hanno conseguenze minime per la maggior parte degli utenti.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-sintatticamente-che-sulla-base-della-struttura-del-grafo-può-essere-raggiunto",
+    "title": "1. Sintatticamente: che sulla base della struttura del grafo può essere raggiunto",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-semantica-se-esiste-unesecuzione-reale-del-programma-che-può-effettivamente-passare-per-quel-nodo-o-arco-tenendo-conto-delle-condizioni-logiche-e-del-valore-delle-variabili-anche-se-un-nodo-è-collegato-ad-un-altro-potrebbe-non-essere-semanticamente-raggiungibile-se-le-condizioni-per-arrivarci-non-si-verificano-mai",
+    "title": "2. Semantica: se esiste un’esecuzione reale del programma che può effettivamente passare per quel nodo o arco, tenendo conto delle condizioni logiche e del valore delle variabili. Anche se un nodo è collegato ad un altro, potrebbe non essere semanticamente raggiungibile se le condizioni per arrivarci non si verificano mai.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-test-requirements-sono-delle-condizioni-o-proprietà-che-i-percorsi-di-test-test-path-devono-soddisfare-in-pratica-definiscono-cosa-deve-essere-coperto-o-verificato-nei-test-ad-esempio-tutti-i-nodi-devono-essere-visitati-almeno-una-volta",
+    "title": "1. Test Requirements Sono delle condizioni o proprietà che i percorsi di test (test path) devono soddisfare. In pratica, definiscono cosa deve essere coperto o verificato nei test (ad esempio: \"tutti i nodi devono essere visitati almeno una volta\").",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-test-criterion-è-linsieme-di-regole-che-definisce-quali-devono-essere-i-test-requirements-ogni-criterio-impone-un-certo-tipo-di-copertura-ad-esempio-coprire-tutti-i-nodi-tutti-gli-archi-tutti-i-possibili-usi-di-una-variabile-ecc",
+    "title": "2. Test Criterion È l’insieme di regole che definisce quali devono essere i test requirements. Ogni criterio impone un certo tipo di copertura (ad esempio: coprire tutti i nodi, tutti gli archi, tutti i possibili usi di una variabile, ecc.).",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/3-satisfaction-dato-un-insieme-di-test-requirements-tr-relativo-a-un-criterio-c-un-insieme-di-test-t-soddisfa-quel-criterio-c-se-per-ogni-requisito-in-tr-esiste-almeno-un-percorso-di-test-in-t-che-lo-copre-il-criterio-è-soddisfatto-se-tutti-i-requisiti-sono-stati-effettivamente-testati-almeno-una-volta",
+    "title": "3. Satisfaction Dato un insieme di test requirements TR relativo a un criterio C, un insieme di test T soddisfa quel criterio C se per ogni requisito in TR esiste almeno un percorso di test in T che lo copre. Il criterio è soddisfatto se tutti i requisiti sono stati effettivamente testati almeno una volta.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/4-structural-coverage-criteria-sono-criteri-basati-solo-sulla-struttura-del-grafo-che-rappresenta-il-programma-o-il-flusso-di-controllo-guardano-solo-a-nodi-e-archi-del-grafo",
+    "title": "4. Structural Coverage Criteria Sono criteri basati solo sulla struttura del grafo che rappresenta il programma o il flusso di controllo. Guardano solo a nodi e archi del grafo",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/5-data-flow-coverage-criteria-questi-criteri-sono-più-avanzati-e-richiedono-che-il-grafo-sia-annotato-con-informazioni-sulle-variabili-come-dove-vengono-definite-e-usate-lobiettivo-è-verificare-che-i-test-coprano-i-diversi-modi-in-cui-i-dati-cioè-le-variabili-si-muovono-attraverso-il-programma",
+    "title": "5. Data Flow Coverage Criteria Questi criteri sono più avanzati e richiedono che il grafo sia annotato con informazioni sulle variabili (come dove vengono definite e usate). L’obiettivo è verificare che i test coprano i diversi modi in cui i dati (cioè le variabili) si muovono attraverso il programma.",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/1-non-è-necessario-mantenere-un-database-di-password-e-altre-informazioni-segrete-implementare-e-mantenere-un-sistema-di-autenticazione-può-risultare-molto-oneroso-per-una-piccola-azienda-di-sviluppo",
+    "title": "1. Non è necessario mantenere un database di password e altre informazioni segrete. Implementare e mantenere un sistema di autenticazione può risultare molto oneroso per una piccola azienda di sviluppo",
+    "level": 1,
+    "children": []
+  },
+  {
+    "sid": "/2-il-provider-di-identità-può-fornire-ulteriori-informazioni-sullutente-utilizzabili-per-personalizzare-il-servizio-o-per-inviare-allutente-pubblicità-mirata-naturalmente-quando-si-imposta-un-sistema-di-identità-federata-con-un-grande-provider-è-necessario-chiedere-agli-utenti-se-desiderano-condividere-con-lazienda-fornitrice-del-prodotto-le-informazioni-in-possesso-del-provider-e-non-è-garantito-che-accettino",
+    "title": "2. Il provider di identità può fornire ulteriori informazioni sull’utente, utilizzabili per personalizzare il servizio o per inviare all’utente pubblicità mirata. Naturalmente, quando si imposta un sistema di identità federata con un grande provider è necessario chiedere agli utenti se desiderano condividere con l’azienda fornitrice del prodotto le informazioni in possesso del provider, e non è garantito che accettino.",
+    "level": 1,
+    "children": []
+  }
+]
