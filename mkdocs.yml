@@ -11,6 +11,8 @@ theme:
   features:
     - navigation.tabs
     - search.share
+    - content.code.copy # Aggiunge il tasto per copiare il codice
+    - content.code.annotate # Permette di inserire annotazioni numerate nei blocchi di codice
 
 extra:
   manifest: manifest.webmanifest
@@ -24,3 +26,21 @@ exclude_patterns:
 plugins:
   - search
   - roamlinks
+  - mermaid2
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite # Per il codice all'interno dei paragrafi
+  - pymdownx.snippets # Per includere file di codice esterni
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
