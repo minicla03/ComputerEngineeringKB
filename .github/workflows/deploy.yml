@@ -1,39 +1,44 @@
-name: Deploy KB Site
+name: Deploy KB Site (Zensical)
 on:
   push:
     branches:
       - main
 
 permissions:
-  contents: write # Fondamentale per permettere il push sul ramo gh-pages
+  contents: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4 # Aggiornato alla v4 per migliori performance
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.14" # Allineato alla versione che stai già usando
 
-      - name: Install dependencies
+      - name: Install Zensical
         run: |
-          pip install mkdocs-material
-          pip install mkdocs-roamlinks-plugin
+          pip install zensical
 
       - name: Staging Docs
         run: |
+          # Creazione struttura per la build
           mkdir -p docs
           cp index.md docs/ 2>/dev/null || true
+          # Copia le cartelle numerate (es. 01_Note, 02_Esercizi)
           cp -r [0-9][0-9]_* docs/ 2>/dev/null || true
           cp -r assets docs/ 2>/dev/null || true
+          # Se hai file javascript personalizzati (come quello per MathJax)
+          mkdir -p docs/javascripts
+          cp -r javascripts/* docs/javascripts/ 2>/dev/null || true
 
       - name: Build and Deploy
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          mkdocs gh-deploy --force
+          # Zensical genera il sito e può effettuare il push su gh-pages automaticamente
+          zensical gh-deploy --force
