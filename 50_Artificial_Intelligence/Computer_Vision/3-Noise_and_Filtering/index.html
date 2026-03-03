@@ -1,0 +1,4134 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Computer_Vision/3-Noise_and_Filtering/">
+      
+      
+        <link rel="prev" href="../3-1_Edge_Detection/">
+      
+      
+        <link rel="next" href="../../Deep_Learning/Deep_Learning_MOC/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Noise and Filtering - Computer Engineering KB</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#noise-and-filtering" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Computer Engineering KB" class="md-header__button md-logo" aria-label="Computer Engineering KB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computer Engineering KB
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Noise and Filtering
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🌐 Engineering KB: Master MOC
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../00_Inbox/" class="md-tabs__link">
+          
+  
+  
+  00 Inbox
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../10_Theory/Theory_MOC/" class="md-tabs__link">
+          
+  
+  
+  10 Theory
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../20_Languages/Languages_MOC/" class="md-tabs__link">
+          
+  
+  
+  20 Languages
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../30_Frameworks_Tools/Frameworks_Tools_MOC/" class="md-tabs__link">
+          
+  
+  
+  30 Frameworks Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../40_Software_Engineering/Software_Engineering_MOC/" class="md-tabs__link">
+          
+  
+  
+  40 Software Engineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Artificial_Intelligence_MOC/" class="md-tabs__link">
+          
+  
+  
+  50 Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../98_Project_Journal/2026_Learning_Log/" class="md-tabs__link">
+          
+  
+  
+  98 Project Journal
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../99_Meta/Templates/Technical_Note_Template/" class="md-tabs__link">
+          
+  
+  
+  99 Meta
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Computer Engineering KB" class="md-nav__button md-logo" aria-label="Computer Engineering KB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Computer Engineering KB
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Engineering KB: Master MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    00 Inbox
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    00 Inbox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00_Inbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    README
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00_Inbox/data_registry_draft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data registry draft
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    draft BLE
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    draft BLE
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00_Inbox/draft_BLE/BLE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 Theory
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    10 Theory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Theory_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Theory MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Algorithms/Complexity_Basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Complexity Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Data_Structures/Trees_and_Graphs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trees and Graphs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Reti/Reti_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Reti (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sicurezza
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sicurezza
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Sicurezza/Sicurezza_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Sicurezza (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20 Languages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    20 Languages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_Languages/Languages_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Languages MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_Languages/Java/Java_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Java (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_Languages/Python/Python_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30 Frameworks Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    30 Frameworks Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Frameworks_Tools_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frameworks Tools MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Android
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/0_Android_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/10_Gestione_UI_Android/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INTERFACCIA UTENTE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/11_Layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11 Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/12_Modelli_navigazionali/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12 Modelli navigazionali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/1_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/2_Compilazione_app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilazione app Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/3_Activity_e_Fragment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/4_Service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SERVICE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/5_Broadcast_Receiver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 Broadcast Receiver
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/6_Content_Provider/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CONTENET PROVIDER
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/7_Intent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INTENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/8_Notifiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOTIFICHE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/9_Setting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 Setting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/Android/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    COMPUTAZIONE PERVASIVA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/UI%20Testing%20%28Espresso%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Testing (Espresso)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/Unit%20Testing%20%28JUnit%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit Testing (JUnit)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Building Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Building_Tools/Building_Tools_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Building Tools (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Building_Tools/Gradle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gradle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Building_Tools/Maven/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Spring/Spring_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Spring (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    40 Software Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    40 Software Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/Software_Engineering_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Engineering MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DevOps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/DevOps/DevOps_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ DevOps (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/Software_Design/Software_Design_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Software Design (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versioning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Versioning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/Versioning/DVC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DVC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/Versioning/Git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/Versioning/Software_Versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOFTWARE VERSIONING
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_Software_Engineering/Versioning/Versioning_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Versioning (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50 Artificial Intelligence
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    50 Artificial Intelligence
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Artificial_Intelligence_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Artificial Intelligence MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer Vision
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computer Vision
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0-Computer_Vision_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Computer Vision (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-Image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-Image_Processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image_Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-1_Edge_Detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edge Detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noise and Filtering
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noise and Filtering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Noise
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtering
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boundary-effects-and-padding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundary Effects and Padding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separable-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separable Filters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smooting-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Smooting Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Smooting Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moving-average-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Moving Average Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaussian-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gaussian Filter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gaussian Filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#averaging-vs-gaussian-smoothing-averaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Averaging vs Gaussian Smoothing Averaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sharpening-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sharpening Filters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-linear-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-Linear Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Non-Linear Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#median-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Median Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maxmin-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Max/Min Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bilateral-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bilateral Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measuring-filter-goodness-psnr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measuring Filter Goodness: PSNR
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Deep_Learning/Deep_Learning_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Deep Learning (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Analytics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graph Analytics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Graph_Analytics/0_Graph_Analytics_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Graph Analytics (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Graph_Analytics/1_Graph_Analytics_Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Analytics Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Graph_Analytics/2_Graph_Theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Graph_Analytics/3_Graph_Storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Strorage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Machine Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Machine_Learning/Machine_Learning_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Machine Learning (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    98 Project Journal
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    98 Project Journal
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../98_Project_Journal/2026_Learning_Log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 Learning Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    99 Meta
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    99 Meta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Templates
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../99_Meta/Templates/Technical_Note_Template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Note Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Noise
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtering
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boundary-effects-and-padding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundary Effects and Padding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separable-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separable Filters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smooting-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Smooting Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Smooting Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moving-average-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Moving Average Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaussian-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gaussian Filter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gaussian Filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#averaging-vs-gaussian-smoothing-averaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Averaging vs Gaussian Smoothing Averaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sharpening-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sharpening Filters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-linear-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-Linear Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Non-Linear Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#median-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Median Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maxmin-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Max/Min Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bilateral-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bilateral Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measuring-filter-goodness-psnr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measuring Filter Goodness: PSNR
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="noise-and-filtering">Noise and Filtering</h1>
+<p>Parent: <a href="../0-Computer_Vision_MOC/">0-Computer_Vision_MOC</a></p>
+<h2 id="noise">Noise</h2>
+<p>Histograms images representation consider pixels independent eache other, but in real images pixels are correlated with their neighbors and there is noise in the pixel that alter the image.</p>
+<p>Noise can not be removed with point operators because it depens on the neighborhood of the pixel, so we need to use <strong>neighborhood operators</strong> that consider the pixels around the pixel we want to process.</p>
+<p>!!!note <strong>Noise</strong> can be defined as everything that is not part of the original image or more in general as any unwanted signal that can alter the image which does not represent relevant information for the task we want to perform on the image.</p>
+<p>Ther are three type of noises:</p>
+<ol>
+<li><strong>signal noise</strong>. Often, but not necessarly, noise is an additive noise , i.e. $I’(i,j)= I(i,j)+n(i,j)$.</li>
+<li><strong>computational noise</strong> it is an error, acting as a noise, produced by computational tasks of processing the image that can alter the image due to the limited precision of the computer;</li>
+<li><strong>perceptual noise</strong> (<em>distractors</em>) everything in the image which is not the target of the image itself; sometime called <strong>semantic noise</strong>.</li>
+</ol>
+<p>Noise can be measured by the Signal-to-Noise Ratio (SNR), which is defined as the ratio of the power of the signal to the power of the noise. In terms of standard deviation, it can be expressed as:</p>
+<p>$$SNR= \frac{\sigma_s}{\sigma_n}$$</p>
+<p>where $\sigma_s$ is the standard deviation of the signal and $\sigma_n$ is the standard deviation of the noise. The higher the SNR, the better the quality of the image. Noise can be generated by different sources, such as sensor noise, transmission noise, or environmental noise. Noise can be reduced by using various techniques, such as filtering, averaging, or denoising algorithms.</p>
+<p>Understanding the nature of noise is crucial for selecting the appropriate restoration filter basing on the type of noise present in the image. The commonn types of noise include:</p>
+<ol>
+<li><strong>Salt-and-Pepper Noise</strong> (<strong>Impulse</strong>), also known as <strong>spike noise</strong>, this occurs due to transmission errors or faulty pixel elements.</li>
+<li><strong>Gaussian Noise</strong> (<strong>Additive</strong>), whit which every pixel in the image is altered by a small amount, following a Gaussian (normal) distribution $n(i,j) \sim \mathcal{N}(0, \sigma^2)$. It is always present in images due to the physical properties of sensors and the environment.</li>
+<li><strong>Speckle Noise</strong> (<strong>Multiplicative</strong>) unlike Gaussian noise, speckle noise is multiplicative. it is particularly prevalent in medical imaging (ultrasound) and synthetic aperture radar (SAR).
+   It is present as a granular pattern that is more pronounced in brighter areas of the image.</li>
+</ol>
+<div align="center">
+
+![alt text](./image.png)
+
+</div>
+
+<p>If we do not have specific erros in acquisition, communication (and storage), the signal noise in the images is supposed to be <strong>white noise</strong> that is a random signal having equal intensity at different frequencies, giving it a constant power spectral density ($S(f) = \sigma^2$). This affect all frequencies of the image.</p>
+<p>!!!note 
+      In statistical sense, a time series $r_t$ is characterized as having <strong>weak white noise</strong> if ${r_t}$ is a sequence of serially uncorrelated random variables with zero mean and finite variance. 
+      White noise also has the quality of being i.i.d. independent and identically distributed , which implies no autocorrelation.
+      In particular, if $r_t$ is normally distributed with zero mean and standard deviation $\sigma$, the series is called a <strong>Gaussian white noise.</strong></p>
+<p>When a signal is "white" in the spatial frequency domain, it means its Power Spectral Density (PSD) is flat across all horizontal ($u$) and vertical ($v$) frequencies.
+In a 2D image, white noise is a random field where the intensity value of any given pixel $(x, y)$ is completely uncorrelated with its neighbors. This implies that if you shift the image by even one pixel in any direction, the correlation between the original and shifted versions drops to zero. Each pixel is an independent, identically distributed (i.i.d.) random variable.
+Just as temporal white noise contains all "audible" frequencies equally, spatial white noise contains all "visible" frequencies (rates of change in pixel intensity) equally. This means that the noise has no preferred scale or direction, and it can be thought of as a "static" pattern that overlays the image, affecting all spatial frequencies uniformly.</p>
+<p>Without other information noise is supposed to be additive, and Gaussian (normal, white, with zero mean), that is a stochastic value added to the pixel value, completely unrelated with the signal and the noise added to other pixels.</p>
+<h2 id="filtering">Filtering</h2>
+<p>!!!note <strong>Image restoration</strong> is the process of recovering an original image from a degraded version enhancing the quality of the image and make it more suitable for analysis or visualization.</p>
+<p>One way to remove noise from an image is to use <strong>filters</strong>, a neighborhood operator that considers the pixels around the pixel we want to process.</p>
+<div align="center">
+
+![alt text](./image-1.png)
+</div>
+
+<p>Looking at histograms of the image, noise can be seen as a <strong>spikes</strong> in the histogram, that have value that differ from the avarage value of the pixels in the image, and that are not part of the original image.</p>
+<p>Th simplest way to remove noise is to do a <strong>smoothing operation</strong> such as a <strong>mean filter</strong> that replaces each pixel value with the average of the pixel values in its neighborhood, defined by a <em>window size</em>. This can help to reduce the effect of noise by averaging out the random variations in pixel intensity.</p>
+<p>This is a <strong>linear filter</strong> because the output pixel value is a linear combination of the input pixel values. This consists in a process which gives in output a new image G=g(x,y) , where each location is a weighted sum of the original pixel values from the locations surrounding the corresponding location in the image, using the same set of weights each time, called <strong>filter</strong> or <strong>kernel</strong>. The result is:</p>
+<ul>
+<li><strong>shift-invariant</strong> — meaning that the value depends on the pattern in an image neighborhood, rather than the position of the neighborhood</li>
+<li><strong>linear</strong> — meaning that the output for the sum of two filtered images is the same as the sum of the outputs obtained by filtering images separately.</li>
+</ul>
+<p>Liner filters are defined as:
+$$g(x,y)= \sum_{s=-a}^a \sum_{t=-b}^b f(x+s, y+t)w(s,t) $$ or in a more compact form: $ g = f \otimes w$. This operation is called <strong>correlation</strong>, while, in signale processing, the operation is called <strong>convolution</strong>, defined as:
+$$g(x,y) = \sum<em>{s=-a}^a \sum</em>{t=-b}^b f(x-s, y-t)w(s,t)= \sum<em>{s=-a}^a \sum</em>{t=-b}^b f(s, t)w(x-s,y-t)$$ or in a more compact form: $g = f * w$. The difference between the two is that in convolution the kernel is flipped both horizontally and vertically before being applied to the image, while in correlation it is not.</p>
+<p>The mathematical definition of convolution confirms its role as a fundamental <strong>Linear Time-Invariant (LTI)</strong>—or in 2D, <strong>Linear Shift-Invariant (LSI)</strong>—operation. By using the properties of the Dirac delta function, we can see exactly why the impulse response defines the system's behavior.</p>
+<p>In a continual domain, convolution of two functions, $f$ and $h$, is defined as:</p>
+<p>$$(f * h)(t) = \int_{-\infty}^{\infty} f(\tau)h(t - \tau) d\tau$$</p>
+<ol>
+<li><strong>Reflect:</strong> Flip the kernel $h(\tau)$ to obtain $h(-\tau)$.</li>
+<li><strong>Shift:</strong> Offset the flipped kernel by $t$ to get $h(t - \tau)$.</li>
+<li><strong>Multiply &amp; Integrate:</strong> Find the area under the product of $f(\tau)$ and the shifted kernel.</li>
+</ol>
+<p><img alt="alt text" src="../image-2.png" /></p>
+<p>The kernel $h$ is termed the "impulse response" because it represents the output of the system when the input is a Dirac delta function $\delta(t)$.</p>
+<p>The distinction between these two is the "flip" step. In cross-correlation, the kernel is <strong>not</strong> reversed.
+If the kernel is symmetric (e.g., a Gaussian kernel), convolution and correlation yield identical results.</p>
+<p>In computer vision, the logic extends to two dimensions ($x, y$ or $u, v$). The 2D continuous convolution is:</p>
+<p>$$(f * h)(x, y) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(u, v)h(x - u, y - v) du dv$$</p>
+<p>However, it can also blur the image and reduce the sharpness of edges, which may not be desirable in some cases.</p>
+<p>Due to the linearity of convolution, we can exploit the properties of linear systems to analyze and design filters. The key properties include:</p>
+<ol>
+<li><strong>linearity</strong> (additivity and homogeneity): $f * (h_1 + h_2) = f * h_1 + f * h_2$. So, instead of scanning an image twice (e.g., first for noise reduction and then for edge enhancement), we can convolve the two kernels together beforehand to create a single filter.</li>
+<li>
+<p><strong>scalarity</strong> (homogeneity): $f * (k h) = k (f * h)$. This ensures that the filter's behavior is consistent regardless of the signal's magnitude. If you brighten an image by a factor $k$, the filtered output is brightened by that same factor $k$.</p>
+</li>
+<li>
+<p><strong>shift invariance</strong> (stationarity): $f(x - x_0, y - y_0) * h(x, y) = (f * h)(x - x_0, y - y_0)$. This property dictates that the filter does not "care" where a feature is located in the image. If an edge exists at the top-left or the bottom-right, the filter's response to that edge will be identical, just shifted to the corresponding location.</p>
+</li>
+<li><strong>commutativity</strong> (order independence): $f * h = h * f$. This means that the order in which we apply filters does not matter. If you apply filter $h_1$ and then filter $h_2$ to an image $f$, the result is the same as applying filter $h_2$ and then filter $h_1$ to the same image.</li>
+<li><strong>associativity</strong> (grouping independence): $f * (h_1 * h_2) = (f * h_1) * h_2$. This means that when applying multiple filters, the way we group them does not affect the final output. If you have two filters, $h_1$ and $h_2$, and you want to apply both to an image $f$, you can first convolve $h_1$ and $h_2$ together to create a single filter, and then convolve that result with the image. Alternatively, you can first convolve the image with $h_1$ and then convolve the result with $h_2$. Both approaches will yield the same final output.</li>
+</ol>
+<p>$$(h_2 * (h_1 * f)) = (h_2 * h_1) * f$$</p>
+<p>!!!success This is fundamental for object recognition. If you are looking for a "vertical line," your filter should be able to find it regardless of whether the line is in the center or the corner of the frame.</p>
+<p>Correlation and convolution can both be written as a matrix vector multiplication, if we first convert the two dimensional images $f(i , j)$ and $h(i, j)$ into raster ordered vectors $f $and $g$, given $H$ as a sparse matrix
+$g = \bold{H}f$.</p>
+<p><img alt="alt text" src="../image-4.png" /></p>
+<h3 id="boundary-effects-and-padding">Boundary Effects and Padding</h3>
+<p>Correlation produces a result images smaller than the original one, which may not be desirable in many applications. This is because the neighborhoods of typical correlation and convolution operations extend beyond the image boundaries near the edges, and so the filtered images suffer from <strong>boundary effects</strong>, where the output pixel values near the edges of the image are influenced by the lack of neighboring pixels outside the image. This can lead to artifacts and distortions in the filtered image, especially when using larger kernels or filters that require a larger neighborhood.
+To deal with this, a number of different <strong>padding</strong> strategies have been developed to handle the boundaries of the image when applying filters. These strategies include:</p>
+<ul>
+<li><strong>zero</strong>: set all pixels outside the source image to 0 (a good choice for alpha-matted cutout images);</li>
+<li><strong>constant</strong> (border color): set all pixels outside the source image to a specified border value;</li>
+<li><strong>clamp</strong> (replicate or clamp to edge): repeat edge pixels indefinitely;</li>
+<li><strong>wrap</strong> (repeat or tile): loop “around” the image in a “toroidal” configuration;</li>
+<li><strong>mirror</strong>: reflect pixels across the image edge;</li>
+<li><strong>reflect</strong>: reflect pixels across the image edge, but not including the edge pixel itself;</li>
+<li><strong>extend</strong>: extend the signal by subtracting the mirrored version of the signal from the edge pixel value.</li>
+</ul>
+<h3 id="separable-filters">Separable Filters</h3>
+<p>The processs of performing convolutional operation requires $K^2$ multiplication per pixel, where $K$ in the size of the kernel.</p>
+<p><img alt="alt text" src="../image-3.png" /></p>
+<p>This operation can be speed up if the kernel is <strong>separable</strong>, meaning that convolutional can be computed as two one-dimensionale convolutions, one in the horizontal direction and one in the vertical direction. This reduces the number of multiplications per pixel to $2K$, which can significantly speed up the convolution operation, especially for larger kernels.</p>
+<p>!!!note Separable Kernel
+      Kernel is <strong>separable</strong> decomposing with its sigular value decomposition (SVD) into a sum of rank-1 matrices, which can be expressed as the outer product of two vectors. $$K = \sum_{i=1}^r \sigma_i u_i v_i^T$$ where $r$ is the rank of the kernel, $\sigma_i$ are the singular values, and $u_i$ and $v_i$ are the left and right singular vectors, respectively.
+      If only the first singular value $\sigma_0$ is non-zero, the kernel is separable and $\sqrt{\sigma_0}u_0$ and $\sqrt{\sigma_0}v_0^T$ provide the vertical and horizontal kernels.</p>
+<p>For 2D kernels, it can be rewritten as the product of two 1D kernels:
+$$K(x, y) = vh^T$$ where $v$ is a column vector representing the vertical kernel and $h^T$ is a row vector representing the horizontal kernel.</p>
+<p>If kernels is not separable we can use more terms of SVD relation series (i.e., summing up a number of separable convolutions).</p>
+<h3 id="smooting-filters">Smooting Filters</h3>
+<p>Smoothing kernels (or low-pass filters) are designed to reduce noise and remove fine details by averaging the pixel values in a local neighborhood. Being low-pass filters, in the spatial domain, they suppress high-frequency components.</p>
+<h4 id="moving-average-filter">Moving Average Filter</h4>
+<p>A <strong>Moving Average Filter</strong> is a Low-Pass Filter (LPF) used to smooth signals and images by reducing random noise. It operates by replacing each data point with the average of its local neighborhood.</p>
+<p>In a discrete-time signal $x[n]$, the output of a moving average filter $y[n]$ with a window size of $M$ is defined as:</p>
+<p>$$y[n] = \frac{1}{M} \sum_{k=0}^{M-1} x[n-k]$$</p>
+<p>Essentially, as the window "moves" along the signal, it computes a new average for every position.</p>
+<p>Thi filter is simple and effective for reducing random noise, but it can also blur the image and reduce the sharpness of edges, due to the fact that suppressing high-frequency components.</p>
+<p>A standard moving average gives equal importance to all pixels in the window. However, this often leads to unnatural artifacts.</p>
+<ul>
+<li><strong>Simple Moving Average (SMA):</strong> All weights are $1/M$.</li>
+<li><strong>Weighted Moving Average (WMA):</strong> Assigns higher weights to pixels closer to the center. This can help to preserve edges better than a simple moving average.</li>
+</ul>
+<h4 id="gaussian-filter">Gaussian Filter</h4>
+<p>The <strong>Gaussian Filter</strong> is a linear smoothing filter used to blur images and remove noise. Unlike the Moving Average (Box) filter, which gives equal weight to all pixels in the neighborhood, the Gaussian filter uses a weighted average based on the <strong>Gaussian (Normal) distribution</strong>.</p>
+<p>The weights of the filter are determined by the 2D Gaussian function:</p>
+<p>$$G(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}$$</p>
+<ul>
+<li><strong>Small $\sigma$:</strong> Subtle smoothing; preserves fine details.</li>
+<li><strong>Large $\sigma$:</strong> Heavy blurring; removes noise but also obscures edges and structures.</li>
+</ul>
+<p><img alt="alt text" src="../image-6.png" /></p>
+<p>It blurs the image equally in all directions, whereas a Box filter tends to favor horizontal and vertical directions.
+In the frequency domain, the Fourier transform of a Gaussian is another Gaussian. This means it has no "ripples" or oscillations, avoiding the artifacts often seen with a Moving Average filter.</p>
+<p>One of the properties of the Gaussian filter is that it is <strong>separable</strong>. A 2D Gaussian convolution can be performed by applying a 1D Gaussian filter horizontally, followed by a 1D Gaussian filter vertically.</p>
+<ul>
+<li><strong>Standard 2D Convolution:</strong> Requires $M \times N$ multiplications per pixel (for an $M \times N$ kernel).</li>
+<li><strong>Separable Convolution:</strong> Requires only $M + N$ multiplications per pixel.</li>
+</ul>
+<p>This makes Gaussian blurring extremely efficient for large kernels (e.g., a $25 \times 25$ kernel becomes significantly faster).</p>
+<h5 id="averaging-vs-gaussian-smoothing-averaging">Averaging vs Gaussian Smoothing Averaging</h5>
+<p>While both are linear low-pass filters designed to reduce noise, they treat the spatial frequency of an image very differently.</p>
+<ul>
+<li>The Averaging filter treats every pixel within the neighborhood as equally important. It creates a "blocky" blur. Sharp edges are transformed into linear ramps, which can look unnatural.</li>
+<li>The Gaussian filter gives more weight to pixels closer to the center of the neighborhood, resulting in a smoother and more natural blur. It preserves edges better than the Averaging filter, as it does not create the same blocky artifacts. It provides a much "smoother" and more organic blur. It mimics how out-of-focus lenses naturally behave.</li>
+</ul>
+<p><img alt="alt text" src="../image-7.png" /></p>
+<h4 id="sharpening-filters">Sharpening Filters</h4>
+<p>Smoothing kernels can also be used to <strong>sharpen images</strong> using a process called <strong>unsharp masking</strong>. The process of unsharp masking involves the following steps:</p>
+<ol>
+<li><strong>blurring</strong>: The original image is blurred using a low-pass filter, such as a Gaussian blur, to create a smoothed version of the image.</li>
+<li><strong>sharpening</strong>: The blurred image is subtracted from the original image to create a "mask" that contains the high-frequency details (edges and fine textures) that were lost during the blurring process. $$g_{sharp} = f + \gamma(f- h_{blur} * f)$$</li>
+<li><strong>combining</strong>: The mask is then added back to the original image, often with a scaling factor $\gamma$ to control the amount of sharpening applied. This results in a sharpened image that enhances edges and fine details while maintaining the overall structure of the original image. $$I_{sharpened} = I_{original} + \gamma g_{sharp}$$</li>
+</ol>
+<p>Sharpening filter accentuates differences with local average</p>
+<h3 id="non-linear-filters">Non-Linear Filters</h3>
+<p>Better performance can be obtained by using a non-linear combination of neighboring pixels. When the noise, is <strong>shot noise</strong> (impulsive or salt-and-pepper), rather than being Gaussian, regular blurring with a Gaussian filter fails to remove the noisy pixels and instead turns them into softer (but still visible) spots.</p>
+<h4 id="median-filter">Median Filter</h4>
+<p>A better filter to use in this case is the <strong>median filter</strong>, which selects the median value from each pixel’s neighborhood.</p>
+<p><img alt="alt text" src="../image-5.png" /></p>
+<p>Since the shot noise value usually lies well outside the true values in the neighborhood, the median filter is able to filter away such bad pixels.</p>
+<p>Median values can be computed in linear time using a <strong>randomized select algorithm</strong> and <strong>incremental variants</strong> have also been developed as well as a constant time algorithm that is independent of window size.</p>
+<p>One downside of the median filter, in addition to its moderate computational cost, is that because it selects only one input pixel value to replace each output pixel, it is not as efficient at averaging away regular Gaussian noise. A better choice may be compute a <strong>weighted median</strong>, in which each pixel is used a number of times depending on its distance from the center. This turns out to be equivalent to minimizing the weighted objective function $$\sum_{k,l} w(k, l)|f(i + k, j + l) − g(i, j)|^p$$ where $g(i, j)$ is the desired output value and $p = 1$ for the weighted median. The value $p = 2$ is the usual <strong>weighted mean</strong>, which is equivalent to correlation after normalizing by the sum of the weights</p>
+<p>Non-linear smoothing has another property. They are useful in <strong>edge preserving</strong>, have less tendency to soften edges while filtering away high-frequency noise.</p>
+<h4 id="maxmin-filter">Max/Min Filter</h4>
+<p>The <strong>Max Filter</strong> (<strong>Dilation</strong>) replaces the intensity of the central pixel with the maximum intensity value found in its local neighborhood. It is defined as:$$g(x, y) = \max_{(i, j) \in W} {f(i, j)}$$ where $W$ is the sliding window/kernel.</p>
+<p>It makes bright areas "grow" or expand while causing dark details to shrink or disappear.
+Since it picks the maximum value, small black dots (low intensity) are overwritten by the brighter surrounding pixels, resolving the shot noise problem of "pepper" noise.
+It helps bridge small gaps in bright objects.</p>
+<p>While the <strong>Min Filter</strong> (<strong>Erosion</strong>) replaces the intensity of the central pixel with the minimum intensity value found in its neighborhood. It is defined as: $$g(x, y) = \min_{(i, j) \in W} {f(i, j)}$$</p>
+<p>It makes dark areas expand and bright areas "erode" or shrink, reducing small white spikes (high intensity) by replacing them with the darker values of the background.</p>
+<p>It can be used to disconnect two bright objects that are touching by a thin "bridge" of pixels.</p>
+<h4 id="bilateral-filter">Bilateral Filter</h4>
+<p>The <strong>Bilateral Filter</strong> is a non-linear smoothing filter that addresses the primary weakness of the Gaussian blur: <strong>edge blurring</strong>. While a Gaussian filter averages pixels based solely on their geometric distance, a Bilateral filter considers both <strong>geometric distance</strong> and <strong>pixel intensity difference</strong>.
+It smoothes the image while keeping sharp edges intact by ensuring that only pixels with similar intensity values to the central pixel contribute to the average.</p>
+<p>A weight is calculated for each neighbor based on two distinct Gaussian functions:</p>
+<ol>
+<li><strong>Spatial Weight ($G_s$):</strong> Pixels closer to the center get higher weights (just like a standard Gaussian blur).</li>
+<li><strong>Range Weight ($G_r$):</strong> Pixels with intensity values similar to the center pixel get higher weights. If a neighbor has a vastly different intensity (indicating an edge), its weight drops to near zero.</li>
+</ol>
+<p>In the bilateral filter, the output pixel value depends on a weighted combination of neighboring pixel values
+$$\mathbf{g}(i, j) = \frac{\sum_{k,l} \mathbf{f}(k,l)w(i, j, k, l)}{\sum_{k,l} w(i, j, k, l)}$$</p>
+<p>The weighting coefficient w(i, j, k, l) depends on the product of a <strong>domain kernel</strong>,
+$$d(i, j, k, l) = \exp \left( -\frac{(i - k)^2 + (j - l)^2}{2\sigma_d^2} \right)$$
+and a data-dependent <strong>range kernel</strong>,
+$$r(i, j, k, l) = \exp \left( -\frac{|\mathbf{f}(i, j) - \mathbf{f}(k, l)|^2}{2\sigma_r^2} \right)$$</p>
+<p>When multiplied together, these yield the data-dependent bilateral weight function</p>
+<p>$$w(i, j, k, l) = \exp \left( -\frac{(i - k)^2 + (j - l)^2}{2\sigma_d^2} - \frac{|\mathbf{f}(i, j) - \mathbf{f}(k, l)|^2}{2\sigma_r^2} \right)$$</p>
+<p>If the $\sigma_{range}$ is set too high, it reverts to a standard Gaussian blur. If set too low, it may fail to smooth noise that has a high amplitude.</p>
+<p><img alt="alt text" src="../image-32.png" />
+<img alt="alt text" src="../image-9.png" /></p>
+<p>It is ideal for removing Gaussian noise without losing the structural boundaries of objects.</p>
+<ul>
+<li><strong>Photo Retouching:</strong> Widely used in "beauty filters" to smooth skin texture (low-contrast details) while keeping the eyes, lips, and hair (high-contrast edges) sharp.</li>
+</ul>
+<p>Because the weights depend on the actual pixel values (not just their positions), the kernel must be recomputed for every single pixel. It is significantly slower than a Gaussian filter.</p>
+<h4 id="measuring-filter-goodness-psnr">Measuring Filter Goodness: PSNR</h4>
+<p>Non-linear filters are currently adopted more frequently than linear ones. To evaluate the effectiveness of a filter, ground truth images with synthetic noise are typically used:</p>
+<ul>
+<li>$I(x)$: The original starting image.</li>
+<li>$I'(x) = I(x) + N(x)$: The image with added noise.</li>
+<li>$\hat{I}(x) = \text{filter}(I'(x))$: The result after applying the filter.</li>
+</ul>
+<p>The MSE measures the average squared difference between the original and the filtered image:$$MSE = \frac{1}{n} \sum_{x} [I(x) - \hat{I}(x)]^2$$</p>
+<p><strong>PSNR</strong> (<strong>Peak Signal-to-Noise Ratio</strong>) is used to quantify the difference between the two images, expressed in decibels (dB). A higher PSNR generally indicates a better quality reconstruction.$$PSNR = 10 \log_{10} \frac{I_{max}^2}{MSE}$$ where:</p>
+<ul>
+<li><strong>$I_{max}$</strong>: The maximum possible pixel value (e.g., 255 for 8-bit images).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

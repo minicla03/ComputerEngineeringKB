@@ -2,166 +2,218 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/00_Inbox/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/00_Inbox/data_registry_draft/</loc>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/00_Inbox/draft_BLE/BLE/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/10_Theory/Theory_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/10_Theory/Algorithms/Complexity_Basics/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/10_Theory/Data_Structures/Trees_and_Graphs/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/10_Theory/Reti/Reti_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/10_Theory/Sicurezza/Sicurezza_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/20_Languages/Languages_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/20_Languages/Java/Java_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/20_Languages/Python/Python_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Frameworks_Tools_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/0_Android_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/10_Gestione_UI_Android/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/11_Layout/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/12_Modelli_navigazionali/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/1_Android_OS/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/2_Compilazione_app/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/3_Activity_e_Fragment/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/4_Service/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/5_Broadcast_Receiver/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/6_Content_Provider/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/7_Intent/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/8_Notifiche/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/9_Setting/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/Android/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/UI%20Testing%20%28Espresso%29/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Android/Unit%20Testing%20%28JUnit%29/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Building_Tools/Building_Tools_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Building_Tools/Gradle/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Building_Tools/Maven/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/30_Frameworks_Tools/Spring/Spring_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/40_Software_Engineering/Software_Engineering_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/40_Software_Engineering/DevOps/DevOps_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/40_Software_Engineering/Software_Design/Software_Design_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/40_Software_Engineering/Versioning/DVC/</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/40_Software_Engineering/Versioning/Git/</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/40_Software_Engineering/Versioning/Software_Versioning/</loc>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/40_Software_Engineering/Versioning/Versioning_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Artificial_Intelligence_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Computer_Vision/0-Computer_Vision_MOC/</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Computer_Vision/1-Image/</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Computer_Vision/2-Image_Processing/</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Computer_Vision/3-1_Edge_Detection/</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Computer_Vision/3-Noise_and_Filtering/</loc>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Deep_Learning/Deep_Learning_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Graph_Analytics/0_Graph_Analytics_MOC/</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Graph_Analytics/1_Graph_Analytics_Intro/</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Graph_Analytics/2_Graph_Theory/</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Graph_Analytics/3_Graph_Storage/</loc>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/50_Artificial_Intelligence/Machine_Learning/Machine_Learning_MOC/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/98_Project_Journal/2026_Learning_Log/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://minicla03.github.io/ComputerEngineeringKB/99_Meta/Templates/Technical_Note_Template/</loc>
-         <lastmod>2026-02-15</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
 </urlset>

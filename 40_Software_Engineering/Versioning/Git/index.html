@@ -1,0 +1,4232 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://minicla03.github.io/ComputerEngineeringKB/40_Software_Engineering/Versioning/Git/">
+      
+      
+        <link rel="prev" href="../DVC/">
+      
+      
+        <link rel="next" href="../Software_Versioning/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Git - Computer Engineering KB</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#git" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Computer Engineering KB" class="md-header__button md-logo" aria-label="Computer Engineering KB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computer Engineering KB
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Git
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🌐 Engineering KB: Master MOC
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../00_Inbox/" class="md-tabs__link">
+          
+  
+  
+  00 Inbox
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../10_Theory/Theory_MOC/" class="md-tabs__link">
+          
+  
+  
+  10 Theory
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../20_Languages/Languages_MOC/" class="md-tabs__link">
+          
+  
+  
+  20 Languages
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../30_Frameworks_Tools/Frameworks_Tools_MOC/" class="md-tabs__link">
+          
+  
+  
+  30 Frameworks Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Software_Engineering_MOC/" class="md-tabs__link">
+          
+  
+  
+  40 Software Engineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../50_Artificial_Intelligence/Artificial_Intelligence_MOC/" class="md-tabs__link">
+          
+  
+  
+  50 Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../98_Project_Journal/2026_Learning_Log/" class="md-tabs__link">
+          
+  
+  
+  98 Project Journal
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../99_Meta/Templates/Technical_Note_Template/" class="md-tabs__link">
+          
+  
+  
+  99 Meta
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Computer Engineering KB" class="md-nav__button md-logo" aria-label="Computer Engineering KB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Computer Engineering KB
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 Engineering KB: Master MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    00 Inbox
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    00 Inbox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00_Inbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    README
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00_Inbox/data_registry_draft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data registry draft
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    draft BLE
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    draft BLE
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00_Inbox/draft_BLE/BLE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BLE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 Theory
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    10 Theory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Theory_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Theory MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Algorithms/Complexity_Basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Complexity Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Data_Structures/Trees_and_Graphs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trees and Graphs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Reti/Reti_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Reti (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sicurezza
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sicurezza
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_Theory/Sicurezza/Sicurezza_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Sicurezza (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20 Languages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    20 Languages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_Languages/Languages_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Languages MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_Languages/Java/Java_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Java (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_Languages/Python/Python_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30 Frameworks Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    30 Frameworks Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Frameworks_Tools_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frameworks Tools MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Android
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/0_Android_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/10_Gestione_UI_Android/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INTERFACCIA UTENTE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/11_Layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11 Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/12_Modelli_navigazionali/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12 Modelli navigazionali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/1_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/2_Compilazione_app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilazione app Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/3_Activity_e_Fragment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/4_Service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SERVICE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/5_Broadcast_Receiver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 Broadcast Receiver
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/6_Content_Provider/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CONTENET PROVIDER
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/7_Intent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    INTENT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/8_Notifiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOTIFICHE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/9_Setting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 Setting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/Android/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    COMPUTAZIONE PERVASIVA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/UI%20Testing%20%28Espresso%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Testing (Espresso)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Android/Unit%20Testing%20%28JUnit%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit Testing (JUnit)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Building Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Building_Tools/Building_Tools_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Building Tools (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Building_Tools/Gradle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gradle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Building_Tools/Maven/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_Frameworks_Tools/Spring/Spring_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Spring (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    40 Software Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    40 Software Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Software_Engineering_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Engineering MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DevOps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DevOps/DevOps_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ DevOps (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Software_Design/Software_Design_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Software Design (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versioning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Versioning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DVC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DVC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File .gitignore
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branching-e-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branching e Merge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conflitti-e-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conflitti e Integrazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conflitti e Integrazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risoluzione-dei-conflitti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risoluzione dei Conflitti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprendere-lo-stato-git-status-e-git-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprendere lo Stato: git status e git log
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategie-di-integrazione-merge-vs-rebase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strategie di Integrazione: Merge vs Rebase
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annullare-modifiche-e-stashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annullare Modifiche e Stashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Annullare Modifiche e Stashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reset-vs-revert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reset vs Revert
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lo-stash-git-stash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lo Stash (git stash)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cherry-picking-git-cherry-pick-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cherry-Picking (git cherry-pick hash)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cherry-Picking (git cherry-pick hash)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cherry-pick-multiplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cherry-pick multiplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-conventional-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices: Conventional Commits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandi-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandi (CLI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Software_Versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOFTWARE VERSIONING
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Versioning_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Versioning (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50 Artificial Intelligence
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    50 Artificial Intelligence
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Artificial_Intelligence_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Artificial Intelligence MOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer Vision
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computer Vision
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Computer_Vision/0-Computer_Vision_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Computer Vision (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Computer_Vision/1-Image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Computer_Vision/2-Image_Processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Image_Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Computer_Vision/3-1_Edge_Detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edge Detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Computer_Vision/3-Noise_and_Filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noise and Filtering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Deep_Learning/Deep_Learning_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Deep Learning (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Analytics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graph Analytics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Graph_Analytics/0_Graph_Analytics_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Graph Analytics (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Graph_Analytics/1_Graph_Analytics_Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Analytics Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Graph_Analytics/2_Graph_Theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Graph_Analytics/3_Graph_Storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graph Strorage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Machine Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_Artificial_Intelligence/Machine_Learning/Machine_Learning_MOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗺️ Machine Learning (MOC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    98 Project Journal
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    98 Project Journal
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../98_Project_Journal/2026_Learning_Log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 Learning Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    99 Meta
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    99 Meta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Templates
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../99_Meta/Templates/Technical_Note_Template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Note Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File .gitignore
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branching-e-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branching e Merge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conflitti-e-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conflitti e Integrazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conflitti e Integrazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risoluzione-dei-conflitti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risoluzione dei Conflitti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprendere-lo-stato-git-status-e-git-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprendere lo Stato: git status e git log
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategie-di-integrazione-merge-vs-rebase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strategie di Integrazione: Merge vs Rebase
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annullare-modifiche-e-stashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annullare Modifiche e Stashing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Annullare Modifiche e Stashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reset-vs-revert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reset vs Revert
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lo-stash-git-stash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lo Stash (git stash)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cherry-picking-git-cherry-pick-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cherry-Picking (git cherry-pick hash)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cherry-Picking (git cherry-pick hash)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cherry-pick-multiplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cherry-pick multiplo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-conventional-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices: Conventional Commits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandi-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandi (CLI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="git">Git</h1>
+<p>Parent: <a href="../Versioning_MOC/">Versioning_MOC</a></p>
+<p><img alt="git_logo" src="../assets/git_logo.png" /></p>
+<p>Git è un software per il controllo di versione distribuito utilizzabile da interfaccia a riga dicomando, creato da Linus Torvalds nel 2005, basata su versioning di tipo DAG.</p>
+<p><img alt="step" src="../assets/step_commit.png" /></p>
+<h2 id="workflow">Workflow</h2>
+<p>Per poter modificare il codice presente in un <strong>repository remoto</strong>, è necessario seguire alcuni passaggi fondamentali. Il primo passo consiste nel <strong>clonare</strong> il repository remoto sulla propria macchina locale. Questo permette di ottenere una copia del codice sorgente nella propria <strong>working directory</strong>, ovvero la cartella locale dove si lavorerà sulle modifiche. Una volta effettuatele modifiche ai file, questi devono essere aggiunti alla <strong>staging area</strong>, uno spazio temporaneo che raccoglie i file modificati prima di essere confermati. Questo passaggio avviene tramite il comando git add, che può essere utilizzato per aggiungere singoli file o tutti i file modificati. Dopo aver preparato i file nella staging area, è necessario creare un <strong>commit</strong>, che rappresenta un'istantanea delle modifiche apportate. Il commit viene effettuato con un messaggio descrittivo che spiega le modifiche effettuate. Tuttavia, il commit rimane ancora nella repository locale e non è stato inviato al repository remoto. Per rendere effettive le modifiche nel repository remoto, è necessario eseguire un <strong>push</strong>, che aggiorna il branch su cui si sta lavorando con i commit effettuati localmente. Nel caso in cui altri sviluppatori abbiano modificato il codice nelrepository remoto, è importante aggiornare la propria copia locale prima di procedere con nuove modifiche. Questo si fa con un pull, che permette di scaricare e integrare le modifiche più recenti. Infine, quando si lavora su più branch, è possibile passare da un branch all'altro e unire le modifiche tramite le operazioni di <strong>checkout</strong> e <strong>merge</strong>. Il merge permette di combinare le modifiche provenienti da diversi branch in un unico flusso di sviluppo.</p>
+<table>
+<thead>
+<tr>
+<th><strong>COSA GESTIRE</strong></th>
+<th><strong>COSA ESCLUDERE</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Source Code</strong> <br><strong>Configuration Files</strong> <br><strong>Build &amp; Deployment Scripts</strong> <br><strong>Dependencies</strong> (Librerie esterne e package manager)</td>
+<td><strong>File temporanei o generati</strong> <br><strong>File di log</strong> (.log, .tmp) <br><strong>File compilati</strong> (.class, .exe, dist/, node_modules/) <br><strong>File di cache</strong> (<code>__pycache__</code>, .cache) <br><strong>File di configurazione specifici per l'utente</strong> <br><strong>Impostazioni locali di IDE/editor</strong> (.vscode/, .idea/, .DS_Store) <br><strong>File personali</strong> (a meno che non siano critici per il deployment) <br><strong>Credenziali e segreti hardcoded</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="file-gitignore">File .gitignore</h3>
+<p>Il <strong>file .gitignore</strong> viene utilizzato per escludere specifici file e directory dal versionamento in Git. Questo è utile per evitare di includere file temporanei, di log, compilati, di configurazione locale o di cache.</p>
+<p>Creare un file .gitignore nella root del repository.</p>
+<p>Aggiungere le regole per escludere i file non necessari.</p>
+<h2 id="branching-e-merge">Branching e Merge</h2>
+<p><img alt="branch" src="../assets/branch.png" /></p>
+<p>In Git, ogni <strong>branch</strong> è come un <strong>segnalibro</strong> che punta a un certo punto della storia del progetto, cioè a un <strong>commit</strong> identificato da un
+identificativo <strong>hash SHA-1</strong> di 40 caratteri.</p>
+<p>Il <strong>puntatore HEAD</strong> non è un branch vero e proprio, ma serve a Git per capire <strong>dove ti trovi attualmente</strong>. Quando sei su un branch, HEAD punta a quel branch. Se fai un commit, il branch si sposta in avanti, e HEAD si sposta con lui. Se fai checkout di un altro branch, HEAD si sposta su quel branch.</p>
+<p><strong>1.Clonare il repository remoto</strong></p>
+<ul>
+<li>Comando: git clone <URL-del-repository></li>
+<li>Scarica una copia completa del repository sulla propria macchina (codice + cronologia).</li>
+<li>Crea una working directory locale dove poter lavorare.</li>
+</ul>
+<p><strong>2.Modificare i file nella working directory</strong></p>
+<ul>
+<li>Apporta le modifiche desiderate ai file del progetto.</li>
+<li>Queste modifiche sono non tracciate finché non vengono aggiunte esplicitamente a Git.</li>
+</ul>
+<p><strong>3.Aggiungere i file modificati alla staging area</strong></p>
+<ul>
+<li>Comando: git add <file> oppure git add . (per tutti i file modificati)</li>
+<li>La staging area è una zona intermedia prima del commit.</li>
+<li>Permette di selezionare quali modifiche includere nel prossimo commit.</li>
+</ul>
+<p><strong>4.Creare un commit</strong></p>
+<ul>
+<li>Comando: git commit -m "Messaggio descrittivo"</li>
+<li>Crea un’istantanea delle modifiche nella repository locale.</li>
+<li>Il messaggio dovrebbe spiegare chiaramente cosa è stato modificato.</li>
+</ul>
+<p><strong>5.Inviare le modifiche al repository remoto (push)</strong></p>
+<ul>
+<li>Comando: git push origin <nome-branch></li>
+<li>Condivide i commit fatti localmente con il repository remoto.</li>
+<li>Rende visibili le modifiche agli altri collaboratori.</li>
+</ul>
+<p><strong>6.Aggiornare la propria copia locale (pull)</strong></p>
+<ul>
+<li>Comando: git pull origin <nome-branch></li>
+<li>Scarica e integra le modifiche più recenti dal repository remoto.</li>
+<li>Aiuta a lavorare su una base aggiornata ed evitare conflitti.</li>
+</ul>
+<p><strong>7.Gestire i branch (opzionale, ma comune)</strong></p>
+<ul>
+<li>Cambiare branch: git checkout <nome-branch></li>
+<li>Creare un nuovo branch: git checkout -b <nuovo-branch></li>
+<li>Unire branch: git merge <branch-da-unire></li>
+<li>Utile per organizzare il lavoro, ad esempio separando sviluppo, test e produzione.</li>
+</ul>
+<h2 id="conflitti-e-integrazione">Conflitti e Integrazione</h2>
+<p>Nelle dinamiche di team, non si modifica direttamente il <code>main</code>. Si crea un branch separato, si fanno i commit e si apre una <strong>Pull Request</strong>. Questo permette la code review, l'esecuzione di test automatizzati (CI/CD) e, se tutto è corretto, l'approvazione del maintainer per il merge finale.</p>
+<h3 id="risoluzione-dei-conflitti">Risoluzione dei Conflitti</h3>
+<p>Si verificano quando ci sono modifiche concorrenti incompatibili (es. stessa riga modificata diversamente in due branch). Git interrompe il merge e segnala il conflitto nei file:</p>
+<pre><code class="language-plaintext">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Ciao, questo è un messaggio modificato da Main.
+
+=======
+
+Ciao, questo è un messaggio modificato dal nuovo branch.
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; nuovo-branch
+</code></pre>
+<ul>
+<li>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD → indica la versione attuale nel branch main</li>
+<li>======= → separa le due versioni</li>
+<li>&gt;&gt;&gt;&gt;&gt;&gt;&gt; nuovo-branch → indica la versione del branch che stai cercando di unire</li>
+</ul>
+<p>L'utente deve rimuovere i marcatori (&lt;&lt;&lt;, ===, &gt;&gt;&gt;), mantenere la versione corretta (o un mix delle due) e fare un nuovo commit per risolvere il conflitto.</p>
+<h3 id="comprendere-lo-stato-git-status-e-git-log">Comprendere lo Stato: git status e git log</h3>
+<ul>
+<li>
+<p>git log: Mostra la cronologia dei commit con relativi hash SHA-1 (40 caratteri). L'HEAD indica dove ci si trova attualmente.</p>
+</li>
+<li>
+<p>git status: Divide i file in tre categorie:</p>
+</li>
+<li>Changes to be committed: In staging, pronti per il commit.</li>
+<li>Changes not staged: Modificati ma non aggiunti alla staging area.</li>
+<li>Untracked files: Nuovi file sconosciuti a Git.</li>
+</ul>
+<h3 id="strategie-di-integrazione-merge-vs-rebase">Strategie di Integrazione: Merge vs Rebase</h3>
+<p>Un <strong>merge fast-forward</strong> accade quando il branch di destinazione non ha commit propri e può semplicemente avanzare per includere i commit del branch da unire. In pratica, Git può spostare il puntatore del branch di destinazione avanti nel tempo, senza creare un commit di merge separato.</p>
+<p>Un "fast-forward" avviene quando:</p>
+<ol>
+<li>Il branch di destinazione è direttamente alla base del branch che stai cercando di unire</li>
+<li>Non ci sono divergenze tra i due branch (cioè, il branch di destinazione non ha modifiche che non siano già nel branch di origine)</li>
+</ol>
+<p>Un <strong>merge non fast-forward</strong> avviene quando i due branch hanno cambiamenti divergenti e Git non può semplicemente "spostare" il puntatore del branch di destinazione avanti. In questo caso, Git crea un <strong>commit di merge</strong> che unisce i cambiamenti dei due branch.</p>
+<p>Un <strong>merge non fast-forward</strong> accade quando:</p>
+<ul>
+<li>Hai dei commit sia sul branch di origine che su quello di destinazione</li>
+<li>Git non può semplicemente spostare il puntatore del branch di destinazione per includere i commit del branch di origine, perché entrambi i branch hanno fatto modifiche in parallelo</li>
+</ul>
+<p>Un <strong>rebase</strong> è un'alternativa al merge che riscrive la cronologia dei commit. Con il rebase, si sposta un intero set di commit (un branch) sopra un altro commit, come se i tuoi cambiamenti fossero stati fatti a partire da una base più recente.</p>
+<p>Immagina che tu abbia il branch main e il branch feature:</p>
+<ol>
+<li>main ha un commit A</li>
+<li>feature ha i commit B e C</li>
+</ol>
+<pre><code class="language-plaintext">  A---B---C (feature)
+     /
+D---E---F---G (main)
+</code></pre>
+<p>Se fai un merge di feature su main, avrai qualcosa di simile:</p>
+<pre><code class="language-plaintext">    A---B---C
+     /         \
+D---E---F---G---M (main)
+</code></pre>
+<p>Un <strong>rebase</strong> cambia la cronologia in modo che i commit di feature vengano riposizionati sopra main. Il risultato sarà:</p>
+<pre><code class="language-plaintext">D---E---F---G (main)
+             \
+              A'---B'---C' (feature)
+</code></pre>
+<p>Per effettuare il rebase, è necessario avere tutti i commit che si vogliono portare nel rebase nel tuo branch master.</p>
+<h2 id="annullare-modifiche-e-stashing">Annullare Modifiche e Stashing</h2>
+<p>Oltre al workflow standard, è fondamentale saper gestire gli errori e manipolare l'area di lavoro in sicurezza. Git offre diversi comandi per annullare modifiche, sia a livello di commit che di file, e per gestire situazioni in cui si devono mettere da parte modifiche non ancora pronte per il commit.</p>
+<h3 id="reset-vs-revert">Reset vs Revert</h3>
+<ul>
+<li>git reset: Arretra il puntatore HEAD a un commit precedente, "cancellando" la storia recente. Si usa solo per commit locali non condivisi.</li>
+<li>--soft: Mantiene le modifiche nella staging area.</li>
+<li>--mixed (default): Mantiene le modifiche nella working directory, rimuovendole dalla staging.</li>
+<li>--hard: Distrugge definitivamente le modifiche. Ripristina il file system esattamente al commit indicato.</li>
+<li>git revert: Crea un nuovo commit che applica le modifiche inverse di un commit precedente. È l'unico modo sicuro per annullare modifiche già condivise sul repository remoto, in quanto non altera la storia pregressa.</li>
+</ul>
+<h3 id="lo-stash-git-stash">Lo Stash (git stash)</h3>
+<p>Permette di salvare temporaneamente le modifiche non committate "mettendole in pausa" in un'area separata (lo stash). È utile quando si deve cambiare branch urgentemente per risolvere un bug, ma non si vuole fare un commit incompleto.</p>
+<ul>
+<li>Salvare: git stash</li>
+<li>Recuperare: git stash pop (applica le modifiche salvate e le rimuove dallo stash).</li>
+</ul>
+<h3 id="cherry-picking-git-cherry-pick-hash">Cherry-Picking (git cherry-pick <code>hash</code>)</h3>
+<p>Permette di applicare le modifiche introdotte da un singolo commit specifico appartenente a un altro branch, inserendolo nel branch corrente. Molto usato per applicare hotfix urgenti estratti da branch di sviluppo generici. Git prende il commit scelto, calcola la differenza rispetto al suo genitore (il patch), e applica quella differenza al tuo branch corrente. Poi crea un nuovo commit, con un nuovo hash.
+Stesso contenuto, identità diversa. Come clonare un gatto ma con un nuovo nome e microchip.</p>
+<p>Questo significa che:</p>
+<ul>
+<li>la cronologia rimane lineare nel tuo branch,</li>
+<li>non porti dentro tutti i commit intermedi di un branch,</li>
+<li>puoi estrarre solo ciò che serve (tipico per hotfix).</li>
+</ul>
+<pre><code class="language-plaintext">main:    A---B---C
+feature:      \---D---E
+</code></pre>
+<p>Il commit E contiene un bugfix urgente.
+Da main fai <code>git cherry-pick E</code></p>
+<p>Risultato:</p>
+<pre><code class="language-plaintext">main: A---B---C---E'
+feature:      \---D---E
+</code></pre>
+<p><code>E'</code> è una copia logica di <code>E</code>, con hash diverso.</p>
+<p>Se il codice è cambiato troppo, Git non riesce ad applicare il patch automaticamente e ti chiede di risolvere i conflitti.
+Dopo averli sistemati:</p>
+<pre><code class="language-bash">git add .
+git cherry-pick --continue
+</code></pre>
+<p>Oppure annulli tutto:</p>
+<pre><code class="language-bash">git cherry-pick --abort
+</code></pre>
+<h4 id="cherry-pick-multiplo">Cherry-pick multiplo</h4>
+<p>Puoi applicare più commit:</p>
+<pre><code class="language-bash">git cherry-pick A B C
+</code></pre>
+<p>Oppure un range:</p>
+<pre><code class="language-bash">git cherry-pick A^..C
+</code></pre>
+<p>Git li applica in ordine.</p>
+<p>-x aggiunge nel messaggio del commit la provenienza del commit originale.
+Utile per tracciare da dove viene il fix.</p>
+<p>--no-commit applica le modifiche senza creare subito il commit.
+Perfetto se vuoi combinarle con altro.</p>
+<h2 id="best-practices-conventional-commits">Best Practices: Conventional Commits</h2>
+<p>Per mantenere una cronologia pulita e leggibile, in ambito professionale si adottano i <strong>Conventional Commits</strong>. Si tratta di una convenzione leggera basata sull'uso di prefissi esplicativi:</p>
+<ul>
+<li>feat: (Nuova funzionalità per l'utente)</li>
+<li>fix: (Correzione di un bug)</li>
+<li>docs: (Modifiche alla sola documentazione)</li>
+<li>style: (Formattazione, assenza di punti e virgole; nessuna modifica al codice produttivo)</li>
+<li>refactor: (Ristrutturazione del codice senza alterarne il comportamento esterno)</li>
+<li>test: (Aggiunta o correzione di test)</li>
+<li>chore: (Aggiornamenti a script di build, configurazioni, aggiornamenti librerie)</li>
+</ul>
+<p>Esempio: feat: aggiunta autenticazione tramite OAuth2</p>
+<h2 id="comandi-cli">Comandi (CLI)</h2>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Categoria</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git init</code></td>
+<td>Setup</td>
+<td>Inizializza un nuovo repository locale nella cartella corrente.</td>
+</tr>
+<tr>
+<td><code>git clone url</code></td>
+<td>Setup</td>
+<td>Scarica in locale un intero repository remoto.</td>
+</tr>
+<tr>
+<td><code>git add file</code></td>
+<td>Modifiche</td>
+<td>Sposta file (o . per tutti i file) dalla working directory alla staging area.</td>
+</tr>
+<tr>
+<td><code>git commit -m "msg"</code></td>
+<td>Modifiche</td>
+<td>Consente di salvare lo snapshot attuale in un nuovo commit locale.</td>
+</tr>
+<tr>
+<td><code>git status</code></td>
+<td>Ispezione</td>
+<td>Mostra lo stato dei file (non tracciati, modificati, in staging).</td>
+</tr>
+<tr>
+<td><code>git log --oneline</code></td>
+<td>Ispezione</td>
+<td>Stampa la cronologia dei commit in formato compatto.</td>
+</tr>
+<tr>
+<td><code>git diff</code></td>
+<td>Ispezione</td>
+<td>Mostra le differenze tra la working directory e l'ultimo commit.</td>
+</tr>
+<tr>
+<td><code>git branch nome</code></td>
+<td>Branching</td>
+<td>Crea un nuovo branch a partire dallo stato attuale.</td>
+</tr>
+<tr>
+<td><code>git checkout branch</code></td>
+<td>Branching</td>
+<td>Sposta l'HEAD e la working directory su un branch esistente (oggi sostituito anche da git switch).</td>
+</tr>
+<tr>
+<td><code>git checkout -b nome</code></td>
+<td>Branching</td>
+<td>Crea un nuovo branch e ci si sposta immediatamente.</td>
+</tr>
+<tr>
+<td><code>git merge branch</code></td>
+<td>Branching</td>
+<td>Fonde i commit del branch indicato all'interno del branch in cui ci si trova.</td>
+</tr>
+<tr>
+<td><code>git push origin branch</code></td>
+<td>Remoto</td>
+<td>Invia i nuovi commit locali al server remoto.</td>
+</tr>
+<tr>
+<td><code>git pull origin branch</code></td>
+<td>Remoto</td>
+<td>Scarica nuovi commit dal remoto e li fonde (merge) col branch attuale.</td>
+</tr>
+<tr>
+<td><code>git fetch</code></td>
+<td>Remoto</td>
+<td>Aggiorna le informazioni sui branch remoti in locale, senza fonderle.</td>
+</tr>
+<tr>
+<td><code>git stash</code></td>
+<td>Utility</td>
+<td>Accantona le modifiche attuali non ancora committate.</td>
+</tr>
+<tr>
+<td><code>git stash pop</code></td>
+<td>Utility</td>
+<td>Ripristina nella working directory le ultime modifiche accantonate.</td>
+</tr>
+<tr>
+<td><code>git revert hash</code></td>
+<td>Annullamento</td>
+<td>Annulla in modo sicuro l'effetto di un commit passato, creando un nuovo commit di compensazione.</td>
+</tr>
+<tr>
+<td><code>git reset --hard HEAD</code></td>
+<td>Annullamento</td>
+<td>Distruttivo. Elimina le modifiche non committate per tornare allo stato dell'ultimo commit locale.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
