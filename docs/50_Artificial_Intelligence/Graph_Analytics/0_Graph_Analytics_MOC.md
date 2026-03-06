@@ -45,3 +45,10 @@ created: 2026-02-12
 ## Graph Machine Learning
 
 
+---
+
+## Riferimenti
+
+- [Neo4j](https://neo4j.com/) - Sito ufficiale di Neo4j
+- [Cypher](https://neo4j.com/developer/cypher/) - Documentazione ufficiale di Cypher
+- [NetworkX](https://networkx.org/) - Sito ufficiale di NetworkX
