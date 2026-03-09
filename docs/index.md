@@ -35,6 +35,10 @@ Architettura del software e qualità del codice.
 
 Machine Learning, Deep Learning e AI .
 
+- [[0_Graph_Analytics_MOC]]
+- [[Deep_Learning_MOC]]
+- [[0-Computer_Vision_MOC]]
+
 ---
 
 ## 📝 Operatività Quotidiana
