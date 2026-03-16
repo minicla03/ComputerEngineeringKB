@@ -98,3 +98,5 @@ By viewing the histogram as a PDF, you can calculate **statistical moments** to 
 - **Entropy:** Measures the "information content" or randomness. A high-entropy image has a flat, uniform histogram, while a low-entropy image is predictable (like a binarized image).
 
   $$Entropy(I) = -\sum_{j}^{}p(j) \log p(j)$$
+
+Rappresentation of feature image: [[5_Visual_feature_extraction]]

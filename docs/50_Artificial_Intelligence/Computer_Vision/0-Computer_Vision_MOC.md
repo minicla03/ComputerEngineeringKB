@@ -20,3 +20,5 @@ created: 2026-02-12
 ## 📐 Computer Vision
 
 - [[4_CNN]] - _Reti Neurali Convoluzionali per la Computer Vision._
+- [[5_Visual_feature_extraction]] - _Estrazione di caratteristiche visive._
+- [[5_1_Types_of_features]] - _Tipi di caratteristiche: SIFT, HOG, ORB._
