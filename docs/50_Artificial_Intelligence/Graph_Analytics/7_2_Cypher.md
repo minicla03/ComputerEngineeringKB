@@ -1,6 +1,6 @@
 # Cypher
 
-Parent: [[6_1_Neo4j]]
+Parent: [[7_1_Neo4j]]
 
 
 ## Definizione dello Schema e Integrità

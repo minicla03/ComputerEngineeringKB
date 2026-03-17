@@ -1,6 +1,6 @@
 # Neo4j
 
-Parent: [[6_Graph_Databases]]
+Parent: [[7_Graph_Databases]]
 
 ![alt text](image-10.png)
 
@@ -29,4 +29,4 @@ Neo4j utilizza il modello del grafo a proprietà etichettate:
 
 Neo4j supporta un linguaggio dichiarativo di query chiamato **Cypher**, che è progettato specificamente per lavorare con i grafi e consente agli sviluppatori di esprimere query in modo intuitivo e leggibile.
 
-Guide: [[6_2_Cypher]]
+Guide: [[7_2_Cypher]]
