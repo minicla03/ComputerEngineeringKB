@@ -18,7 +18,7 @@ Una catrna di markov è definita da tre componenti:
 Data una sequenza di variabili aleatorie $\{X_0, X_1, X_2, \dots, X_t\}$, il processo è formalmente markoviano se rispetta l'equazione:
 $$P(X_{t+1} = j \mid X_t = i, X_{t-1} = i_{t-1}, \dots, X_0 = i_0) = P(X_{t+1} = j \mid X_t = i)$$
 
-Una catena di Markov è **omogenea** se un processi in cui la probabilità di transizione al tempo $t_i$ non dipende dal tempo stesso, ma solo dallo stsato del sistema al tempo predente $S(t_{i-1})$. Se è omogenea a stati finiti, la catena di markov può essere rappresentata dalla **matreice di transizione** $A \in \R^{N \times N}$, dove $N$ è il numero di stati. Insieme alla matrice di transizione, si definisce anche il **vettore di probabilità iniziale** $v_0 \in \R^N$ che definisce le probabilià che la catena inizi in ciascuno degli stati.
+Una catena di Markov è **omogenea** se un processi in cui la probabilità di transizione al tempo $t_i$ non dipende dal tempo stesso, ma solo dallo stsato del sistema al tempo predente $S(t_{i-1})$. Se è omogenea a stati finiti, la catena di markov può essere rappresentata dalla **matrice di transizione** $A \in \R^{N \times N}$, dove $N$ è il numero di stati. Insieme alla matrice di transizione, si definisce anche il **vettore di probabilità iniziale** $v_0 \in \R^N$ che definisce le probabilià che la catena inizi in ciascuno degli stati.
 
 Gli elementi della matrice rapprenentano le probabilità di transizione tra stati, e ogni riga della matrice deve sommare a 1, riflettendo la natura stocastica del processo. Le probabilità di transizione nella diagonale principale rappresentano la probabilià di rimanere nello stesso stato, mentre le probabilità fuori diagonale rappresentano la probabilità di transizione verso stati diversi.
 
