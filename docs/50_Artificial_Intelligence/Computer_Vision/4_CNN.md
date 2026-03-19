@@ -9,7 +9,7 @@ The classic architecture of a CNN is composed of several layers, including:
 - **Pooling layers**: These layers are responsible for extract the most important information.
 - **Fully connected layers**: These layers are responsible for making predictions based on the features extracted by the convolutional and pooling layers. They consist of a set of neurons that are connected to all the neurons in the previous layer.
 
-![alt text](image-35.png){width=70% height=70%}
+![alt text](./assets/image-35.png){width=70% height=70%}
 
 ## Receptive field
 
@@ -19,7 +19,7 @@ The convolution operation allows the CNN to learn **spatial hierarchies of featu
 
 Applying convolutional at different layers of the CNN, and differente kernels, we flatten the image into a more compact rappresentation suitable for the neural network, and capture more local information incresing the receptive field that capture the most important feature and local information, to capture  more complex patterns and relationships in the data.
 
-![alt text](image-44.png){width=70% height=70%}
+![alt text](./assets/image-44.png){width=70% height=70%}
 
 The receptive field determines the amount of context that the network can capture when processing the input data. A larger receptive field allows the network to capture more global information, while a smaller receptive field allows the network to capture more local information.
 
@@ -103,7 +103,7 @@ AlexNet contains approximately **60 million learnable parameters**. Interestingl
 
 AlexNet famously used **groups=2** for its convolutional layers to spread the workload across two GPUs. This meant the filters on GPU 1 only saw the feature maps on GPU 1, effectively creating two parallel pathways that only merged at specific "cross-talk" layers.
 
-![alt text](image-36.png){width=90% height=90%}
+![alt text](./assets/image-36.png){width=90% height=90%}
 
 ### VGGNet
 
@@ -118,7 +118,7 @@ Every time a pooling layer halves the spatial dimensions ($H, W$), the number of
 
 VGGNet was presented in two configurations: **VGG-16** and **VGG-19**, referring to the number of weight layers (convolutional and fully connected).
 
-![alt text](image-37.png){width=20% height=20%}
+![alt text](./assets/image-37.png){width=20% height=20%}
 
 Despite its elegance, VGGNet is "heavy":
 
@@ -139,11 +139,11 @@ The naive implementation of an inception module involves (inpuyt -> 28 x 28 x 19
 - Max Pooling: Downsample the feature maps. outputs -> 28 x 28 x 32
 - After applying these operations, we concatenate the outputs along the depth dimension. (The final output tensor is 28 x 28 x 256).
 
-![alt text](image-38.png){width=50% height=50%}
+![alt text](./assets/image-38.png){width=50% height=50%}
 
 The main problem with this naive implementation is that it is computationally expensive, especially when using larger filters like $5 \times 5$, to led to a large number of parameters. To address this issue, GoogLeNet uses **1x1 conv “bottleneck” layers** as a dimensionality reduction step before applying the larger filters. This allows the network to capture multi-scale features while keeping the computational cost manageable.
 
-![alt text](image-39.png){width=50% height=50%}
+![alt text](./assets/image-39.png){width=50% height=50%}
 
 The model consists of multiple Inception modules chained together, with max-pooling layers in between, except for the side branches. These side branches are called **Auxiliary Classifiers** which are s smaller versions of the main classifier that are attached to intermediate layers of the network. The structure of each auxiliary classifier is:
 
@@ -156,7 +156,7 @@ These auxiliary classifiers help the gradient to flow and not diminish too quick
 By adding these extra loss functions, the network learns useful features earlier in training. They act as a regularizer, reducing overfitting.
 During inference, they are typically discarded, and only the main classifier is used for predictions.
 
-![alt text](image-43.png)
+![alt text](./assets/image-43.png)
 
 Another key feature of GoogLeNet is that it replaces fully connected layers with global average pooling at the end, reducing the total number of parameters.
 
@@ -168,7 +168,7 @@ The maim problem was that stacking more layers led to a **degradation problem**,
 
 ResNet introduced the **Residual Block** which, instead of, trying to learn a direct mapping $H(x)$, the network is designed to learn the **residual** $F(x) = H(x) - x$. The original input $x$ is then added back to the output of the convolutional layers through a **skip connection**.
 
-![alt text](image-42.png){width=50% height=50%}
+![alt text](./assets/image-42.png){width=50% height=50%}
 
 By adding the identity $x$, the layers only need to learn the "difference" required to improve the features. Conseguently, during backpropagation, these skip connections act as compute gradient equals to 1, avoiding the vanishing gradient problem and allowing the network to train much deeper architectures effectively.
 If a layer is unnecessary, the network can easily learn to set the weights to zero, effectively letting the identity $x$ pass through unchanged.
@@ -184,7 +184,7 @@ This approach significantly reduces the number of parameters and floating-point 
 !!!warning Summation of F(x) and x
     The summation of $F(x)$ and $x$ in the residual block requires that they have the same dimensions. If the dimensions do not match, a common solution is to use a **projection shortcut** (e.g., a 1x1 convolution) to transform $x$ to the same shape as $F(x)$ before performing the addition.
 
-![alt text](image-41.png)
+![alt text](./assets/image-41.png)
 
 #### Wide ResidualNetworks
 

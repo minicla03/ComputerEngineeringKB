@@ -31,7 +31,7 @@ Understanding the nature of noise is crucial for selecting the appropriate resto
 
 <div align="center">
 
-![alt text](image.png)
+![alt text](./assets/image.png)
 
 </div>
 
@@ -56,7 +56,7 @@ One way to remove noise from an image is to use **filters**, a neighborhood oper
 
 <div align="center">
 
-![alt text](image-1.png)
+![alt text](./assets/image-1.png)
 </div>
 
 Looking at histograms of the image, noise can be seen as a **spikes** in the histogram, that have value that differ from the avarage value of the pixels in the image, and that are not part of the original image.
@@ -82,7 +82,7 @@ $$(f * h)(t) = \int_{-\infty}^{\infty} f(\tau)h(t - \tau) d\tau$$
 2. **Shift:** Offset the flipped kernel by $t$ to get $h(t - \tau)$.
 3. **Multiply & Integrate:** Find the area under the product of $f(\tau)$ and the shifted kernel.
 
-![alt text](image-2.png)
+![alt text](./assets/image-2.png)
 
 The kernel $h$ is termed the "impulse response" because it represents the output of the system when the input is a Dirac delta function $\delta(t)$.
 
@@ -111,7 +111,7 @@ $$(h_2 * (h_1 * f)) = (h_2 * h_1) * f$$
 Correlation and convolution can both be written as a matrix vector multiplication, if we first convert the two dimensional images $f(i , j)$ and $h(i, j)$ into raster ordered vectors $f $and $g$, given $H$ as a sparse matrix
 $g = \bold{H}f$.
 
-![alt text](image-4.png)
+![alt text](./assets/image-4.png)
 
 ### Boundary Effects and Padding
 
@@ -130,7 +130,7 @@ To deal with this, a number of different **padding** strategies have been develo
 
 The processs of performing convolutional operation requires $K^2$ multiplication per pixel, where $K$ in the size of the kernel.
 
-![alt text](image-3.png)
+![alt text](./assets/image-3.png)
 
 This operation can be speed up if the kernel is **separable**, meaning that convolutional can be computed as two one-dimensionale convolutions, one in the horizontal direction and one in the vertical direction. This reduces the number of multiplications per pixel to $2K$, which can significantly speed up the convolution operation, especially for larger kernels.
 
@@ -175,7 +175,7 @@ $$G(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}$$
 - **Small $\sigma$:** Subtle smoothing; preserves fine details.
 - **Large $\sigma$:** Heavy blurring; removes noise but also obscures edges and structures.
 
-![alt text](image-6.png)
+![alt text](./assets/image-6.png)
 
 It blurs the image equally in all directions, whereas a Box filter tends to favor horizontal and vertical directions.
 In the frequency domain, the Fourier transform of a Gaussian is another Gaussian. This means it has no "ripples" or oscillations, avoiding the artifacts often seen with a Moving Average filter.
@@ -194,7 +194,7 @@ While both are linear low-pass filters designed to reduce noise, they treat the 
 - The Averaging filter treats every pixel within the neighborhood as equally important. It creates a "blocky" blur. Sharp edges are transformed into linear ramps, which can look unnatural.
 - The Gaussian filter gives more weight to pixels closer to the center of the neighborhood, resulting in a smoother and more natural blur. It preserves edges better than the Averaging filter, as it does not create the same blocky artifacts. It provides a much "smoother" and more organic blur. It mimics how out-of-focus lenses naturally behave.
 
-![alt text](image-7.png)
+![alt text](./assets/image-7.png)
 
 #### Sharpening Filters
 
@@ -214,7 +214,7 @@ Better performance can be obtained by using a non-linear combination of neighbor
 
 A better filter to use in this case is the **median filter**, which selects the median value from each pixel’s neighborhood.
 
-![alt text](image-5.png)
+![alt text](./assets/image-5.png)
 
 Since the shot noise value usually lies well outside the true values in the neighborhood, the median filter is able to filter away such bad pixels.
 
@@ -262,8 +262,8 @@ $$w(i, j, k, l) = \exp \left( -\frac{(i - k)^2 + (j - l)^2}{2\sigma_d^2} - \frac
 
 If the $\sigma_{range}$ is set too high, it reverts to a standard Gaussian blur. If set too low, it may fail to smooth noise that has a high amplitude.
 
-![alt text](image-32.png)
-![alt text](image-9.png)
+![alt text](./assets/image-32.png)
+![alt text](./assets/image-9.png)
 
 It is ideal for removing Gaussian noise without losing the structural boundaries of objects.
 

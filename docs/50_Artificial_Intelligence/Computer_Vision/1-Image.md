@@ -5,7 +5,7 @@ Parent: [[0-Computer_Vision_MOC]]
 An image can be defined in many ways:
 
 1. **2D signal:** image is a discrete representation of a 2D continuous function _I(x,y)._ It can be considered as a signal and take advantage of the techniques of signal processing for 1D signal.
-   ![alt text](image-29.png)
+   ![alt text](./assets/image-29.png)
    $$I(x)=f(x,y): R2 \rightarrow R$$ The image is defined over a squared interval and the value of the function is sampled and digitalized
 2. **matrix of pixel:** image is a 2D matrix of digital pixels and thus, image processing is an application of mathematical functions or algorithmic procedures working on images.This can come from the quantization of image signal, where eache values of matrix represent the characteristics of image in a certain point. Each row can be represented graphically by using **histogram**.
 3. **2D or 3D tensor** in dl field
@@ -47,7 +47,7 @@ For color images, which are **3D vectors in a color space**, you can have one hi
 
 <div align="center">
 
-![Image: image_004](./image_004.png)
+![Image: image_004](./assets/image_004.png)
 
 </div>
 
@@ -57,7 +57,7 @@ For another point of view, histogram can be viewed a discrete **probability dens
 
 <div align="center">
 
-![Image: image_005](./image_005.png)
+![Image: image_005](./assets/image_005.png)
 
 </div>
 
@@ -78,7 +78,7 @@ A limited Dynamic Range may indicate that the sensor has not been sensitive enou
 
 For the PDF we can determinate **Cumulative Distribution Function** (**CDF**) by summing probabilities up to a specific intensity level $l$.
 
-![Image: image_006](./image_006.png)
+![Image: image_006](./assets/image_006.png)
 $$cdf_{x}=p\left(x\leq l\right)=\sum_{j=0}^{k}p\left(j\right)$$
 It represents the percentage of pixels in an image that are equal to or darker than a specific grey level.
 

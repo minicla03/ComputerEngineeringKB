@@ -6,7 +6,7 @@ The CNN are based on the convolution operation, that involves the images (or the
 
 $$\text{Output}(i, j) = \sum_{m=0}^{K-1} \sum_{n=0}^{K-1} \text{Input}(i+m, j+n) \cdot \text{Kernel}(m, n)$$
 
-![alt text](image-33.png){width=70% height=70%}
+![alt text](./assets/image-33.png){width=70% height=70%}
 
 Usually, convolution operation, reduce the dimension of the input but the output feature map's dimension does not depend only on the kernel size, but also on the stride, padding, and dilation parameters used in the convolution operation.
 
@@ -50,7 +50,7 @@ where:
 The **dilation** is used to increase the receptive field of the kernel, and it can be used to capture more complex patterns in the data. I  this case, this is defined as **dilated convolution** (or atrous convolution), and it is a type of convolution that allows the kernel to have a larger receptive field without increasing the number of parameters. This is achieved by inserting spaces between the kernel elements, effectively "dilating" the kernel. The **dilation rate** controls how much the kernel is dilated, and it can be used to capture more complex patterns in the data without increasing the computational cost.
 When the **dilation** parameter ($D$) is introduced to a convolutional layer, the effective size of the kernel is expanded by inserting "holes" between the kernel elements. This allows the network to increase its receptive field without increasing the number of parameters or the computational cost. A $3 \times 3$ kernel has 9 weights regardless of whether the dilation is 1, 2, or 10.
 
-![alt text](image-34.png){width=70% height=70%}
+![alt text](./assets/image-34.png){width=70% height=70%}
 
 The formula for the output dimensions ($H_{out}, W_{out}$) of a dilated convolutional layer is modified to account for the dilation as follows:
 

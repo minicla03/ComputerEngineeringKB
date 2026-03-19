@@ -2,7 +2,7 @@
 
 Parent: [[0-Computer_Vision_MOC]]
 
-![alt text](image-10.png)
+![alt text](./assetsimage-10.png)
 
 Image processing focuses on transforming images—inputting an image and outputting a modified version. Its primary goals include improving image quality (e.g., noise reduction, contrast enhancement), resizing, and extracting low-level features. It uses mathematical operations and algorithms that do not necessarily "learn" from data.
 
@@ -34,7 +34,7 @@ where:
 
 <div align=center>
 
-![Image: image_008](./image_008.png)
+![Image: image_008](./assets/image_008.png)
 
 </div>
 
@@ -56,7 +56,7 @@ $$I'(x,y)=(I(x,y)-min) \cdot \frac{L-1}{max-min}$$
 - $\frac{L-1}{max-min}$: Scales the values so the highest value reaches the maximum limit L-1 (e.g., 255).
 - Scale Factor = $\frac{L-1}{max-min}$
 
-![Image: image_009](./image_009.png)
+![Image: image_009](./assets/image_009.png)
 
 Maintains the original "shape" of the distribution thing that equalization does not.
 
@@ -64,7 +64,7 @@ Maintains the original "shape" of the distribution thing that equalization does 
 
 <div align=center>
 
-![alt text](image-30.png)
+![alt text](./assets/image-30.png)
 
 </div>
 
@@ -72,7 +72,7 @@ This process modifies entire image. In same case can be useful apply different k
 
 <div align=center>
 
-![alt text](image-31.png)
+![alt text](./assets/image-31.png)
 
 </div>
 
@@ -80,7 +80,7 @@ Because equalization attempts to create a uniform distribution, it often over-st
 
 <div align=center>
 
-![Image: image_013](./image_013.png)
+![Image: image_013](./assets/image_013.png)
 
 </div>
 
@@ -169,7 +169,7 @@ Common methods for calculating the local threshold $T$ include:
 
 <div align=center>
 
-![alt text](image-13.png)
+![alt text](./assets/image-13.png)
 
 </div>
 
@@ -236,7 +236,7 @@ def hsv_threshold(im_rgb: torch.Tensor, h_range: tuple, s_range: tuple, v_range:
 
 It is a method of grouping pixels based on their intensity values. It is a simple form of clustering that assigns each pixel to the nearest cluster center based on its intensity. The algorithm iteratively updates the cluster centers until convergence, where the cluster centers no longer change significantly. Every pixel is assigned to the "cluster center" (mean intensity) that is numerically closest to its own value.
 
-![alt text](image-12.png)
+![alt text](./assets/image-12.png)
 
 **Process:**
 

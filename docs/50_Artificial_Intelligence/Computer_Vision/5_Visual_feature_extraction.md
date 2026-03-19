@@ -2,7 +2,7 @@
 
 Parent: [[0-Computer_Vision_MOC]], [[4_CNN]], [[1-Image]]
 
-!!!note Visual features are the specific pieces of information extracted from an image that allow an algorithm to understand its content. they provide the essential characteristics needed to distinguish a cat from a car, or a pothole from a shadow, for example.
+!!!note Visual features are the specific pieces of information extracted from an image that allow an algorithm to understand its content. They provide the essential characteristics needed to distinguish a cat from a car, or a pothole from a shadow, for example.
 
 ![alt text](image-45.png){width=100% height=50%}
 
@@ -33,7 +33,7 @@ For a computere vision task is important to choose the right levelo of granulari
 
 ## Marr's Three Levels of Analysis
 
-David Marr, was the person that defined first the concept of th COmputer Vision, in its book "Vision: A Computational Investigation into the Human Representation and Processing of Visual Information" (1980), in which he said that omputational vision has three levels of analysis:
+David Marr, was the person that defined first the concept of th Computer Vision, in its book "Vision: A Computational Investigation into the Human Representation and Processing of Visual Information" (1980), in which he said that omputational vision has three levels of analysis:
 
 1. **Computational Level** which defines what are the problems that system have to resolve and why. For example, recognizing objects in an image to understand the scene.
 2. **Algorithmic Level** which how the system do it and wgat _representations_ it uses to preocess image. For example, using a convolutional neural network to extract features and classify objects.
@@ -56,60 +56,20 @@ and based on this, also for the computer vision system, we have the same levels 
 
 ## Visual feature extraction
 
-1. which
-kind of visual features (semantically, perceptual, both)
-•
-2. which kind
-of data structure
-•
-feature scalars, vectors, numerical/categorical textual
-•
-Time series
-•
-Pixel/value maps, heap
-maps,
-•
-graph,
-•
-Linguistic/symbolic features
-•
-3. how compute ore
-extract the features
-•
-4.hot wo check if these features are suitable enough?
+Designing visual features is a quantization and data compression problem. The objective is to summarize visual content to respect computational constraints and ensure data generalization, which is a critical step in preventing model overfitting.
 
-The feature has to be
-designed to effectively summarize the visual content : it’s a quantization problem, or a
-compression problem
-•
-It’s a necessary procedure:
-•
-Data generalization (avoid
-overfitting
-•
-Computational constraints
+To evaluate whether an extracted feature is robust and suitable for a downstream task, it must satisfy four criteria:
 
+* **Discriminant:** It must clearly differentiate between distinct target classes.
+* **Reliable:** It must remain consistent across different instances within the exact same class.
+* **Independent:** Features should be orthogonal and non-redundant, capturing unique information.
+* **Minimum Cardinality:** The feature space must be as compact as possible without losing its representative power (dimensionality reduction).
 
+Visual feature extraction pipeline is engineered to achieve three main properties: 
 
-Use these criteria to evaluate any feature you study:
-
-1. **Discriminant**: Must differ between different classes.
-2. **Reliability**: Must be similar within the same class.
-3. **Independence**: Features should not be redundant.
-4. **Minimum Cardinality**: Use as few features as possible to represent the data.
-5. Distinguish between **Global** features (describing the whole image) and **Local** features (focusing on specific points or regions).
-
-Computer Vision
-aims to compute VISUAL FEATURES that exhibit
-•
-Perceptual
-similarity ( invariance and subjective relevance
-•
-Computational
-stabiity ( discriminance , reliability, indipendence , minimum cardinality
-•
-Continuity
-similarity (in the space , and also in the time)
+- **Perceptual Similarity**: The extracted features should align with human subjective relevance, capturing the semantic essence of the visual content. Furthermore, they must guarantee invariance, meaning the representation remains robust even if the object undergoes transformations such as changes in scale, rotation, or illumination.
+- **Computational Stability**: Features are optimized for downstream algorithms by inherently satisfying the core criteria: high discriminance, intra-class reliability, statistical independence, and minimal cardinality.
+- **Continuity Similarity**: Features exhibit spatio-temporal coherence, ensuring smooth transitions across both spatial regions and consecutive video frames.
 
 ### Visual feature representation
 
@@ -119,28 +79,18 @@ The choice of feature representation is crucial for the success of any computer 
 
 Simple geometric descriptors are often extracted from binarized regions where pixels are distinguished from the background.
 
-* 
-**Area**: Calculated as the total number of pixels belonging to a specific region.
-
-
-* 
-**Perimeter**: Measured by summing the points on the external border.
-
-
-* 
-**Connectivity**: Border calculations depend on whether the system uses 4-connectivity or 8-connectivity to define adjacent pixels.
+* **Area**: Calculated as the total number of pixels belonging to a specific region.
+* **Perimeter**: Measured by summing the points on the external border.
+* **Connectivity**: Border calculations depend on whether the system uses 4-connectivity or 8-connectivity to define adjacent pixels.
 
 Based on the slide provided, **Binarized Image Features** represent the simplest form of structural extraction. After an image is thresholded into black and white (binary), we can calculate mathematical properties of the resulting "blobs" or regions.
 
 Here is the expansion of the three core features mentioned:
-
-
 This is the most fundamental geometric descriptor.
 
 * **Definition:** The total number of pixels belonging to the object or region.
 * **Logic:** In a binary image where the object is represented by pixels with a value of **1** and the background by **0**, the area is simply the sum of all pixels in that region: $A = \sum_{i,j} I(i,j)$.
 * **Use Case:** Useful for filtering out "noise" (very small areas) or distinguishing between objects of significantly different sizes.
-
 
 The perimeter describes the length of the boundary of the region.
 
@@ -148,47 +98,31 @@ The perimeter describes the length of the boundary of the region.
 * **The Connectivity Factor:** The measurement depends on how you define a "neighbor":
 * **4-connectivity:** Only considers pixels touching the top, bottom, left, and right.
 * **8-connectivity:** Includes diagonal neighbors as well.
-
-
 * **Significance:** Combined with Area, Perimeter helps calculate **Compactness** ($P^2 / A$), which tells you if a shape is a perfect circle or a long, thin line.
-
 
 The slide highlights **Connectivity** as a topological feature, often expressed through the **Euler Number ($E$)**.
 
 * **Formula:** $E = S - N$
 * $S$ = Number of connected components (the "solid" parts).
 * $N$ = Number of holes.
-
-
 * **Logic:** This feature is **invariant** to scaling or rotation. For example, a "B" has an Euler number of -1 (1 part, 2 holes), while an "I" has an Euler number of 1 (1 part, 0 holes). It allows the system to understand the "topology" of a shape regardless of its size.
-
 
 #### Color Histograms
 
 This represents the distribution of colors within an image across a chosen color space, such as RGB or HSV.
-![alt text](image-47.png)
+![alt text](./assets/image-47.png)
 
-* 
-**Pros**: Computationally efficient compared to other invariant features.
-
-
-* 
-**Cons**: It ignores spatial information (shape and texture) and is highly sensitive to changes in lighting intensity.
-
-
+* **Pros**: Computationally efficient compared to other invariant features.
+* **Cons**: It ignores spatial information (shape and texture) and is highly sensitive to changes in lighting intensity.
 
 ##### Spatial Color Histograms
 
 To address the lack of spatial information in standard histograms, researchers use **Spatial Pyramids**.
 
-* 
-**Structure**: The image is divided into multiple levels of increasingly fine grids (Level 0, Level 1, Level 2).
+* **Structure**: The image is divided into multiple levels of increasingly fine grids (Level 0, Level 1, Level 2).
+* **Application**: This method is a foundational step in modern deep learning architectures, including Convolutional Neural Networks (CNNs) and Vision Transformers (ViT).
 
-
-* 
-**Application**: This method is a foundational step in modern deep learning architectures, including Convolutional Neural Networks (CNNs) and Vision Transformers (ViT).
-
-![alt text](image-46.png)
+![alt text](./assets/image-46.png)
 
 ## Search and Retrieval
 
@@ -224,8 +158,8 @@ $$D(x, y) = \left( \sum_{i=1}^n |x_i - y_i|^p \right)^{\frac{1}{p}}$$
 * **$p = 1$ (Manhattan Distance / L1 Norm):** Computes the grid-like path between points. Useful for high-dimensional data or when dealing with sparse vectors (like Lasso regression). Manhattan distance measures the sum of the absolute differences between the coordinates of the points.
 $$D_{L1}(x, y) = \sum_{i=1}^n |x_i - y_i|$$
 * **$p = 2$ (Euclidean Distance / L2 Norm):** The standard straight-line distance. Sensitive to outliers because differences are squared. $$D_{L2}(x, y) = \sqrt{\sum_{i=1}^n (x_i - y_i)^2}$$
-  ![alt text](image-52.png){width=50% height=50%}
-* **$p \to \infty$ (Chebyshev Distance / L$\infty$ Norm):** Takes the absolute maximum difference along any single dimension. $$D_{L\infty}(x, y) = \max_{i} |x_i - y_i|$$ ![alt text](image-53.png){width=50% height=50%} 
+  ![alt text](./assets/image-52.png){width=50% height=50%}
+* **$p \to \infty$ (Chebyshev Distance / L$\infty$ Norm):** Takes the absolute maximum difference along any single dimension. $$D_{L\infty}(x, y) = \max_{i} |x_i - y_i|$$ ![alt text](./assets/image-53.png){width=50% height=50%} 
 Emphasizes the maximum shift in any coordinate direction, which is pivotal in scenarios where movement is not restricted to horizontal or vertical paths but includes any direct line.
 
 ### Mahalanobis (Quadratic) Distance
@@ -240,7 +174,7 @@ $$D_M(x, y) = \sqrt{(x - y)^T \Sigma^{-1} (x - y)}$$
 
 Where $\Sigma$ is the covariance matrix. If the covariance matrix is the identity matrix (features are uncorrelated and have unit variance), this reduces exactly to the Euclidean distance.
 
-![alt text](image-54.png)
+![alt text](./assets/image-54.png)
 
 > Mahlanhobis distance used between color histograms
 
@@ -258,7 +192,6 @@ The result ranges from -1 (exactly opposite) to 1 (exactly the same).
     For the retrieval of a single query against a database of $N$ items, the computational complexity is $\mathcal{O}(N \cdot d)$, where $d$ is the dimensionality of the feature vectors. This is because you need to compute the cosine similarity between the query vector and each of the $N$ vectors in the database, and each similarity computation involves $d$ multiplications and additions.
     To optimize this, can be stored $\frac{b_i}{||b_i||}$ in datbase, so at query time, only need to compute the dot product with the normalized query vector, reducing the per-comparison cost to $\mathcal{O}(d)$.
     Normalize we make shorter the vector and create a hypersphere space (more dense space) where all vector have the same length, so we can focus only on the angle between them allowing to capture the similarity in direction and redduce the computational cost.
-
 
 ### Kullback-Leibler Distance (Divergence)
 
@@ -280,7 +213,7 @@ At each bin $i$, the algorithm applies a logical AND equivalent for continuous v
 
 If the histograms are normalized (sum to 1), the intersection directly yields a similarity score between 0 and 1.
 
-![alt text](image-55.png)
+![alt text](./assets/image-55.png)
 
 ### Earth Mover’s Distance (Wasserstein Metric)
 
@@ -299,7 +232,7 @@ $$EMD(P, Q) = \frac{\sum_{i=1}^m \sum_{j=1}^n f_{i,j} d_{i,j}}{\sum_{i=1}^m \sum
 
 This minimization is subject to strict constraints: mass can only be moved, not created or destroyed. The sum of the flow from a specific bin cannot exceed its original mass.
 
-![alt text](image-56.png)
+![alt text](./assets/image-56.png)
 
 **Cross-Bin Relationships** This is the primary reason to use EMD. If a sensor calibration error shifts a continuous signal exactly 5Hz to the right, Euclidean distance and Histogram Intersection will report a massive error because the exact bin-to-bin matches are destroyed. EMD recognizes that the entire mass simply moved a short ground distance, returning a correspondingly small, accurate distance score.
 

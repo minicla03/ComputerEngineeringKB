@@ -24,7 +24,7 @@ $$ J(x) = \nabla I(x) = \left( \frac{\partial I}{\partial x}, \frac{\partial I}{
 
 <div align="center">
 
-  ![alt text](image-14.png)
+  ![alt text](./assets/image-14.png)
 
 </div>
 
@@ -39,7 +39,7 @@ Taking the derivatives of the image increases high frequencies and consequently 
 
 <div align="center">
 
-![alt text](image-15.png)
+![alt text](./assets/image-15.png)
 
 </div>
 
@@ -64,7 +64,7 @@ There are two approcies to detect edges:
 
 <div align="center">
 
-![alt text](image-16.png)
+![alt text](./assets/image-16.png)
 
 </div>
 
@@ -137,7 +137,7 @@ If the vector is close to the subspace spanned by the edge kernels, the pixel is
 
 After apply one of these operators, we can compute _thresholding_ to identify **strong edges**. This step is important because the convolutional operation can produce noise and this is manifested as more edges than the real ones.
 
-![alt text](image-20.png)
+![alt text](./assets/image-20.png)
 
 ## Canny Edge Detector
 
@@ -147,7 +147,7 @@ John Canny developed an edge detection algorithm, designed with three specific p
 2. **Good Localization**: an edge detector should not just find edges ensuring that detected edges are positioned as close as possible to the true edges in the original image. The localization property is achieved through **non-maximum suppression**.
 3. **Single Response**: a problem with earlier edge detectors was their tendency to produce multiple responses to a single edge. Canny’s algorithm addresses this through a combination of non-maximum suppression and **hysteresis thresholding**, ensuring that each true edge in the image generates exactly one detected edge in the output. This produces clean, thin edge lines that accurately represent the structure of the image.
 
-![alt text](image-19.png)
+![alt text](./assets/image-19.png)
 
 !!!tip **STEPS** "Canny Edge Detection Algorithm"
     1. **Gaussian Smoothing**
@@ -166,7 +166,7 @@ Locate edges by finding zero-crossings along the edge normal directions with **n
 
 <div align="center">
 
-![alt text](image-18.png)
+![alt text](./assets/image-18.png)
 
 </div>
 
@@ -174,7 +174,7 @@ A pixel $P$ is considered a valid edge only if its gradient magnitude is greater
 
 $$\text{if } \begin{cases} Grad(P) \geq Grad(P_1) \\ Grad(P) \geq Grad(P_2) \end{cases} \Rightarrow P \text{ is a valid edge}$$
 
-![alt text](image-21.png)
+![alt text](./assets/image-21.png)
 
 Since the gradient direction may not point directly at a neighboring pixel, Canny often uses linear interpolation to estimate the gradient values at points $P_1$ and $P_2$.
 
@@ -185,7 +185,7 @@ Grad(P_1) = Grad(1, -1) \cdot m + Grad(1, 0) \cdot (1-m) \\
 Grad(P_2) = Grad(-1, 1) \cdot m + Grad(-1, 0) \cdot (1-m)
 $$
 
-![alt text](image-28.png)
+![alt text](./assets/image-28.png)
 
 If $|Grad_x(i,j)| < |Grad_y(i,j)|$, it signifies that the vertical component of the gradient is dominant, meaning the edge is oriented more horizontally. We calculate the inverse slope $1/m$ to perform sub-pixel interpolation.
 
@@ -198,7 +198,7 @@ Grad(P_1) = Grad(0, 1) \cdot (1 - |1/m|) + Grad(1, 1) \cdot |1/m| \\
 Grad(P_2) = Grad(0, -1) \cdot (1 - |1/m|) + Grad(-1, -1) \cdot |1/m|
 $$
 
-![alt text](image-27.png)
+![alt text](./assets/image-27.png)
 
 After non-maximum suppression, we need to decide which responses are true edges. Using a single threshold creates a difficult choice:
 
@@ -211,7 +211,7 @@ Canny's solution is **Hysteresis Thresholding** that uses two thresholds:
 - a low threshold to identify weak edge pixels. Pixels with gradient magnitude between the low threshold ($T_{low}$) and high threshold ($T_{high}$) are marked as potential edge pixels.
 - Non-edges: Pixels with gradient magnitude less than the low threshold ($T_{low}$) are immediately discarded. These represent locations where we have high confidence that no edge exists.
 
-![alt text](image-23.png)
+![alt text](./assets/image-23.png)
 
 $$
 E(p) =\begin{cases}
@@ -236,7 +236,7 @@ The Laplacian ($\nabla^2$) is a second-order derivative operator that is extreme
 
 $$\nabla^2 I = \frac{\partial^2 I}{\partial x^2} + \frac{\partial^2 I}{\partial y^2}$$
 
-![alt text](image-25.png)
+![alt text](./assets/image-25.png)
 By the property of convolution, these two steps can be combined into a single kernel,
 $$LoG(x, y) = -\frac{1}{\pi\sigma^4} \left[ 1 - \frac{x^2 + y^2}{2\sigma^2} \right] e^{-\frac{x^2 + y^2}{2\sigma^2}}$$
 
@@ -258,6 +258,6 @@ The threshold $t$ is typically very small (e.g., $t=1$ when using Gaussian smoot
 - **Closed Edges:** The method is very sensitive to small, closed edges. This can result in "spotted" noise or the detection of tiny, irrelevant structures that a gradient-based method (like Canny) might ignore.
 - **Isotropic Nature:** Because the Laplacian is rotationally invariant, it does not provide the edge orientation information that first-derivative operators (like Sobel) offer.
 
-![alt text](image-26.png)
+![alt text](./assets/image-26.png)
 
 The **Difference of Gaussians** is often used to approximate the LoG because it is computationally more efficient while yielding nearly identical results for feature detection.
