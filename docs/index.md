@@ -15,11 +15,11 @@ Benvenuto nel punto di ingresso centrale del tuo secondo cervello tecnico. Quest
 
 ## 🏗️ Aree Principali
 
-### 1. [[Theory_MOC]]
+### 1. [[./10_Theory/Theory_MOC.md]]
 
 Fondamenta scientifiche e teoriche.
 
-### 2. [[Languages_MOC]]
+### 2. [[./20_Languages/Languages_MOC]]
 
 Linguaggi di programmazione e sintassi core.
 
