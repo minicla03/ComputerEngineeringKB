@@ -26,13 +26,6 @@ jobs:
       - name: Install Zensical
         run: pip install zensical
 
-      - name: Staging Docs
-        run: |
-          mkdir -p docs
-          cp index.md docs/ 2>/dev/null || true
-          cp -r [0-9][0-9]_* docs/ 2>/dev/null || true
-          cp -r assets docs/ 2>/dev/null || true
-
       - name: Build Site
         run: zensical build # Crea la cartella 'site' con tutto il contenuto
 
