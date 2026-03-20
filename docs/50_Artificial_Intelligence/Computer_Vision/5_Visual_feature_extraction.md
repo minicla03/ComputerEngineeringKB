@@ -4,7 +4,7 @@ Parent: [[0-Computer_Vision_MOC]], [[4_CNN]], [[1-Image]]
 
 !!!note Visual features are the specific pieces of information extracted from an image that allow an algorithm to understand its content. They provide the essential characteristics needed to distinguish a cat from a car, or a pothole from a shadow, for example.
 
-![alt text](image-45.png){width=100% height=50%}
+![alt text](./assets/image-45.png){width=100% height=50%}
 
 Visual features are generally categorized into two main eras: **Hand-Crafted Features** and **Learned Features**.
 

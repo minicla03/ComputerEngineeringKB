@@ -50,16 +50,12 @@ created: 2026-02-12
 ### Database a Grafo (Storage & Querying)
 
 - [[7_Graph_Databases]] - _Introduzione ai DBMS a grafo._
-- [[7_1_Neo4j]] - _Guida architetturale all'uso di Neo4j._
-- [[7_2_Cypher]] - _Linguaggio di query Cypher._
-- [[7_3_Graph_Algorithms_Neo4j]] - _Algoritmi di grafi eseguiti nativamente in Neo4j._
-- [[7_4_Graph_Visualization_Neo4j]] - _Strumenti di visualizzazione integrati._
+- [[7_1_GraphDB_Modelling]] - _Modellazione dei dati per grafi._
+- [[7_2_Neo4j]] - _Guida architetturale all'uso di Neo4j._
+- [[7_2_1_Cypher]] - _Linguaggio di query Cypher._
 
 ### In-Memory Analytics (Elaborazione Vettoriale)
 
-- [[7_5_NetworkX]] - _Introduzione a NetworkX (Python)._
-- [[7_6_Graph_Algorithms_NetworkX]] - _Implementazione algoritmica in NetworkX._
-- [[7_7_Graph_Visualization_NetworkX]] - _Plotting e visualizzazione programmatica._
 
 ## Graph Machine Learning
 
