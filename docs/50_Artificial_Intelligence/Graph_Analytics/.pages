@@ -1,39 +1,18 @@
 title: Graph Analytics
 nav:
-    - title: Graph Analytics
-        url: /50_Artificial_Intelligence/Graph_Analytics/
-        children:
-            - title: Graph Analytics MOC
-              url: /50_Artificial_Intelligence/Graph_Analytics/0_Graph_Analytics_MOC/
-            - title: Graph Theory
-              url: /50_Artificial_Intelligence/Graph_Analytics/2_Graph_Theory/
-            - title: Graph Storage
-              url: /50_Artificial_Intelligence/Graph_Analytics/3_Graph_Storage/
-            - title: Graph Traversal
-              url: /50_Artificial_Intelligence/Graph_Analytics/4_Graph_Traversal/
-            - title: Shortest Path Problem
-              url: /50_Artificial_Intelligence/Graph_Analytics/4_1_Shortest_Path/
-            - title: Shortest Path Algorithms
-              url: /50_Artificial_Intelligence/Graph_Analytics/4_2_SP_Algorithms/
-            - title: Graph Connettivity
-              url: /50_Artificial_Intelligence/Graph_Analytics/5_Graph_Connettivity/
-            - title: Clustering
-              url: /50_Artificial_Intelligence/Graph_Analytics/5_1_Clustering/
-            - title: Centrality Measures
-              url: /50_Artificial_Intelligence/Graph_Analytics/6_Centrality_Measures/
-            - title: Markov and Random Walks
-              url: /50_Artificial_Intelligence/Graph_Analytics/6_1_Markov_and_Random_Walks/
-            - title: PageRank and HITS
-              url: /50_Artificial_Intelligence/Graph_Analytics/6_2_PageRank_and_HITS/
-            - title: Citation Networks
-              url: /50_Artificial_Intelligence/Graph_Analytics/6_3_Citation_Networks/
-            - title: Graph Databases
-              url: /50_Artificial_Intelligence/Graph_Analytics/7_Graph_Databases/
-            - title: GraphDB Modelling
-                url: /50_Artificial_Intelligence/Graph_Analytics/7_1_GraphDB_Modelling/
-            - title: Neo4j
-                url: /50_Artificial_Intelligence/Graph_Analytics/7_2_Neo4j/
-            - title: Cypher
-                url: /50_Artificial_Intelligence/Graph_Analytics/7_2_Cypher/  
-                
-    
+    - 0_Graph_Analytics_MOC.md
+    - 1_Graph_Analytics_Intro.md
+    - 2_Graph_Theory.md
+    - 3_Graph_Storage.md
+    - 4_Graph_Traversal.md
+    - 4_1_Shortest_Path.md
+    - 4_2_SP_Algorithms.md
+    - 5_Graph_Connettivity.md
+    - 5_1_Clustering.md
+    - 6_Centrality_Measures.md
+    - 6_1_Markov_and_Random_Walks.md
+    - 6_2_PageRank_and_HITS.md
+    - 6_3_Citation_Networks.md
+    - 7_Graph_Databases.md
+    - 7_1_Neo4j.md
+    - 7_2_Cypher.md
