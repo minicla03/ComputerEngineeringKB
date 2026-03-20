@@ -29,3 +29,36 @@ site_dir = "site"
 
 [markdown_extensions]
 "pymdownx.arithmatex" = { generic = true }
+
+
+nav = [
+    { "Home" = "index.md" },
+    { "Inbox" = "00_Inbox/README.md" },
+    { "Theory" = [
+        { "Algorithms" = "10_Theory/Algorithms/Complexity_Basics.md" },
+        { "Data Structures" = "10_Theory/Data_Structures/Trees_and_Graphs.md" },
+        { "Networks" = "10_Theory/Reti/Reti_MOC.md" },
+        { "Security" = "10_Theory/Sicurezza/Sicurezza_MOC.md" }
+    ]},
+    { "Languages" = [
+        { "Java" = "20_Languages/Java/Java_MOC.md" },
+        { "Python" = "20_Languages/Python/Python_MOC.md" }
+    ]},
+    { "Frameworks & Tools" = [
+        { "Android" = "30_Frameworks_Tools/Android/0_Android_MOC.md" },
+        { "Building Tools" = "30_Frameworks_Tools/Building_Tools/Building_Tools_MOC.md" },
+        { "Spring" = "30_Frameworks_Tools/Spring/Spring_MOC.md" }
+    ]},
+    { "Software Engineering" = [
+        { "Software Design" = "40_Software_Engineering/Software_Design/Software_Design_MOC.md" },
+        { "Versioning" = "40_Software_Engineering/Versioning/Versioning_MOC.md" }
+    ]},
+    { "Artificial Intelligence" = [
+        { "Agentic AI" = "50_Artificial_Intelligence/Agentic_AI/0_Agentic_AI_MOC.md" },
+        { "Computer Vision" = "50_Artificial_Intelligence/Computer_Vision/0-Computer_Vision_MOC.md" },
+        { "Deep Learning" = "50_Artificial_Intelligence/Deep_Learning/Deep_Learning_MOC.md" },
+        { "Graph Analytics" = "50_Artificial_Intelligence/Graph_Analytics/0_Graph_Analytics_MOC.md" },
+        { "Machine Learning" = "50_Artificial_Intelligence/Machine_Learning/Machine_Learning_MOC.md" }
+    ]},
+    { "Journal" = "98_Project_Journal/2026_Learning_Log.md" }
+]
