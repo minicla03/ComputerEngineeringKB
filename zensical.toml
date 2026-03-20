@@ -7,28 +7,6 @@ extra_javascript = [
   "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 ]
 
-[theme]
-name = "material"
-
-[theme.palette]
-scheme = "slate"
-primary = "indigo"
-
-[theme.features]
-navigation_tabs = true
-code_copy = true
-
-[content]
-admonitions = true
-diagrams = "mermaid"
-wikilinks = true
-
-[build]
-docs_dir = "docs"
-site_dir = "site"
-
-[markdown_extensions]
-"pymdownx.arithmatex" = { generic = true }
 
 
 nav = [
@@ -62,3 +40,26 @@ nav = [
     ]},
     { "Journal" = "98_Project_Journal/2026_Learning_Log.md" }
 ]
+
+[theme]
+name = "material"
+
+[theme.palette]
+scheme = "slate"
+primary = "indigo"
+
+[theme.features]
+navigation_tabs = true
+code_copy = true
+
+[content]
+admonitions = true
+diagrams = "mermaid"
+wikilinks = true
+
+[build]
+docs_dir = "docs"
+site_dir = "site"
+
+[markdown_extensions]
+"pymdownx.arithmatex" = { generic = true }
