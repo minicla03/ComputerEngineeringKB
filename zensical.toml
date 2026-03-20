@@ -1,5 +1,12 @@
+[project]
 site_name = "Computer Engineering KB"
 site_url = "https://minicla03.github.io/ComputerEngineeringKB/"
+wikilinks = true
+
+extra_javascript = [
+  "https://polyfill.io/v3/polyfill.min.js?features=es6",
+  "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+]
 
 [theme]
 name = "material"
@@ -13,21 +20,13 @@ navigation_tabs = true
 code_copy = true
 
 [content]
-admonitions = true       # Per !!! note
-math = "katex"            # Per le formule matematiche
-diagrams = "mermaid"      # Per i diagrammi
-wikilinks = true          # Per i link [[Nota]]
+admonitions = true
+diagrams = "mermaid"
+wikilinks = true
 
 [build]
-docs_dir = "docs"         # DEVE corrispondere alla cartella creata nel workflow
+docs_dir = "docs"
 site_dir = "site"
 
 [markdown_extensions]
 "pymdownx.arithmatex" = { generic = true }
-
-[project]
-extra_javascript = [
-  "javascripts/mathjax.js",
-  "https://polyfill.io/v3/polyfill.min.js?features=es6",
-  "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-]
