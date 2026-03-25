@@ -2,9 +2,35 @@
 
 Parent: [[0_Graph_Analytics_MOC]]
 
-La **connettività** è la proprietà che definisce quanto un grafo sia "unito" o quanto sia facile muoversi tra i suoi vertici. Un grafo che non è connesso può essere visto come un insieme di frammenti isolati. In altre parole, in un grafo connesso, è possibile raggiungere qualsiasi vertice partendo da qualsiasi altro vertice seguendo gli archi del grafo.
+La **connettività** è la proprietà che definisce quanto un grafo sia "unito" o quanto sia facile muoversi tra i suoi vertici.
 
-Una **componente connessa** di un grafo $G$ è un sottografo connesso di $G$ che non è un sottografo proprio di un altro sottografo connesso di $G$. In altri termini, una componente connessa di un grafo $G$ è un sottografo connesso massimale di $G$.Un grafo $G$ che non è connesso presenta due o più componenti connesse che sono disgiunte e la cui unione costituisce il grafo $G$ stesso.
+## Connettività nei grafi non orientati
+
+Un grafo non orientato $G = (V, E)$ si dice **connesso** se, per ogni coppia di vertici distinti $u, v \in V$, esiste almeno un **cammino** (*path*) che li congiunge. 
+
+Un grafo si dice **non connesso** (o disconnesso) se esiste almeno una coppia di vertici $(u, v)$ tra i quali non vi è alcun cammino. 
+
+Un grafo non connesso è l'unione di due o più sottografi detti **componenti connesse**.
+
+Una **componente connessa** di un grafo $G$ è un sottografo connesso di $G$ che non è un sottografo proprio di un altro sottografo connesso di $G$. In altri termini, una componente connessa di un grafo $G$ è un sottografo connesso massimale di $G$.
+"Massimale" significa che non è possibile aggiungere un altro vertice del grafo originale a quel sottografo senza perdere la proprietà di connettività.
+
+## Connettività nei grafi orientati
+
+Un grafo orientato $G = (V, E)$ si dice **fortemente connesso** se, per ogni coppia di vertici $(u, v) \in V$, esiste sia un cammino orientato da $u$ a $v$, sia un cammino orientato da $v$ a $u$.
+
+Le **Componenti Fortemente Connesse (SCC)** sono sottografi orientati massimali che risultano fortemente connessi.
+
+Un grafo orientato si dice **debolmente connesso** se il suo **grafo non orientato sottostante** (ottenuto ignorando la direzione degli archi) è connesso.
+In altre parole, esiste un percorso tra ogni coppia di nodi, ma non necessariamente rispettando il verso delle frecce. 
+
+Se un grafo non è nemmeno debolmente connesso, si dice semplicemente **disconnesso**.
+
+Per trovare le componenti fortemente connesse si utilizzano tipicamente l'**algoritmo di Tarjan** o l'**algoritmo di Kosaraju**, entrambi basati su una doppia visita DFS con complessità $O(|V| + |E|)$.
+
+* **Condensazione di un Grafo**: È possibile creare un "grafo delle componenti" dove ogni nodo rappresenta una SCC. Il grafo risultante è sempre un **DAG** (Directed Acyclic Graph), proprietà utilissima per ottimizzare i processi di calcolo distribuito.
+
+## Analisi della connettività
 
 !!!note
     Un **taglio** è un insieme di vertici o di archi la cui rimozione aumenta il numero di componenti connesse del grafo. In altre parole, un taglio è un insieme di elementi (vertici o archi) che, se rimossi, disconnettono il grafo.
@@ -25,18 +51,6 @@ Esistono due approcci principali, uno algoritmico e uno algebrico:
 
 - **Approccio Algoritmico (BFS/DFS)**: Partendo dal nodo sorgente, si esplora il grafo "a macchia d'olio" (Breadth-First Search) o in profondità (Depth-First Search). Tutti i nodi marcati come "visitati" alla fine del processo costituiscono l'insieme dei nodi raggiungibili. La complessità è $O(|V| + |E|)$.
 - **Approccio Algebrico (Matrice di Adiacenza)**: Come accennato in precedenza, se analizziamo la matrice $A$, un nodo $j$ è raggiungibile dal nodo $i$ in esattamente $k$ passi se l'elemento $(i, j)$ della matrice $A^k$ è maggiore di zero:$$(A^k)_{ij} > 0$$
-
-## Connectivity in Undirected Graphs
-
-**Componente Connessa**: Un insieme di nodi in cui ogni nodo è raggiungibile da qualsiasi altro nodo dell'insieme.
-
-## Connectivity in Directed Graphs
-
-Un grafo orientato è **fortemente connesso** se esiste un percorso da $a$ a $b$ e da $b$ ad $a$ ogni volta che $a$ e $b$ sono vertici del grafo.Affinché un grafo orientato sia fortemente connesso, deve esserci una sequenza di archi orientati da qualsiasi vertice del grafo verso ogni altro vertice.
-
-Un grafo orientato è **debolmente connesso** se esiste un percorso tra ogni coppia di vertici nel grafo non orientato sottostante.
-
-Per analizzare la connettività di un grafo (sia esso orientato o non orientato), possiamo utilizzare algoritmi di ricerca come DFS o BFS. Questi algoritmi ci permettono di esplorare il grafo e determinare se tutti i vertici sono raggiungibili l'uno dall'altro, identificando così le componenti connesse.
 
 ## Max-Flow Min-Cut Theorem
 
