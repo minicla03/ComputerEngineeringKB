@@ -119,6 +119,24 @@ $$C(G_1, G_2) = \frac{|\mathbb{C}|}{\min\{(\mathbb{C} + |G_1|), (\mathbb{C} + |G
 Se si prova a isolare un solo nodo, il denominatore diventa molto piccolo, facendo schizzare il valore della conduttanza verso l'alto (cattivo taglio).
 Se le due parti sono grandi e ben bilanciate, il denominatore è grande, rendendo il valore della conduttanza basso (buon taglio).
 
+La **Modularità ($Q$)** è la metrica utilizzata per quantificare la qualità di una partizione di un grafo in comunità. La modularità è definita come la frazione degli archi che cadono all'interno delle comunità, meno la frazione attesa se gli archi fossero distribuiti casualmente (mantenendo invariati i gradi dei nodi).
+
+$$Q = \frac{1}{2m} \sum_{i,j} \left[ A_{ij} - \frac{k_i k_j}{2m} \right] \delta(c_i, c_j)$$
+
+Dove:
+* $m$: Numero totale di archi nel grafo.
+* $A_{ij}$: Matrice di adiacenza (1 se esiste un arco tra $i$ e $j$, 0 altrimenti). Rappresenta la struttura effettiva del grafo. La sommatoria conta quanti archi reali collegano nodi appartenenti allo stesso cluster.
+* $k_i, k_j$: Gradi rispettivi dei nodi $i$ e $j$. 
+* $\frac{k_i k_j}{2m}$ Rappresenta la probabilità che esista un arco tra $i$ e $j$ in un grafo casuale (*Configuration Model*) che preserva la distribuzione dei gradi originale (**Null Model**). 
+* $\delta(c_i, c_j)$: Delta di Kronecker, che vale **1** se i nodi $i$ e $j$ appartengono alla stessa comunità, **0** altrimenti.
+
+**Il Risultato ($Q$):**
+    * **$Q > 0$:** Indica che il numero di archi interni è superiore a quello casuale. In genere, valori tra **0.3 e 0.7** indicano una struttura a comunità molto forte.
+    * **$Q \approx 0$:** La partizione non è migliore di una scelta casuale.
+    * **$Q < 0$:** La partizione è peggiore del caso casuale (ad esempio, hai messo in cluster diversi nodi che sono molto connessi tra loro).
+
+La modularità non riesce a identificare comunità molto piccole in grafi molto grandi (**Resolution Limit**). Matematicamente, se una comunità è così piccola che il numero di archi al suo interno è paragonabile a quello atteso dal "Null Model" dell'intero grafo, l'algoritmo tenderà a fonderla con una comunità vicina per massimizzare $Q$, anche se strutturalmente sarebbe un'entità distinta. In pratica, la modularità "vede meglio" le macro-strutture rispetto ai dettagli microscopici.
+
 La minimizzazione della conduttanza è un problema NP-hard  ($O(k^V)$), ma può essere approssimata efficacemente usando il **secondo autovettore della matrice Laplaciana** (Spectral Partitioning)."
 Nella pratica si ricorre ad euristiche.
 
