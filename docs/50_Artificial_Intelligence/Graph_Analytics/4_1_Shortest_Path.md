@@ -12,13 +12,13 @@ Il problema del cammino minimo può essere formulato in tre varianti principali:
 
 La natura del problema varia significativamente in base alla struttura del grafo. Possiamo avere grafi pesati o non pesati.
 
-> **Unweighted Graphs**
-> In un grafo non pesato, ogni arco ha lo stesso "costo" o "peso" (generalmente considerato come 1). L'obiettivo è trovare un percorso che minimizzi il numero di archi attraversati tra due vertici.
+!!!note **Unweighted Graphs**
+    In un grafo non pesato, ogni arco ha lo stesso "costo" o "peso" (generalmente considerato come 1). L'obiettivo è trovare un percorso che minimizzi il numero di archi attraversati tra due vertici.
 
 Per i grafi non pesati, l'algoritmo di ricerca in ampiezza (BFS) è ottimale. Esplorando il grafo a livelli, garantisce di trovare il cammino con il minor numero di archi in tempo $O(|V| + |E|)$.
 
-> **Weighted Graphs**
-> Un grafo si dice pesato quando a ogni arco è associato un numero reale (peso), che può rappresentare distanza, costo o tempo.
+!!!note **Weighted Graphs**
+    Un grafo si dice pesato quando a ogni arco è associato un numero reale (peso), che può rappresentare distanza, costo o tempo.
 
 L'obiettivo è trovare un percorso tra due vertici tale che la somma dei pesi degli archi costituenti sia minimizzata.
 
@@ -28,3 +28,5 @@ L'obiettivo è trovare un percorso tra due vertici tale che la somma dei pesi de
 - **Algoritmo di A\***: Un algoritmo di ricerca euristica che utilizza una funzione di stima (euristica) per guidare la ricerca verso la destinazione, spesso utilizzato in grafi pesati per trovare il cammino più breve in modo efficiente.
 - **Algoritmo di Viterbi**: Un algoritmo dinamico utilizzato principalmente per trovare il percorso più probabile in _modelli di Markov nascosti_ (HMM), ma può essere adattato per risolvere problemi di cammino minimo in grafi pesati, specialmente quando si desidera massimizzare la probabilità piuttosto che minimizzare un costo.
 - **Algoritmo di Johnson**: Un algoritmo efficiente per trovare i cammini minimi tra tutte le coppie di vertici in un grafo pesato, specialmente quando il grafo è sparso. Combina l'algoritmo di Bellman-Ford per gestire i pesi negativi e l'algoritmo di Dijkstra per calcolare i cammini minimi.
+
+[[4_2_SP_Algorithms]]

@@ -1,4 +1,4 @@
-# 6_3_Citation_Networks
+# Citation_Networks
 
 !!!note 
     Le **Citation Networks** sono reti dirette in cui i nodi rappresentano articoli accademici e gli archi rappresentano le citazioni da un articolo a un altro. Questi archi puntano da articoli più recenti a quelli più vecchi, rendendo le reti di citazione acicliche per natura. 
@@ -7,10 +7,9 @@
   
 Gradi di ingresso tendono a seguire una distribuzione a legge di potenza (power law): pochi documenti sono molto citati, molti sono poco citati.
 
-Citation network possono essere rappresentati utilizzando matrici di adiacenza, dove ogni cella indica una citazione da un documento a un altro, o mediante liste di adiacenza che enumerano tutti i collegamenti in uscita per ciascun nodo, il che è più efficiente per reti sparse. 
+Citation network possono essere rappresentati utilizzando matrici di adiacenza, dove ogni cella indica una citazione da un documento a un altro, o mediante liste di adiacenza che enumerano tutti i collegamenti in uscita per ciascun nodo, il che è più efficiente per reti sparse.
 
-Definiamo $L$ come la matrice di adiacenza (o **citation matrix**) del nostro grafo di dimensione $N \times N$, dove $N$ è il numero totale di documenti.
-Le celle della matrice sono popolate in questo modo:
+Definiamo $L$ come la matrice di adiacenza (o **citation matrix**) del nostro grafo di dimensione $N \times N$, dove $N$ è il numero totale di documenti. Le celle della matrice sono popolate in questo modo:
 
 * $L_{ij} = 1$ se il documento $i$ cita il documento $j$.
 * $L_{ij} = 0$ altrimenti.
@@ -21,11 +20,9 @@ Il **Bibliographic Coupling** (accoppiamento bibliografico) e la **Co-citation**
 
 ![alt text](image-14.png){width=50% height=50%}
 
-BC is a similarity between two citing items, whereas CC is that between two cited items. In BC, the similarity is based on the number of shared references, while in CC, it is based on the number of times two items are cited together by other items.
+BC è una misura di similarità tra due documenti che citano, mentre CC è una misura di similarità tra due documenti citati. In BC, la similarità si basa sul numero di riferimenti condivisi, mentre in CC si basa sul numero di volte che due documenti sono citati insieme da altri documenti.
 
-La **Matrice di Co-citazione** (Co-Citation Matrix) ci permette di quantificare quante volte due documenti vengono citati congiuntamente da terzi. Dal punto di vista dell'ingegneria dei dati, è una trasformazione elegante che passa da un grafo orientato (chi cita chi) a un grafo non orientato e pesato (quanto due paper sono associati dalla comunità).
-
-La matrice di co-citazione $C$ è una matrice quadrata e simmetrica che si ottiene moltiplicando la matrice trasposta $L^T$ per la matrice originale $L$:
+La **Matrice di Co-citazione** (Co-Citation Matrix) ci permette di quantificare quante volte due documenti vengono citati congiuntamente da terzi. La matrice di co-citazione $C$ è una matrice quadrata e simmetrica che si ottiene moltiplicando la matrice trasposta $L^T$ per la matrice originale $L$:
 
 $$C = L^T \times L$$
 

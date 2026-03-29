@@ -5,11 +5,14 @@ Parent: [[0_Graph_Analytics_MOC]]
 Un graph database (NoSQL) è un data-storage engine che utilizza i grafi per rappresentare e memorizzare le informazioni in mdo persistente.
 I graph db vengono utlizzati per gestire grandi quantià di dati che presentano molte relazioni fra di loro, come ad esempio i social network, i sistemi di raccomandazione, le reti di trasporto e le reti di comunicazione.
 
-Sono molto più efficienti dei db relazionali in quanto risultano molto più veloci nell'esecuzione di query che coinvolgono molte relazioni perchè le relazioni vengono rappresentate diretamente negli archi, cosa che nei relazionali non veniva esplicitamente mostrata, ma veniva rappresentata tramite tabelle di join che rallentavano le query.
+Sono molto più efficienti dei db relazionali in quanto risultano molto più veloci nell'esecuzione di query che coinvolgono molte relazioni perchè le relazioni vengono rappresentate direttamente negli archi, cosa che nei relazionali non veniva esplicitamente mostrata, ma veniva rappresentata tramite tabelle di join che rallentavano le query. Nei db relazionali il tempo di risposta aumenta esponenzialmente all'aumentare della "connessione" e della dimensione del dataset. Già tra i 2 e i 3 hops o gradi di separazione, le prestazioni iniziano a degradare.
+I Native Graph hanno una curva di risposta quasi piatta. Può gestire da decine a **centinaia di hops**, migliaia di gradi di separazione e **miliardi di connessioni** mantenendo performance elevate.
 
-Inoltre risultano essere molto più efficienti nella gestione di queries ricorsive. Nei db relazionali, queste possono coinvolgere molte relazioni e svolgere molte operazioni di join, oltre ad essere molto complesse  da scrivere. Mentre con i graph db, le queries ricorsive sono più semplici da scrivere e più efficienti da eseguire, grazie alla struttura a grafo che consente di navigare facilmente tra i nodi e le relazioni. I graph db permetto anche di trovare i **path** fra due nodi, operazione che con i db relazionali non è possibile fare in modo efficeinte.
+Inoltre risultano essere molto più efficienti nella gestione di queries ricorsive. Nei db relazionali, queste possono coinvolgere molte relazioni e svolgere molte operazioni di join, oltre ad essere molto complesse  da scrivere. Mentre con i graph db, le queries ricorsive sono più semplici da scrivere e più efficienti da eseguire, grazie alla struttura a grafo che consente di navigare facilmente tra i nodi e le relazioni. 
 
-Un problema che i graph db presentano sono legati al **mantenimento dell'integrità dei dati**.
+I graph db permetto anche di trovare i **path** fra due nodi, operazione che con i db relazionali non è possibile fare in modo efficiente.
+
+A differenza della rigidità tabellare, i grafi offrono una flessibilità che si adatta perfettamente alla natura dinamica dei dati interconnessi. La natura _schema-free_ permette di evolvere la struttura dei dati dinamicamente, senza migrazioni pesanti o definizioni anticipate complesse. Ma proprio per questa caratteristica presentano problemi legati al **mantenimento dell'integrità dei dati** perché, a differenza dei db relazionali, non hanno un sistema di vincoli e chiavi primarie che garantiscono l'integrità referenziale. Ciò significa che è possibile creare nodi e relazioni senza preoccuparsi della coerenza dei dati, il che può portare a dati incoerenti o duplicati se non si presta attenzione durante la progettazione del modello a grafo e durante l'inserimento dei dati.
 
 ## Tipi di graph database
 
@@ -26,11 +29,11 @@ I **property graph** sono un tipo di database a grafo che modella i nodi e le re
 
 </div>
 
-Un problema per chi usa i graph db è che le properies possono essere diversi, anche per i nodi che modellano la stessa entità. Per esempio, in un grafo di proprietà che rappresenta persone, alcuni nodi potrebbero avere una proprietà "età", mentre altri potrebbero non averla. Questo può portare a una certa eterogeneità nei dati, rendendo più difficile garantire la coerenza e l'integrità dei dati all'interno del grafo.
+Per la naturea schema-free, le properties possono essere diversi, anche per i nodi che modellano la stessa entità. Per esempio, in un grafo di proprietà che rappresenta persone, alcuni nodi potrebbero avere una proprietà "età", mentre altri potrebbero non averla. Questo può portare a una certa eterogeneità nei dati, rendendo più difficile garantire la coerenza e l'integrità dei dati all'interno del grafo.
 
 ### RDF graph database
 
-I **RDF graph detabase** (**Resource Description Framework**) utilizzano un approccio diverso, concentrandosi sulla rappresentazione dei dati come triple soggetto-predicato-oggetto.
+I **RDF graph detabase** (**Resource Description Framework**) rappresentano i dati come triple soggetto-predicato-oggetto.
 
 In RDF, ogni dato è espresso come una tripla, composta da tre componenti:
 
@@ -39,19 +42,25 @@ In RDF, ogni dato è espresso come una tripla, composta da tre componenti:
 - **Oggetto**: indica il valore o l'obiettivo della relazione.
 
 <div align=center>
-
-![alt text](image-9.png){width="70%", height="70%"}
+    <img src="image-9.png" alt="RDF Triple" width="70%" height="70%">
 </div>
 
-Esempio: si consideri la tripla "Alice conosce Bob". Qui, "Alice" è il soggetto, "conosce" è il predicato e "Bob" è l'oggetto.
 La struttura tripla è altamente flessibile, consentendo la rappresentazione di diversi tipi di relazioni e dati. Questa flessibilità si adatta a modelli di dati complessi, rendendo RDF adatto a descrivere e collegare vari tipi di informazioni.
 
-Le triple RDF formano naturalmente una struttura a grafo, in cui i nodi rappresentano risorse (soggetti o oggetti) e gli archi rappresentano predicati. Questa rappresentazione basata su grafi è intuitiva e si allinea bene con il modo in cui i dati sono interconnessi nel mondo reale. I database a grafo RDF eccellono nell'interrogazione di dati interconnessi. Le query possono attraversare il grafo per scoprire modelli, relazioni e connessioni tra diverse entità.
+Le triple RDF formano naturalmente una struttura a grafo, in cui i nodi rappresentano risorse (soggetti o oggetti) e gli archi rappresentano predicati.
+
+Questa rappresentazione basata su grafi è intuitiva e si allinea bene con il modo in cui i dati sono interconnessi nel mondo reale. I database a grafo RDF eccellono nell'interrogazione di dati interconnessi. Le query possono attraversare il grafo per scoprire modelli, relazioni e connessioni tra diverse entità.
 
 ### Hypergraph Database
 
-Un **hypergraph database** è un grafo dove un arco può collegare un numero arbitrario di nodi contemporaneamente, in questo caso si parla di **iper-edge**.
+Un **hypergraph database** è un grafo dove un arco può collegare un numero arbitrario di nodi contemporaneamente, in questo caso si parla di **hyper-edge**.
 Permette di modellare relazioni "molti-a-molti" in modo atomico, senza dover creare nodi intermedi artificiali.
+
+<div align=center>
+    <img src="image-21.png" alt="Hypergraph" width="50%" height="50%">
+</div>
+
+Gli hypergraph database sono particolarmente utili in contesti come la bioinformatica, la modellazione di sistemi complessi e l'analisi di dati con relazioni complesse, dove le relazioni tra entità non possono essere facilmente rappresentate con archi binari tradizionali.
 
 ### Spatial graph database
 
@@ -79,7 +88,7 @@ Alcuni database utilizzano uno **storage nativo** ottimizzato specificamente per
 
 ### Graph First System
 
-I database nativi sono progettati sia per archiviare che per elaborare i dati sotto forma di grafico, occupandosi di rappresentare gli elementi del grafo e di come rendere efficiente l'esecuzione di query sui grafi.
+I database nativi sono progettati sia per archiviare che per elaborare i dati sotto forma di grafo, occupandosi di rappresentare gli elementi del grafo e di come rendere efficiente l'esecuzione di query sui grafi.
 
 I sistemi nativi si distinguono in base a:
 
@@ -88,7 +97,7 @@ I sistemi nativi si distinguono in base a:
 
 #### Index-free adjacency
 
-I database nativi sono progettati da zero con l'unico scopo di gestire strutture a grafo in modo efficiente, ad esempio l'operazione di attraversamente avviente molto eefficacemente senza introdurre idex lookups o altre tecnologie, cosa che i db non nativi fanno. Ovviamente si ha una perdità di effiecienza nelle operazioni che vengono realizzate nel db. La struuttura che permette ai native graph db di essere così efficienti è l'**index-free adjacency**.
+I database nativi sono progettati da zero con l'unico scopo di gestire strutture a grafo in modo efficiente, ad esempio l'operazione di attraversamente avviente molto eefficacemente senza introdurre index lookups o altre tecnologie, cosa che i db non nativi fanno. Ovviamente si ha una perdità di effiecienza nelle operazioni che vengono realizzate nel db. La struttura che permette ai native graph db di essere così efficienti è l'**index-free adjacency**.
 
 Ogni nodo fa riferimento direttamente ai nodi adiacenti (vicini), il che significa che l'accesso alle relazioni e ai dati correlati è semplicemente una ricerca di puntatori di memoria. Questo fa sì che il tempo di elaborazione nativo del grafo sia proporzionale alla quantità di dati elaborati, non aumentando esponenzialmente con il numero di relazioni attraversate e di hop navigati.
 
@@ -118,17 +127,6 @@ Questi sistemi si comportano come database a grafo dal punto di vista dell'utent
 I dati del grafo vengono "serializzati" o adattati forzatamente all'interno di motori di archiviazione generici, come database relazionali, a documenti o a oggetti.
 Per ricostruire le relazioni, questi database devono spesso eseguire complessi JOIN tra tabelle o lookup multipli.
 
-## Perché Scegliere un Graph Database?
-
-Nei db relazionali il tempo di risposta aumenta esponenzialmente all'aumentare della "connessione" e della dimensione del dataset. Già tra i 2 e i 3 hops o gradi di separazione, le prestazioni iniziano a degradare.
-I Native Graph hanno una curva di risposta quasi piatta. Può gestire da decine a **centinaia di hops**, migliaia di gradi di separazione e **miliardi di connessioni** mantenendo performance elevate.
-
-A differenza della rigidità tabellare, i grafi offrono una flessibilità intrinseca che si adatta perfettamente alla natura dinamica dei dati interconnessi. Questa flessibilità si traduce in vantaggi significativi:
-
-* **Modellazione Adattiva**: La natura "schema-free" permette di evolvere la struttura dei dati dinamicamente, senza migrazioni pesanti o definizioni anticipate complesse.
-* **Sviluppo Agile**: Il modello a grafo si allinea perfettamente con lo sviluppo software iterativo; è possibile aggiungere nodi, relazioni e etichette senza rompere le query esistenti.
-* **Approccio Test-Driven**: La governance dei dati viene applicata programmaticamente, garantendo affidabilità anche mentre l'applicazione evolve rapidamente.
-
 ## GQL (Graph Query Language)
 
 **GQL** **(Graph Query Language**) è lo standard internazionale (**ISO/IEC 39075:2024**) completato nel 2024 con l'obiettivo di fornire un linguaggio standardizzato e indipendente dal database, permettendo agli sviluppatori di scrivere query portabili tra diverse implementazioni.
@@ -138,4 +136,4 @@ Su quest ISO sono stati definiti linguaggi come:
 - **Cypher**
 - Gremlin
 - SPARQL
-- ecc
+- ecc...

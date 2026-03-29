@@ -16,7 +16,7 @@ La prima fase consiste nella definizone e nella comprensione del dominio e del p
 
 Fatto questo, si apssa alla definizione dello schema concettuale, uno schema ad alto livello senza dettagli implementativi che rappresenta le entità, le relazioni e le proprietà chiave del dominio. In questa fase si definisce quali sono i nodi, gli archi e le proprietà che rappresentano le entità e le relazioni del dominio.
 
-![alt text](image-16.png)
+![alt text](image-16.png){width=30% height=70%}
 
 Dal modello concettuale si deriva il modello logico, una rappresentazione più adatta alla base di dati che andremo ad utilizzare per operare sui dati.
 

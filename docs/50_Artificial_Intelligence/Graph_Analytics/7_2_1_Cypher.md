@@ -122,7 +122,7 @@ Si può specificare etichette per i nodi e tipi per le relazioni, oltre a propri
 
 !!!warning All'interno di un singolo pattern, le relazioni saranno matchate una sola volta. Cypher applica l'isomorfismo degli archi: garantisce che un singolo arco non venga mai attraversato più di una volta all'interno dello stesso cammino.
 
-Il **Variable-length matching** permette di interrogare catene di relazioni senza conoscerne a priori la profondità esatta. In Cypher, questo si ottiene utilizzando l'asterisco * all'interno della definizione della relazione.
+Il **Variable-length matching** permette di interrogare catene di relazioni senza conoscerne a priori la profondità esatta, eseguendo una DFS. In Cypher, questo si ottiene utilizzando l'asterisco * all'interno della definizione della relazione.
 
 !!!note La struttura base segue il formato: -[TYPE*minHops..maxHops]->.
 
@@ -131,7 +131,8 @@ Il **Variable-length matching** permette di interrogare catene di relazioni senz
 - *1..3: Ricerca tra 1 e 3 salti di distanza.
 - *..5: Ricerca fino a un massimo di 5 salti.
 
-Spesso non serve solo il nodo finale, ma l'intera sequenza di nodi che compone il cammino.
+Quando assegni l'esplorazione a una variabile (es. p = (a)-[*]->(b)), Cypher istanzia un oggetto di tipo `Path`. Un `Path` è una struttura dati ordinata che incapsula la sequenza esatta e alternata di nodi e archi attraversati: (nodo_start)-[arco_1]->(nodo_intermedio)-[arco_2]->(nodo_end).
+
 
 ```cypher
 MATCH path = (start:Project)-[:DEPENDS_ON*..5]->(end:Project)
@@ -139,6 +140,8 @@ RETURN nodes(path) AS ProgettiNelCammino,
        relationships(path) AS Relazioni,
        length(path) AS NumeroSalti;
 ```
+
+Un MATCH di path a lunghezza variabile produrrà un overhead massiccio, restituendo molteplici path identici che convergono sullo stesso nodo target. Per ottimizzare questo scenario si usa l'operatore `DISTINCT` che ma che collassa l'output, mitigando l'esplosione combinatoria nel set di risultati finale, pur richiedendo al motore di scansionare i rami.
 
 La clausola `OPTIONAL MATCH` è l’equivalente funzionale del `LEFT OUTER JOIN` in SQL. È lo strumento fondamentale per interrogare un grafo quando non sei sicuro che un determinato pattern esista, ma desideri comunque mantenere i risultati ottenuti dai passaggi precedenti della query.
 Se il pattern esiste lega le variabili definite nel pattern ai nodi o alle relazioni corrispondenti (esattamente come un `MATCH`).

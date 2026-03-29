@@ -1,4 +1,4 @@
-# Graph Strorage
+# Graph Storage
 
 Parent: [[Graph_Analytics_MOC]]
 
@@ -41,26 +41,19 @@ Abbiamo due requisiti fondamentali:
 - avere lo spazio necessario per ospitare i tipi di grafici che incontreremo nelle applicazioni.
 - sviluppare implementazioni efficienti in termini di tempo dei metodi di istanza dei grafici, i metodi di base di cui abbiamo bisogno per sviluppare client di elaborazione dei grafici.
 
-Una **matrice di adiacenza**, dove manteniamo un array booleano V per V, con la voce nella riga v e nella colonna w definita come vera se c'è un arco adiacente sia al vertice v che al vertice w nel grafo, e falsa altrimenti. Questa rappresentazione fallisce al primo conteggio: i grafi con milioni di vertici sono comuni e il costo in termini di spazio per i valori booleani V 2 necessari è proibitivo.
+Una **matrice di adiacenza**, una matrice booleana $V \times V$ dove l'elemento $A[v][w]$ è $1$ se esiste un arco tra $v$ e $w$, $0$ altrimenti.  L'accesso avvienenin tempo costante $O(1)$ per verificare l'esistenza di un arco specifico, o aggiungere un arco, ma tichiede spazio $\Theta(V^2)$. Anche per iterare sui vicini di un nodo richiede $O(V)$, indipendentemente dal numero effettivo di archi incidenti.
 
-Un **array di archi**, utilizzando una classe Edge
-con due variabili di istanza di tipo int. Questa rappresentazione diretta è semplice, ma fallisce al secondo punto: l'implementazione di adj() comporterebbe l'esame di tutti gli archi nel grafo.
+Un **array di archi**, utilizzando una classe `Edge`,ognuno dei quali contiene una coppia di interi $(u, v)$. Lo spazio utilizzato è esattamente proporzionale al numero di archi ($O(E)$). Quando dobbiamo sapere chi sono i vicini del nodo $v$ è necessatio scansionare l'intero array degli archi dall'inizio alla fine, con complessità nel caso peggiore di $O(E)$. 
 
-Un **array di liste di adiacenza**, dove manteniamo un array indicizzato per vertice contenente elenchi dei vertici adiacenti a ciascun vertice. Questa struttura dati soddisfa entrambi i requisiti.
+Un **array di liste di adiacenza**, dmanteniamo un array di dimensione $V$, dove ogni cella $i$ punta a una lista concatenata contenente solo i vicini effettivi del nodo $i$.
+Occupiamo solo $O(V + E)$, memorizzando solo ciò che esiste realmente e iterare sui vicini di un nodo in tempo proporzionale al suo grado, $O(d)$, dove $d$ è il numero di vicini del nodo.
 Viene usata principalmente per la rappresentazione di grafi non densi.
-Si tiene traccia di tutti i vertici adiacenti a ciascun vertice su una lista concatenata associata a quel vertice. Manteniamo un array di liste in modo che, dato un vertice, possiamo accedere immediatamente alla sua lista. Per implementare le liste, usiamo le _liste concatenate_, in modo da poter aggiungere nuovi archi in tempo costante e iterare attraverso i vertici adiacenti in tempo costante per ogni vertice adiacente.
 
-Per aggiungere un arco che connette v e w, aggiungiamo w alla lista di adiacenza di v e v alla lista di adiacenza di w. Pertanto, ogni arco appare due volte nella struttura dati. Questa implementazione del grafo raggiunge le seguenti caratteristiche prestazionali:
+Per aggiungere un arco che connette $v$ e $w$, aggiungiamo $w$ alla lista di adiacenza di $v$ e $v$ alla lista di adiacenza di $w$. Pertanto, ogni arco appare due volte nella struttura dati. Questa implementazione del grafo raggiunge le seguenti caratteristiche prestazionali:
 
-- Utilizzo dello spazio proporzionale a V + E
-- Il tempo per aggiungere un arco è costante.
-- Il tempo per iterare attraverso i vertici adiacenti a un vertice è proporzionale al numero di vertici adiacenti.
+![alt text](image-19.png){width=70% height=70%}
 
-![alt text](IMG_20260228_154002.jpg)
-
-Anche per i grafi diretti, si usa la rappresentazione delle liste di adiacenza, in cui un arco v->w è rappresentato come un nodo di lista contenente w nell'elenco concatenato corrispondente a v. Questa rappresentazione è essenzialmente la stessa dei grafi non orientati, ma è ancora più semplice perché ogni arco si verifica solo una volta.
-
-![alt text](IMG_20260228_154949.jpg)
+Anche per i grafi diretti, si usa la rappresentazione delle liste di adiacenza, in cui un arco $v \rightarrow w$ è rappresentato come un nodo di lista contenente $w$ nell'elenco concatenato corrispondente a $v$. Questa rappresentazione è essenzialmente la stessa dei grafi non orientati, ma è ancora più semplice perché ogni arco si verifica solo una volta.
 
 ![alt text](IMG_20260228_154053.jpg)
 
@@ -68,21 +61,20 @@ Un'altra rappresentazione di un grafo può avvenire tramite la modellazione degl
 
 ![alt text](IMG_20260228_155713.jpg)
 
-Quindi andiamo a modellare un grafo come una collezione di oggetti Edge, dove ogni Edge contiene informazioni sui vertici che collega e, eventualmente, altri attributi come il peso dell'arco. In questo modo, possiamo rappresentare anche grafi pesati.
+Quindi andiamo a modellare un grafo come una collezione di oggetti `Edge`, dove ogni Edge contiene informazioni sui vertici che collega e, eventualmente, altri attributi come il peso dell'arco. In questo modo, possiamo rappresentare anche grafi pesati.
 
-Potremmo anche con la rappresentazione a matrice di adiacenza, in cui, invece di usare valori booleani per gli edge, mettiamo il peso di quello'edge.
-Invece, nella rappresentazione a liste di adiacenza, possiamo definire un nodo che contiene sia un vertice che un peso da inserire nelle liste di adiacenza.
+Potremmo anche con la rappresentazione a matrice di adiacenza, in cui, invece di usare valori booleani per gli edge, mettiamo il peso di quell'edge. Invece, nella rappresentazione a liste di adiacenza, possiamo definire un nodo che contiene sia un vertice che un peso da inserire nelle liste di adiacenza.
 
 ![alt text](IMG_20260228_155741.jpg)
 
-![alt text](IMG_20260228_155821.jpg)
+![alt text](IMG_20260228_155821.jpg){width=60% height=60%}
 
-Lo stesso vale per i grafi diretti, dove ogni arco v->w è rappresentato come un nodo di lista contenente w e il peso dell'arco nell'elenco concatenato corrispondente a v.
+Lo stesso vale per i grafi diretti, dove ogni arco $v \rightarrow w$ è rappresentato come un nodo di lista contenente $w$ e il peso dell'arco nell'elenco concatenato corrispondente a $v$.
 
 ![alt text](IMG_20260228_155909.jpg)
 
 ![alt text](IMG_20260228_155930.jpg)
 
-![alt text](IMG_20260228_155955.jpg)
+![alt text](IMG_20260228_155955.jpg){width=60% height=60%}
 
 Lo svantaggio di questa rappresentazione è che, se il grafo è molto denso, potremmo finire con molte voci nella lista di adiacenza, rendendo l'iterazione attraverso i vertici adiacenti più costosa. Tuttavia, per grafi più sparsi, questa rappresentazione è efficiente in termini di spazio e tempo.

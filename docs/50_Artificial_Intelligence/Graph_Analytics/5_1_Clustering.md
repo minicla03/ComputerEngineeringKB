@@ -4,6 +4,50 @@ Parent: [[5_Graph_Connettivity]]
 
 Il **clustering** nei grafi si riferisce all'analisi della densità locale e all'identificazione di gruppi di nodi (comunità) che presentano una connettività interna significativamente superiore rispetto a quella con il resto della rete.
 
+## Community Detection
+
+Il clustering permette di identificare le **comunità** che sono porzioni di grafo caratterizzataida un'elevata connettività interna.
+In generale, le comunità sono separate da un numero limitato di archi "ponte" che le collegano ad altri gruppi anche se alcuni nodi possono sovrapporsi in comunità diverse.
+
+![alt text](image-5.png){width=50% height=50% align="center"}
+
+La qualità del partizionamento viene definita tramite la misura di conduttanza.
+
+I metodi di rilevamento delle comunità possono essere suddivisi in due categorie:
+
+- **metodi agglomerativi**, con i quali i bordi vengono aggiunti uno alla volta a ungrafo che contiene solo nodi. I bordi vengono aggiunti dal bordo più forte a quello più debole.
+- **metodi divisivi**, per i quali i bordi vengono rimossi uno alla volta da un grafo completo.
+
+### Girvan-Newman Algorithm
+
+L'algoritmo di Girvan-Newman è un metodo divisivo per l'individuazione di comunità, basato sull'estensione della betweenness centrality agli archi. Opera tipicamente su grafi non diretti e non pesati.
+
+!!!note Edge betweenness
+    L'edge betweenness di un arco $e$ è definita come il numero di cammini minimi, tra tutte le coppie di nodi, che lo attraversano. Se esistono più cammini minimi per una singola coppia, il peso unitario del percorso viene suddiviso equamente tra di essi.
+    
+!!!tip Algoritmo di Girvan-Newman
+    1. Calcolare l'edge betweenness per tutti gli archi del grafo.
+    2. Rimuovere l'arco con il valore più alto (in caso di parità, rimuoverli tutti).
+    3. Ricalcolare l'edge betweenness per tutti gli archi rimanenti.
+    4. Ripetere i passaggi 2 e 3 finché non vengono rimossi tutti gli archi.
+
+Il risultato finale è un **dendrogramma** generato dall'alto verso il basso (top-down). Ogni volta che la rimozione di un arco disconnette una componente, il dendrogramma si biforca, tracciando la divisione del grafo in sotto-comunità. Il processo continua fino al completo isolamento di ogni singolo nodo, fornendo una mappa gerarchica completa della rete.
+
+![alt text](image-6.png){width=50% height=50% align="center"}
+
+---
+
+### Overlapping Community Detection
+
+Nella realtà, i nodi di un grafo possono appartenere a più comunità contemporaneamente, specialmente in contesti sociali o biologici. Per questo motivo, sono stati sviluppati algoritmi specifici per l'identificazione di comunità sovrapposte. 
+
+| Algoritmo | Meccanismo | Scalabilità | Punti di Forza | Punti di Debolezza |
+| :--- | :--- | :--- | :--- | :--- |
+| **Clique Percolation (CPM)** | $k$-clique adiacenti formano comunità. | Media-Bassa | Solido teoricamente, chiara interpretazione delle sovrapposizioni. | Sensibile al parametro $k$, computazionalmente costoso su reti dense. |
+| **Label Propagation (COPRA, SLPA)** | Le etichette si diffondono tra i vicini. | **Molto Alta** | Tempo quasi-lineare, semplice, scala su grafi massivi. | COPRA è sensibile alla soglia di appartenenza; tra i migliori per qualità dell'overlap. |
+| **Local Expansion (LFM)** | Si espande a partire da nodi "seme" (seed nodes). | Media | Scopre naturalmente le sovrapposizioni, buona qualità. | Dipende fortemente dalla selezione iniziale dei semi. |
+| **Fuzzy C-Means on Graphs** | Assegnazione "soft" (sfumata) tramite nodi leader. | Media | Appartenenza "soft" realistica, facilmente parallelizzabile. | Richiede misure di centralità e un tuning accurato dei parametri. |
+
 ## Metriche di clustering
 
 ### Coefficiente di Clustering Locale
@@ -26,9 +70,6 @@ Si ottiene semplicemente calcolando la media aritmetica dei coefficienti di clus
 
 $$\bar{C} = \frac{1}{n} \sum_{i=1}^{n} C_i$$
 
-!!!note Small World Graphs
-    Sono reti caratterizzate da un coefficiente di clustering relativamente alto e un diametro medio ($L$) ridotto, indicando che la maggior parte dei nodi può essere raggiunta con pochi passaggi nonostante la forte aggregazione locale.
-
 ### Wiener Index
 
 Il Wiener Index rappresenta la somma di tutte le distanze tra tutte le coppie di nodi in un grafo connesso. E' un descrittore globale del grafo.
@@ -43,55 +84,11 @@ Dove $d(v_i, v_j)$ è la distanza minima (numero di archi) tra il nodo $i$ e il 
 
 $$L = \frac{W(G)}{n(n-1) / 2}$$
 
-## Community Detection
-
-Il clustering permette di identificare le **comunità** che sono porzioni di grafo caratterizzataida un'elevata connettività interna.
-In generale, le comunità sono separate da un numero limitato di archi "ponte" che le collegano ad altri gruppi anche se alcuni nodi possono sovrapporsi in comunità diverse.
-
-![alt text](image-5.png){width=50% height=50% align="center"}
-
-La qualità del partizionamento viene definita tramite la misura di conduttanza.
-
-I metodi di rilevamento delle comunità possono essere suddivisi in due categorie:
-
-- **metodi agglomerativi**, con i quali i bordi vengono aggiunti uno alla volta a un grafico che contiene solo nodi. I bordi vengono aggiunti dal bordo più forte a quello più debole.
-- **metodi divisivi**, per i quali i bordi vengono rimossi uno alla volta da un grafico completo.
-
-### Girvan-Newman Algorithm
-
-L'algoritmo di Girvan-Newman è un metodo divisivo per l'individuazione di comunità, basato sull'estensione della betweenness centrality agli archi. Opera tipicamente su grafi non diretti e non pesati.
-
-!!!note Edge betweenness
-    L'edge betweenness di un arco $e$ è definita come il numero di cammini minimi, tra tutte le coppie di nodi, che lo attraversano. Se esistono più cammini minimi per una singola coppia, il peso unitario del percorso viene suddiviso equamente tra di essi.
-    
-!!!tip Algoritmo di Girvan-Newman
-    1. Calcolare l'edge betweenness per tutti gli archi del grafo.
-    2. Rimuovere l'arco con il valore più alto (in caso di parità, rimuoverli tutti).
-    3. Ricalcolare l'edge betweenness per tutti gli archi rimanenti.
-    4. Ripetere i passaggi 2 e 3 finché non vengono rimossi tutti gli archi.
-
-Il risultato finale è un **dendrogramma** generato dall'alto verso il basso (top-down). Ogni volta che la rimozione di un arco disconnette una componente, il dendrogramma si biforca, tracciando la divisione del grafo in sotto-comunità. Il processo continua fino al completo isolamento di ogni singolo nodo, fornendo una mappa gerarchica completa della rete.
-
-![alt text](image-6.png){width=50% height=50% align="center"}
-
 ## Graph Partitioning
 
 Il **partizionamento dei grafi** è un problema di ottimizzazione topologica che consiste nel suddividere l'insieme dei nodi di una rete in $k$ sottoinsiemi disgiunti, rispettando rigorosi vincoli strutturali. A differenza della *community detection*, il partizionamento impone una divisione forzata basata su requisiti di efficienza esterni.
 
-!!!note Obiettivi del Partizionamento
-    Il problema classico cerca di soddisfare simultaneamente due criteri spesso in conflitto:
-    1. **Minimizzazione del Taglio (Min-Cut):** Ridurre al minimo assoluto il numero (o il peso totale) degli archi che collegano nodi appartenenti a partizioni diverse.
-    2. **Bilanciamento del Carico:** Garantire che i $k$ sottoinsiemi risultanti abbiano dimensioni o pesi approssimativamente equivalenti.
-
-Poiché la ricerca della partizione perfettamente ottimale è un problema NP-arduo, nella pratica si ricorre a sofisticate euristiche.
-
-InfoMapComplessità: $O(E)$ (generalmente lineare rispetto al numero di archi).Analisi: La logica si basa sulla minimizzazione della description length dei percorsi casuali (random walks). Nonostante il costrutto matematico sottostante risulti meno intuitivo rispetto agli altri metodi, l'efficienza della sua esecuzione garantisce una scalabilità medio-alta, permettendo di catturare strutture topologiche complesse su un'ampia varietà di reti.
-
-LouvainComplessità: $O(V \log V)$ (empirica, frequentemente approssimabile a lineare $O(E)$ su reti sparse).Analisi: Il metodo ottimizza la modularità spostando iterativamente i nodi. Essendo strutturalmente molto veloce, risulta particolarmente efficace per reti dense, il che giustifica la sua classificazione di alta scalabilità. Come contropartita per questa efficienza, tende a produrre comunità nettamente separate e rischia di inglobare le comunità più piccole in aggregazioni maggiori.
-
-### Il Partizionamento in Sottografi (Induced Subgraphs)
-
-Quando applichiamo un algoritmo di *graph partitioning*, il risultato strutturale dell'operazione è l'esatta scomposizione della rete originale in una collezione di **sottografi indotti**. Non si tratta semplicemente di raggruppare etichette, ma di isolare porzioni di topologia matematicamente definite.
+Il risultato dell'operazione è la scomposizione della rete originale in una collezione di **sottografi indotti**.
 
 !!!note Definizione di Sottografo Indotto
     Dato un grafo originale $G = (V, E)$, il partizionamento divide l'insieme dei vertici $V$ in $k$ sottoinsiemi mutuamente esclusivi $V_1, V_2, \dots, V_k$.
@@ -103,18 +100,41 @@ Quando applichiamo un algoritmo di *graph partitioning*, il risultato struttural
 
 Questa frammentazione dei vertici genera $k$ nuovi ecosistemi, ovvero i sottografi $G_i = (V_i, E_i)$.
 
-Affinché $G_i$ sia un sottografo **indotto** valido, l'insieme dei suoi archi $E_i$ deve includere *tutti e soli* gli archi del grafo originale $G$ che hanno entrambi gli estremi all'interno del sottoinsieme $V_i$.
-
-Questa rigida definizione topologica divide inevitabilmente l'insieme totale degli archi $E$ in due categorie:
+Affinché $G_i$ sia un sottografo **indotto** valido, l'insieme dei suoi archi $E_i$ deve includere *tutti e soli* gli archi del grafo originale $G$ che hanno entrambi gli estremi all'interno del sottoinsieme $V_i$. Allora abbiamo che l'insieme totale degli archi $E$ è formato da due categorie:
 
 * **Archi Intra-Sottografo ($E_i$):** Sopravvivono alla divisione e costituiscono la struttura interna di ogni singola partizione.
 * **Archi Inter-Sottografo (Edge Cut):** Sono gli archi i cui estremi finiscono in partizioni diverse (es. un nodo in $V_1$ e uno in $V_2$).
 
-La ricerca della combinazione ottimale di sottografi che minimizzi il taglio rispettando un perfetto bilanciamento dei nodi ha una complessità legata al numero di partizioni possibili, che cresce esponenzialmente ($O(k^V)$). È questa esplosione combinatoria a rendere il problema NP-arduo e vengono usate delle euristiche per trovare soluzioni approssimate in tempi ragionevoli.
+!!!note Obiettivi del Partizionamento
+    Il problema classico cerca di soddisfare simultaneamente due criteri spesso in conflitto:
+    1. **Minimizzazione del Taglio (Min-Cut):** Ridurre al minimo assoluto il numero (o il peso totale) degli archi che collegano nodi appartenenti a partizioni diverse.
+    2. **Bilanciamento del Carico:** Garantire che i $k$ sottoinsiemi risultanti abbiano dimensioni o pesi approssimativamente equivalenti.
+
+Se cercassimo solo di minimizzare $|\mathbb{C}|$ (il numero di archi tagliati), l'algoritmo sceglierebbe quasi sempre di "isolare" un singolo nodo periferico (una *leaf*). Se il $Taglio minimo = 1 arco$, le partizioni sarebbero $G_1$ (1 nodo) e $G_2$ (tutto il resto del grafo).
+
+La formula della conduttanza corregge questo comportamento aggiungendo un **penalizzatore al denominatore**:
+
+$$C(G_1, G_2) = \frac{|\mathbb{C}|}{\min\{(\mathbb{C} + |G_1|), (\mathbb{C} + |G_2|)\}}$$
+
+Se si prova a isolare un solo nodo, il denominatore diventa molto piccolo, facendo schizzare il valore della conduttanza verso l'alto (cattivo taglio).
+Se le due parti sono grandi e ben bilanciate, il denominatore è grande, rendendo il valore della conduttanza basso (buon taglio).
+
+La minimizzazione della conduttanza è un problema NP-hard  ($O(k^V)$), ma può essere approssimata efficacemente usando il **secondo autovettore della matrice Laplaciana** (Spectral Partitioning)."
+Nella pratica si ricorre ad euristiche.
+
+**InfoMap**
+
+- **Complessità**: $O(E)$ (generalmente lineare rispetto al numero di archi).
+- **Analisi**: La logica si basa sulla minimizzazione della description length dei percorsi casuali (random walks). L'efficienza della sua esecuzione garantisce una scalabilità medio-alta, permettendo di catturare strutture topologiche complesse su un'ampia varietà di reti.
+
+**Louvain**
+
+- **Complessità**: $O(V \log V)$ (empirica, frequentemente approssimabile a lineare $O(E)$ su reti sparse).
+- **Analisi**: Il metodo ottimizza la modularità spostando iterativamente i nodi. Essendo strutturalmente molto veloce, risulta particolarmente efficace per reti dense, il che giustifica la sua classificazione di alta scalabilità.Tende a produrre comunità nettamente separate e rischia di inglobare le comunità più piccole in aggregazioni maggiori.
 
 ### Generalizzazione a N-Partitions
 
-Quando l'obiettivo non è più solo tagliare il grafo a metà, ma suddividerlo in un numero $k$ di partizioni, la logica matematica si evolve. Dato un valore $k$, lo scopo è trovare una partizione $(S_1, S_2, \dots, S_k)$ che minimizzi una misura di "taglio" bilanciato.
+Dato un valore $k$, lo scopo è trovare una partizione $(S_1, S_2, \dots, S_k)$ che minimizzi una misura di "taglio" bilanciato.
 
 Per fare questo, le metriche generalizzate cercano di bilanciare simultaneamente due fattori chiave:
 

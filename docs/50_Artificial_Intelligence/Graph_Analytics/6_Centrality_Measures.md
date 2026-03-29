@@ -6,13 +6,15 @@ Parent: [[5_Graph_Connettivity]]
     La **centralità** esprime l'importanza di un nodo basandosi sul suo ruolo nel "mantenere il grafo connesso" o sulla sua facilità di accesso agli altri nodi.
 
 !!!note Prestigio
-    Il **prestigio** è una misura di importanza calcolata solo per reti dirette, poiché la direzione del legame è una proprietà fondamentale della relazione. Si basa sui cosiddetti "in-links".
+    Il **prestigio** è una misura di importanza calcolata solo per reti dirette, poiché la direzione del legame è una proprietà fondamentale della relazione. Si basa sui cosiddetti **in-links**.
 
 ## Metriche di centralità per grafi non orientati
 
 ### Degree Centrality
 
-La **degree centrality** di un nodo $v$ è definita come il numero di vicini (nodi adiacenti) a cui è direttamente connesso
+La **degree centrality** di un nodo $v$ è definita come il numero di vicini (nodi adiacenti) a cui è direttamente connesso. In un grafo non orientato, è semplicemente il numero di archi incidenti al nodo:
+$$C_D(v) = \deg(v)$$
+Un nodo con un alto degree centrality è considerato importante perché ha molte connessioni dirette, fungendo da hub locale all'interno della rete.
 
 ### Closeness Centrality
 
@@ -53,17 +55,20 @@ Nei grafi diretti, l'importanza è legata alla direzione dei legami (in-links), 
 
 ### In-Degree Prestige
 
-La **in-degree prestige** di un nodo $v$ è definita come il numero di archi che entrano in $v$. Un nodo con un alto in-degree è considerato prestigioso perché riceve molte connessioni da altri nodi.
+La **in-degree prestige** di un nodo $v$ è definita come il numero di archi che entrano in $v$. Un nodo con un alto in-degree è considerato prestigioso perché riceve molte connessioni da altri nodi. In un grafo diretto, la in-degree prestige è semplicemente il numero di archi che terminano in quel nodo:
+ $$C_{in}(v) = \deg_{in}(v)$$
 
 ### Out-Degree Prestige
 
-La **out-degree prestige** di un nodo $v$ è definita come il numero di archi che escono da $v$. Un nodo con un alto out-degree è considerato influente perché si connette a molti altri nodi.
+La **out-degree prestige** di un nodo $v$ è definita come il numero di archi che escono da $v$. Un nodo con un alto out-degree è considerato influente perché si connette a molti altri nodi. In un grafo diretto, la out-degree prestige è semplicemente il numero di archi che partono da quel nodo:
+$$C_{out}(v) = \deg_{out}(v)$$
 
 ### Influence Domain
 
 L'Influence Domain di un nodo $i$, indicato come $|I_i|$, rappresenta la portata della sua autorità all'interno della rete.  È il numero di nodi che possono raggiungere il nodo $i$ seguendo un percorso diretto.
 
-Più ampio è il dominio di influenza, più il nodo è considerato un "punto di riferimento" o una destinazione per gli altri membri del network.
+Più ampio è il dominio di influenza, più il nodo è considerato un "punto di riferimento" o una destinazione per gli altri membri del network. Matematicamente, si può definire come:
+$$|I_i| = |\{j \in V : \text{esiste un cammino diretto da } j \text{ a } i\}|$$
 
 ### Proximity Prestige
 
@@ -97,6 +102,4 @@ L'indice si basa su due pilastri:
     Un autore possiede un indice pari a **$h$** se ha pubblicato almeno $h$ articoli, ognuno dei quali è stato citato da altri lavori almeno $h$ volte. In sostanza, l'H-index identifica il punto di equilibrio dove il numero d'ordine dell'articolo (ordinato per citazioni decrescenti) incrocia il numero di citazioni ricevute.
 
 !!!example
-    **Esempio A**: Un autore con articoli citati 10, 8, 5, 4 e 3 volte ha un **H-index di 4**. Infatti, ci sono 4 lavori con almeno 4 citazioni.
-
-    **Esempio B**: Un autore con citazioni 25, 8, 5, 3 e 3 ha un **H-index di 3**. Nonostante il record di 25 citazioni su un singolo lavoro, solo 3 articoli hanno ricevuto almeno 3 citazioni.
+    Se un autore ha pubblicato 10 articoli con le seguenti citazioni: [15, 12, 10, 8, 5, 4, 3, 2, 1, 0], il suo H-index è 5, poiché ha almeno 5 articoli con almeno 5 citazioni ciascuno. L'articolo con il numero d'ordine 6 (con 4 citazioni) non soddisfa la condizione per essere incluso nell'H-index.

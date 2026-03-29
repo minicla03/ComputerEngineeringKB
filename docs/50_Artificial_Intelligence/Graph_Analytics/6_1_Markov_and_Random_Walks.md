@@ -1,4 +1,4 @@
-# 6_1_Markov_and_Random_Walks
+# Markov Chains e Random Walks
 
 Parent: [[6_Centrality_Measures]]
 
@@ -9,7 +9,7 @@ Una **Markovian chain** è un modello matematico di un fenomeno stocastico che e
 !!!note Propretà di Markov
     La **memoria limitata** (memoryless) è la caratteristica  di una catena di Markov, che implica che il futuro è indipendente dal passato dato il presente.
 
-Una catrna di markov è definita da tre componenti:
+Una catena di markov è definita da tre componenti:
 
 1. **Spazio degli Stati ($S$):** L'insieme di tutte le possibili configurazioni del sistema. Applicato ai grafi, ogni nodo rappresenta uno stato discreto.
 2. **Transizioni:** I passaggi da uno stato all'altro, che in un grafo corrispondono direttamente agli archi che collegano i nodi.
@@ -18,7 +18,7 @@ Una catrna di markov è definita da tre componenti:
 Data una sequenza di variabili aleatorie $\{X_0, X_1, X_2, \dots, X_t\}$, il processo è formalmente markoviano se rispetta l'equazione:
 $$P(X_{t+1} = j \mid X_t = i, X_{t-1} = i_{t-1}, \dots, X_0 = i_0) = P(X_{t+1} = j \mid X_t = i)$$
 
-Una catena di Markov è **omogenea** se un processi in cui la probabilità di transizione al tempo $t_i$ non dipende dal tempo stesso, ma solo dallo stsato del sistema al tempo predente $S(t_{i-1})$. Se è omogenea a stati finiti, la catena di markov può essere rappresentata dalla **matrice di transizione** $A \in \R^{N \times N}$, dove $N$ è il numero di stati. Insieme alla matrice di transizione, si definisce anche il **vettore di probabilità iniziale** $v_0 \in \R^N$ che definisce le probabilià che la catena inizi in ciascuno degli stati.
+Una catena di Markov è **omogenea** se un processi in cui la probabilità di transizione al tempo $t_i$ non dipende dal tempo stesso, ma solo dallo stato del sistema al tempo predente $S(t_{i-1})$. Se è omogenea a stati finiti, la catena di markov può essere rappresentata dalla **matrice di transizione** $A \in \R^{N \times N}$, dove $N$ è il numero di stati. Insieme alla matrice di transizione, si definisce anche il **vettore di probabilità iniziale** $v_0 \in \R^N$ che definisce le probabilià che la catena inizi in ciascuno degli stati.
 
 Gli elementi della matrice rapprenentano le probabilità di transizione tra stati, e ogni riga della matrice deve sommare a 1, riflettendo la natura stocastica del processo. Le probabilità di transizione nella diagonale principale rappresentano la probabilià di rimanere nello stesso stato, mentre le probabilità fuori diagonale rappresentano la probabilità di transizione verso stati diversi.
 
@@ -33,9 +33,13 @@ Questo prodotto matriciale rappresenta l'evoluzione del sistema, con la matrice 
 !!!note Distribuzione di stato stazionario
     Si tratta di una distribuzione verso cui la catena converge, indipendentemente dallo stato iniziale, all'aumentare del numero di passi. Quindi, se si continua ad applicare la matrice di transizione, il vettore di stato si stabilizzerà su questa distribuzione stazionaria, che rappresenta la probabilità di trovarsi in ciascuno stato dopo un numero infinito di passi. La distribuzione stazionaria è un punto fisso del processo, soddisfacendo l'equazione $v = A^T v$.
 
-L'applicazione iterativa e ininterrotta di questa equazione, calcolando il vettore al tempo $t_{i+1}$ usando il vettore al tempo $t_i$, prende il nome di **Power Iteration**. 
+!!!note Esistenza e unicità della distribuzione stazionaria nei processi di Markov
+    Devono valere le seguenti condizioni:
+    1. La matrice di transizione è una matrice stocastica: la somma di tutte le colonne è pari a 1.
+    2. La matrice è irriducibile, cioè il grafo è fortemente connesso: i → j per ogni coppia di nodi nel grafo.
+    3. La matrice è aperiodica → è possibile tornare a ciascun nodo in un numero fisso di passi.
 
-L'algoritmo procede ricalcolando il vettore di stato e arrestandosi solo quando viene raggiunta la convergenza.
+L'applicazione iterativa e ininterrotta di questa equazione, calcolando il vettore al tempo $t_{i+1}$ usando il vettore al tempo $t_i$, prende il nome di **Power Iteration**. L'algoritmo procede ricalcolando il vettore di stato e arrestandosi solo quando viene raggiunta la convergenza.
 
 ## Random Walks
 
@@ -50,10 +54,50 @@ Per derivare la matrice di transizione da un grafo, è necessario normalizzare l
 
 Il **Random Surfing** è una variante del random walk che introduce un meccanismo di teletrasporto per superare i limiti topologici intrinseci delle reti complesse, come i *dead end* (nodi senza uscite) e le *spider trap* (sottografi fortemente connessi che intrappolano il random walker).
 
-Per superare questi problemi, si regolarizza l'equazione introducendo il parametro di teletrasporto $\alpha$. L'equazione di aggiornamento generale diventa una combinazione lineare:
+```mermaid
+graph LR
+    %% Definizione degli stili cromatici
+    classDef redNode fill:#ff0000,stroke:#333,stroke-width:1.5px;
+    classDef blueNode fill:#0000ff,stroke:#333,stroke-width:1.5px,color:#fff;
+    classDef greenNode fill:#008000,stroke:#333,stroke-width:1.5px,color:#fff;
+
+    %% Nodi rossi (Componente principale)
+    R_TL(( )):::redNode
+    R_TR(( )):::redNode
+    R_BL(( )):::redNode
+    R_BR(( )):::redNode
+
+    %% Nodo Dead end
+    DeadEnd(("Dead end")):::blueNode
+
+    %% Nodi Spider trap
+    G_Top(( )):::greenNode
+    G_BL(( )):::greenNode
+    G_BR(("Spider trap")):::greenNode
+
+    %% Archi interni alla componente rossa
+    R_TR --> R_TL
+    R_TL --> R_BL
+    R_BL --> R_TR
+    R_BL --> R_BR
+    R_BR --> R_TR
+
+    %% Archi di transizione verso le anomalie
+    R_TR --> DeadEnd
+    R_BR --> G_Top
+
+    %% Archi interni al ciclo della Spider trap
+    G_Top --> G_BL
+    G_BL --> G_BR
+    G_BR --> G_Top
+```
+
+In un random walk standard, se il walker raggiunge un nodo senza uscite (dead end), rimane bloccato lì, poiché non ci sono transizioni possibili. Allo stesso modo, se il walker entra in una spider trap, rimane intrappolato all'interno di quel sottografo fortemente connesso, poiché tutte le transizioni lo riportano indietro.
+
+Per superare questi problemi, si regolarizza l'equazione introducendo il **parametro di teletrasporto** $\alpha$ che rappresenta iul slto casuale del walker su un punto qualsiasi del grafo. $\alpha$ agisce come un meccanismo di regolarizzazione, assicurando che il processo di random walk non rimanga intrappolato in componenti fortemente connesse o nodi senza uscite, e garantendo la convergenza a una distribuzione stazionaria unica anche in grafi con topologie complesse.  L'equazione di aggiornamento generale diventa una combinazione lineare:
 
 $$v_{i+1} = (1-\alpha) A^T v_i + \alpha \begin{bmatrix} \frac{1}{N} \\ \vdots \\ \frac{1}{N} \end{bmatrix}$$
 
-* **Il primo termine** $(1-\alpha) A^T v_i$ modella la normale navigazione strutturale seguendo gli archi uscenti con una probabilità attenuata.
-* **Il secondo termine** $\alpha [\frac{1}{N}, \dots, \frac{1}{N}]^T$ funge da rumore di fondo uniforme, distribuendo la probabilità di un salto casuale equamente su tutti gli $N$ nodi del grafo, garantendo l'irriducibilità della matrice. 
-* $\alpha$ agisce come un meccanismo di regolarizzazione, assicurando che il processo di random walk non rimanga intrappolato in componenti fortemente connesse o nodi senza uscite, e garantendo la convergenza a una distribuzione stazionaria unica anche in grafi con topologie complesse.  
+dove:
+* $(1-\alpha) A^T v_i$ modella la normale navigazione strutturale seguendo gli archi uscenti con una probabilità attenuata.
+* $\alpha [\frac{1}{N}, \dots, \frac{1}{N}]^T$ funge da rumore di fondo uniforme, distribuendo la probabilità di un salto casuale equamente su tutti gli $N$ nodi del grafo, garantendo l'irriducibilità della matrice.
