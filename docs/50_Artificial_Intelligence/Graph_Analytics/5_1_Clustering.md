@@ -114,7 +114,7 @@ Se cercassimo solo di minimizzare $|\mathbb{C}|$ (il numero di archi tagliati), 
 
 La formula della conduttanza corregge questo comportamento aggiungendo un **penalizzatore al denominatore**:
 
-$$C(G_1, G_2) = \frac{|\mathbb{C}|}{\min\{(\mathbb{C} + |G_1|), (\mathbb{C} + |G_2|)\}}$$
+$$C(G_1, G_2) = \frac{|\mathbb{C}|}{\min\{vol(G_1), vol(G_2)\}} = \frac{|\mathbb{C}|}{\min\{(2*\mathbb{C} + |G_1|), (2*\mathbb{C} + |G_2|)\}}$$
 
 Se si prova a isolare un solo nodo, il denominatore diventa molto piccolo, facendo schizzare il valore della conduttanza verso l'alto (cattivo taglio).
 Se le due parti sono grandi e ben bilanciate, il denominatore è grande, rendendo il valore della conduttanza basso (buon taglio).
