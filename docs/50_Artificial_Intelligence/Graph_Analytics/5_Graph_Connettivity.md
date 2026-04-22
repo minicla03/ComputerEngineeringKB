@@ -87,18 +87,24 @@ Questo teorema viene utilizzato per analizzare la resilienza e al'affidabilità 
 
 La **conduttanza** di un grafo  è un parametro metrico che misura la "qualità" di un taglio nel grafo, indicando quanto sia difficile per un _walk_ uscire da un determinato insieme di nodi.
 
-!!!note Conduttanza
-    Sia $G = (V, E)$ un grafo e $S \subset V$ un sottoinsieme di vertici. La conduttanza di $S$, indicata con $\phi(S)$, è definita come: $$\phi(S) = \frac{|\partial(S)|}{\min(\text{vol}(S), \text{vol}(V \setminus S))}$$ Dove:
+!!!note Conduttanza per i grafi non orientati
+    Sia $G = (V, E)$ un grafo non orientato e $S \subset V$ un sottoinsieme di vertici. La conduttanza di $S$, indicata con $\phi(S)$, è definita come: $$\phi(S) = \frac{|\partial(S)|}{\min(\text{vol}(S), \text{vol}(V \setminus S))}$$ Dove:
     - **$|\partial(S)|$**: è il numero di archi che collegano un nodo in $S$ a un nodo fuori da $S$ (il "taglio").
     -  **$\text{vol}(S)$**: è il volume di $S$, ovvero la somma dei gradi dei nodi appartenenti a $S$ ($\sum_{v \in S} d(v)$).
     - **$\text{vol}(V \setminus S)$**: è il volume del complemento di $S$, ovvero la somma dei gradi dei nodi che non appartengono a $S$.
   
+!!!note Conduttanza per i grafi diretti
+    Per i grafi diretti, la conduttanza di un sottoinsieme $S$ è definita come:$$\phi_D(S)= \frac{|{\partial}_{out}(S)|}{\min( vol_{out}(S), vol_{out}(V \setminus S))}$$ Dove:
+    - **$|{\partial}_{out}(S)|$**: è il numero di archi che escono da $S$ verso $V \setminus S$.
+    - **$vol_{out}(S)$**: è la somma dei gradi in uscita dei nodi in $S$ ($\sum_{v \in S} d_{out}(v)$).
+    - **$vol_{out}(V \setminus S)$**: è la somma dei gradi in uscita dei nodi in $V \setminus S$ ($\sum_{v \in V \setminus S} d_{out}(v)$).
+
 In termini intuitivi, una bassa conduttanza indica la presenza di un "collo di bottiglia": un insieme di nodi densamente connessi tra loro ma scarsamente connessi al resto del grafo; mentre una conduttanza elevata suggerisce che il sottoinsieme è ben integrato con il resto del grafo, senza barriere significative alla diffusione o al flusso di informazioni.
 
-La conduttanza può essere calcolata sia per i grafi direttti che per quelli non diretti, ma per questi, bisogna considerare gli archi in entrambie le direzioni.
+Partendo da un grafo non orientato, e considerando il suo equivalente orientato è possibile calcolare la conduttanza con la formula per i grafi orientati.
 
 !!!note Conduttanza globale
-    La conduttanza dell'intero grafo $G$ è il valore minimo di $\phi(S)$ calcolato su tutti i possibili sottoinsiemi $S$: $$\phi(G) = \min_{S \subseteq V} \phi(S)$$
+    La conduttanza dell'intero grafo $G$ è il valore minimo di $\phi(S)$ calcolato su tutti i possibili sottoinsiemi $S$ non banali ($\emptyset \subseteq S \subseteq$ V): $$\phi(G) = \min_{S \subseteq V} \phi(S)$$
 
 L'analisi della conduttanza permette di caratterizzare la struttura globale del network:
 
