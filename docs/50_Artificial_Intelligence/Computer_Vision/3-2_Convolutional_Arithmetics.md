@@ -65,6 +65,77 @@ where:
 
 ## Transposed convolution
 
+**Transposed convolution** (also called **deconvolution**) is an upsampling operation that can learn to upsample the features in a way that preserves the spatial information and can lead to a better performance.
+
+In a standard convolution, a kernel slides over an input patch, performs element-wise multiplication, and sums the results to produce a *single* output pixel. A transposed convolution effectively reverses this spatial mapping:
+
+1. The operation takes a *single* pixel (a scalar) from the input feature map.
+2. It multiplies that single scalar value by every weight within the entire kernel matrix and projects it to the resulting matrix directly onto the output feature map.
+3. The kernel step size across the output is determined by the **stride**. As the operation moves to the next input pixel and projects the next matrix, these projected regions often overlap in the output space. Wherever they overlap, the values are simply summed together.
+
+![{alt text}](image-22.png){width=70% height=50%}
+
+If the kernel size is not evenly divisible by the stride, the overlaps in the output feature map become asymmetric. This uneven summation produces a **checkerboard effect**, a grid of artificially high and low activation magnitudes. To bypass this issue in modern SOTA architectures, it is often best practice to use Bilinear Interpolation for the spatial resize, immediately followed by a standard $3 \times 3$ convolution to refine the features.
+
+To calculate the output dimension (for either height or width) of a Transposed Convolution operation. The formula is as follows:
+
+$$O = (I - 1) \times S - 2P + K$$
+
+where:
+
+- $O$ = Output dimension size
+- $I$ = Input dimension size
+- $S$ = Stride (the step size of the projection)
+- $P$ = Padding (the amount of implicit zero-padding added to both sides)
+- $K$ = Kernel size
+
+While convolution is easiest to conceptualize as a "sliding window" passing over an input, implementing it using nested `for` loops in code is incredibly slow. To leverage the massive parallel processing power of modern GPUs, Deep Learning frameworks (like PyTorch and TensorFlow) reframe the convolution operation as a single **Matrix Multiplication**.
+
+They achieve this by transforming the small kernel into a large, sparse matrix known as a **Toeplitz matrix**.Suppose we have:
+
+- An **Input Vector** ($x$) of size 4: $x = [x_1, x_2, x_3, x_4]$
+- A **Kernel Vector** ($w$) of size 3: $w = [w_1, w_2, w_3]$
+- We are performing a "Valid" convolution (no padding, stride of 1).
+
+The output size will be $4 - 3 + 1 = 2$. Therefore, the output vector ($y$) will have 2 elements: $y = [y_1, y_2]$.
+
+To compute this via matrix multiplication ($y = W \times x$), we must construct the Toeplitz matrix $W$. We do this by "unrolling" the kernel into a matrix where each row represents one step of the sliding window:
+
+1.  **Step 1 (Row 1):** The kernel aligns with the first 3 elements of the input. We pad the remaining positions with zeros. 
+    $\rightarrow [w_1, w_2, w_3, 0]$
+2.  **Step 2 (Row 2):** The kernel shifts one position to the right. We pad the left and right with zeros accordingly. Rappresenting the kernel's new position, so the stride effect:
+    $\rightarrow [0, w_1, w_2, w_3]$
+
+We assemble these rows into our Toeplitz matrix $W$ (size $2 \times 4$) and multiply it by the input vector $x$ (formatted as a $4 \times 1$ column vector):
+
+$$
+\begin{bmatrix}
+w_1 & w_2 & w_3 & 0 \\
+0 & w_1 & w_2 & w_3
+\end{bmatrix}
+\times
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+x_4
+\end{bmatrix}
+=
+\begin{bmatrix}
+(w_1 x_1 + w_2 x_2 + w_3 x_3) \\
+(w_1 x_2 + w_2 x_3 + w_3 x_4)
+\end{bmatrix}
+=
+\begin{bmatrix}
+y_1 \\
+y_2
+\end{bmatrix}
+$$
+
+This is valid only for $stride = 1$ and no padding. For other configurations, the Toeplitz matrix would be constructed differently to account for the stride and padding.
+
+By structuring the data this way (often referred to generally as `im2col` for 2D images), we waste memory by duplicating values and storing many zeros. However, we gain immense speed because we can now hand the operation over to highly optimized BLAS (Basic Linear Algebra Subprograms) libraries that compute matrix multiplications efficiently in parallel hardware.
+
 ## Grouped convolution
 
 The **Grouped Convolution** divides the input channels into $n$ distinct groups. Each group of channels is then convolved with its own dedicated set of filters. It is essentially like running multiple smaller convolutional layers in parallel and then concatenating their results at the end.
