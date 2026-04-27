@@ -40,10 +40,6 @@ Una volta predetti i punteggi di rilevanza per tutti gli item non ancora visti (
 
 Il **Content-Based Filtering** analizza le caratteristiche e gli attributi degli oggetti stessi, come le descrizioni di un prodotto, le parole chiave della trama di un film o il suo regista, e suggerisce articoli simili a quelli per cui l'utente ha già mostrato interesse. È molto efficace per i nuovi utenti poiché non necessita di uno storico comportamentale, ma il suo limite è la dipendenza dalla disponibilità e dalla qualità delle descrizioni degli articoli.
 
-Il processo per la generazione di raccomandazioni consiste nel confrontare gli attributi del profilo dell'utente target (in cui sono modellati interessi e preferenze) con gli attributi degli elementi (*item*), al fine di individuare quelli simili a ciò che l'utente ha apprezzato in passato. Il risultato è un **punteggio di rilevanza** che predice il livello di interesse dell'utente per tali elementi.
-
-In genere, gli attributi utilizzati per descrivere un *item* sono caratteristiche (*feature*) estratte dai metadati associati o elementi testuali correlati, come descrizioni, commenti e parole chiave. Questi elementi, essendo ricchi di contenuto, offrono una quantità di informazioni sufficiente per effettuare confronti o inferire gli interessi dell'utente basandosi sullo storico delle sue interazioni. Per tali ragioni, i sistemi **CBRS (Content-Based Recommender Systems)** non richiedono grandi moli di dati per essere efficaci.
-
 ![alt text](image-35.png){width="70%" height="70%"}
 
 Il processo di raccomandazione si articola in tre componenti principali:
@@ -53,9 +49,15 @@ Il processo di raccomandazione si articola in tre componenti principali:
     - **Feedback esplicito:** preferenze fornite direttamente dall'utente sui propri interessi.
     - **Feedback implicito:** osservazione e memorizzazione del comportamento dell'utente.
 Il risultato è un grafo che rappresenta l'interesse dell'utente verso un *item*, una sua caratteristica o entrambi. Poiché entrambi i processi restituiscono modelli a grafo, i loro output possono essere combinati in un unico **modello a grafo connesso** e di facile accesso, che fungerà da input per la fase successiva.
-1. **Recommendation Engine** Questo modulo sfrutta i profili utente e le rappresentazioni degli elementi per suggerire contenuti rilevanti, facendo combaciare gli interessi dell'utente con le caratteristiche degli *item*. In questa fase, viene costruito un **modello di predizione** per generare un punteggio di rilevanza per ogni elemento e per ogni utente; tale punteggio viene poi utilizzato per classificare e ordinare (*ranking*) gli elementi da suggerire. Alcuni algoritmi pre-calcolano valori rilevanti, come la similarità tra gli *item*, per velocizzare la fase di predizione. Questi nuovi valori vengono poi salvati nel grafo, arricchendolo con ulteriori dati inferiti dai profili.
+3. **Recommendation Engine** Questo modulo sfrutta i profili utente e le rappresentazioni degli elementi per suggerire contenuti rilevanti, facendo combaciare gli interessi dell'utente con le caratteristiche degli *item*. In questa fase, viene costruito un **modello di predizione** per generare un punteggio di rilevanza per ogni elemento e per ogni utente; tale punteggio viene poi utilizzato per classificare e ordinare (*ranking*) gli elementi da suggerire. Alcuni algoritmi pre-calcolano valori rilevanti, come la similarità tra gli *item*, per velocizzare la fase di predizione. Questi nuovi valori vengono poi salvati nel grafo, arricchendolo con ulteriori dati inferiti dai profili.
+
+Il processo per la generazione di raccomandazioni consiste nel confrontare gli attributi del profilo dell'utente target (in cui sono modellati interessi e preferenze) con gli attributi degli elementi (*item*), al fine di individuare quelli simili a ciò che l'utente ha apprezzato in passato. Il risultato è un **punteggio di rilevanza** che predice il livello di interesse dell'utente per tali elementi.
+
+In genere, gli attributi utilizzati per descrivere un *item* sono caratteristiche (*feature*) estratte dai metadati associati o elementi testuali correlati, come descrizioni, commenti e parole chiave. Questi elementi, essendo ricchi di contenuto, offrono una quantità di informazioni sufficiente per effettuare confronti o inferire gli interessi dell'utente basandosi sullo storico delle sue interazioni. Per tali ragioni, i sistemi **CBRS (Content-Based Recommender Systems)** non richiedono grandi moli di dati per essere efficaci.
 
 Durante la fase di raccomandazione, un sistema **CBRS** utilizza i profili utente per far corrispondere gli utenti agli elementi che hanno maggiore probabilità di essere di loro interesse. A seconda delle informazioni disponibili e dei modelli definiti sia per gli utenti che per gli *item*, possono essere impiegati diversi algoritmi o tecniche.
+
+### Primo approccio per fornire raccomandazioni: Feature Overlap
 
 Il primo approccio (esplicito) nell'andare ad indicare direttamente nel grafo gli interessi degli utenti, oppure viene inferito dalle interazioni utente-item. Questo approccio è applicabile quando:
 
@@ -68,9 +70,11 @@ Con un modello a grafo adeguato, una semplice query è sufficiente. I dati conte
 
 Questo approccio puramente basato su grafi è semplice, ma presenta numerosi vantaggi:
 
-* **Produce buoni risultati:** La qualità delle raccomandazioni è piuttosto elevata, considerando lo sforzo limitato richiesto da questo metodo.
-* **È semplice:** Non richiede calcoli onerosi o codice complesso per leggere e pre-elaborare i dati prima di fornire le raccomandazioni. Se i dati sono modellati correttamente nel grafo, è possibile eseguire le query e rispondere agli utenti in **tempo reale**.
-* **È estensibile:** Il grafo può contenere altre informazioni utili per raffinare i risultati in base ad altre fonti di dati o informazioni contestuali. Le query possono essere facilmente modificate per tenere conto di nuovi aspetti.
+- **Produce buoni risultati:** La qualità delle raccomandazioni è piuttosto elevata, considerando lo sforzo limitato richiesto da questo metodo.
+- **È semplice:** Non richiede calcoli onerosi o codice complesso per leggere e pre-elaborare i dati prima di fornire le raccomandazioni. Se i dati sono modellati correttamente nel grafo, è possibile eseguire le query e rispondere agli utenti in **tempo reale**.
+- **È estensibile:** Il grafo può contenere altre informazioni utili per raffinare i risultati in base ad altre fonti di dati o informazioni contestuali. Le query possono essere facilmente modificate per tenere conto di nuovi aspetti.
+
+### Secondo approccio per fornire raccomandazioni: Feature Similarity
 
 Il secondo approccio (implicito) estende il precedente focalizzandosi su due aspetti principali di miglioramento:
 
@@ -88,18 +92,75 @@ Questa richiede che ogni *item* e ogni profilo utente siano proiettati in un **m
 
 Per ridurre il numero di calcoli, dobbiamo considerare che nella matrice user-item, non tutti gli elementi sono rilevanti per ogni utente. Ci sono prodotti che l'utente non prendere mai insieme e quindi la similarità risulta essere zero, senza effettuare il calcolo. Per questo motivo, è necessario filtrare gli *item* da confrontare con il profilo utente, limitando il calcolo della similarità solo a quelli che condividono almeno una *feature* in comune. In questo modo, si riduce drasticamente il numero di confronti necessari, migliorando l'efficienza del processo di raccomandazione.
 
+### Terzo approccio per fornire raccomandazioni: Similarità tra item
+
+Il terzo approccio che consideriamo per le raccomandazioni basate sul contenuto (CBRS) è quello di calcolare la similarità rilevanti tra gli item, ma risulta difficile (o inutile) rappresentare i profili utente con lo stesso formato. In questo caso, si modellano le preferenze degli utenti collegandoli direttamente agli item, senza passare per le *feature* che li descrivono. Questo approccio si rende necessario quando i metadati scarseggiano, sono limitati o irrilevanti, rendendo impossibile estrarre l'interesse dell'utente per specifiche feature. Ovviamente per fare ciò è necessaria una descrizione del contenuto dell'item, altrimenti non è possibile calcolare la similarità tra item.
+
+Anche quando i metadati sono ampiamente disponibili, questo terzo approccio (noto come tecnica di *similarity-based retrieval*) supera nettamente il precedente in termini di accuratezza. È un metodo fondamentale per diversi motivi:
+
+- Utilizza diverse rappresentazioni degli item per il calcolo delle similarità.
+- Le similarità sono estremamente facili da memorizzare nel grafo sotto forma di relazioni tra gli item. Questo è un caso d'uso perfetto per la modellazione a grafo: navigare le relazioni di similarità permette di generare raccomandazioni in modo estremamente rapido.
+- È abbastanza flessibile e generale da poter essere applicato in innumerevoli scenari, indipendentemente dal tipo di dato disponibile per i singoli item.
+
+!!!warning La differenza rispetto al *collaborative filtering* è che qui le similarità tra gli item vengono calcolate utilizzando **esclusivamente** i dati relativi agli item stessi. Le interazioni utente-item entrano in gioco solamente nella fase finale di raccomandazione.
+
+Le tre componenti fondamentali sono:
+
+1. **Profilo Utente (User profile):** È rappresentato modellando le interazioni storiche dell'utente (es. *valutato*, *comprato*, *guardato*). Nel grafo, queste sono semplici relazioni (archi) tra il nodo utente e i nodi item.
+2. **Rappresentazione dell'Item:** Per calcolare le similarità tra gli item, dobbiamo rappresentarli in modo quantificabile. Il "come" dipende strettamente dalla funzione matematica scelta per la misurazione.
+3. **Funzione di Similarità:** È l'operatore che, date due rappresentazioni, restituisce un punteggio di similarità.
+
+![alt text](image-43.png){width="70%" height="70%"}
+
+Una metrica tipica, adatta per caratteristiche multivalore, è il **Coefficiente di Dice** per cui ogni item $I_i$ è descritto da un set di feature. Il coefficiente misura la similarità calcolando l'intersezione delle feature moltiplicata per due, divisa per la somma totale delle feature presenti nei due item, come:
+
+$$Dice(I_i, I_j) = \frac{2 \times |features(I_i) \cap features(I_j)|}{|features(I_i)| + |features(I_j)|}$$
+
+Una volta calcolate, le similarità possono essere re-iniettate e salvate direttamente nel grafo. Dal punto di vista architetturale, non è necessario memorizzare gli archi tra *tutte* le possibili coppie di nodi. Generalmente, si imposta una soglia minima di similarità o si definisce un parametro $k$, conservando solo i $k$ item più simili. Questi metodi sono detti **k-Nearest Neighbor (k-NN)** e consentono di mantenere un grafo più snello e facilmente navigabile, evitando di sovraccaricare il sistema con relazioni poco significative.
+
+!!!note k-NN Graph
+    Gli **k-nearest neighbor graph** (o network), modellano i $k$ vicini più rilevanti creando un arco orientato da $v_i$ a $v_j$ se $v_j$ rientra tra i $k$ elementi più simili a $v_i$, non è garantito che valga il viceversa (il nodo $v_j$ potrebbe avere un set di vicini completamente diverso e con score più alti). Una volta identificati i top-$k$ nodi, si collegano con una relazione che ha il valore di similarità memorizzato come proprietà dell'arco stesso. Questo grafo viene poi interrogato durante la fase di predizione.
+    ![alt text](image-44.png){width="60%" height="60%"}
+
+Il coefficiente di Dice è rapido, ma la qualità delle raccomandazioni è scarsa, usa pochissime informazioni. Un metodo migliore consiste nell'usare la **Cosine Similarity**. Gli item vengono vettorializzati esattamente come nel secondo approccio, ma la differenza sostanziale è che, anziché calcolare il coseno tra il profilo utente e l'item, lo si calcola per ogni singola coppia di item, salvando poi le top-$k$ corrispondenze nel grafo.
+
+Il passo successivo consiste nel generare le raccomandazioni sfruttando la rete k-NN e le preferenze implicite o esplicite dell'utente verso gli item. L'obiettivo finale del task è predire quali elementi non ancora visti, comprati o cliccati potrebbero suscitare l'interesse dell'utente.
+
+Questo può essere implementato in diversi modi:
+
+1. **Meccanismo di Voting**: la predizione dell'interesse per un item non ancora visto $d$ da parte di un utente $u$ si basa su un meccanismo a votazione. Si analizzano i $k$ item più simili all'item $d$. Ognuno di questi item simili "esprime" un voto per $d$ se l'utente $u$ lo ha precedentemente guardato o valutato. Se, per esempio, l'utente ha apprezzato 4 dei $k=5$ item più simili a $d$, il sistema deduce che la probabilità che l'utente apprezzi anche $d$ sia elevata.
+2. **Somma delle Similarità**: più accurato del primo, e si basa sulla stima dell'interesse di un utente per un determinato item calcolando la somma di tutte le similarità tra l'item *target* e il set di item con cui l'utente ha già interagito in passato. $$score(u, d) = \sum_{i \in Items(u)} sim(d, i)$$ 
+dove: 
+   - $Items(u)$ è l'insieme degli item con cui l'utente $u$ ha interagito (ad esempio, quelli che ha guardato, valutato positivamente o acquistato).
+
 ## Collaborative Filtering
 
-Un **approccio content-based** è attuabile solo se è possibile attingere a informazioni dettagliate sugli utenti (attributi del profilo, preferenze) e sugli item (proprietà intrinseche). Al contrario, se è disponibile solo il **feedback implicito**, è necessario ricorrere a un approccio di **collaborative filtering** che  analizza il comportamento passato degli utenti  per consigliare prodotti che sono stati apprezzati da altri individui con gusti simili. Il difetto principale di questo sistema è la difficoltà nell'effettuare raccomandazioni per i nuovi utenti che non hanno ancora uno storico (**cold-start**).
-
-Esistono due tipi generali di collaborative filtering:
-
-1. **Da utente a utente**, che si basa sul presupposto che gli utenti che hanno assegnato valutazioni simili a un determinato elemento abbiano probabilmente la stessa preferenza anche per altri elementi. Allora, questo metodo si basa principalmente sulla ricerca di similarità tra utenti.
-2. **Da elemento a elemento**, che si basa sul presupposto che se un utente ha apprezzato un certo elemento, allora potrebbe apprezzare anche altri elementi simili. In questo caso, il focus è sulla ricerca di similarità tra gli elementi stessi.
+Un **approccio content-based** è attuabile solo se è possibile attingere a informazioni dettagliate sugli utenti (attributi del profilo, preferenze) e sugli item (proprietà intrinseche). Al contrario, se è disponibile solo il **feedback implicito**, è necessario ricorrere a un approccio di **collaborative filtering** che  analizza il comportamento passato degli utenti  per consigliare prodotti che sono stati apprezzati da altri individui con gusti simili. Il difetto principale di questo sistema è la difficoltà nell'effettuare raccomandazioni per i nuovi utenti (o item) che non hanno ancora uno storico (**cold-start**).
 
 ![alt text](image-30.png){width="70%" height="70%"}
 
-### Creazione del grafo bipartito e proiezione
+Gli svantaggi sono:
+
+- **sparsità dei dati**: la matrice di interazione è spesso molto sparsa, con la maggior parte degli utenti che interagisce solo con una piccola frazione del catalogo, rendendo difficile trovare utenti o prodotti simili.
+- **scalabilità**: con milioni di utenti e prodotti, il numero di interazioni è enorme, rendendo difficile calcolare le similarità in tempo reale.
+- **bias di popolarità**: i sistemi tendono a raccomandare principalmente i prodotti più popolari, trascurando quelli di nicchia che potrebbero essere più adatti a specifici utenti.
+- **mancanza di spiegabilità** e **sensibilità al rumore**: difficoltà di valutare e pesare le review fornite dall'utente, di cui alcune possono essere false, scritte apposta d qualcuno per danneggiare il prodotto anche se non lo ha mai acquistato. Lo stesso può farlo pre favorire un prodotto, scrivendo recensioni positive anche se non lo ha mai acquistato.
+
+Abbiamo due tipi di approcci per il collaborative filtering:
+
+- **memory-based** dove le raccomandazioni sono generate guardando ai loro vicini basandosi sulle preferenze passate. Sono quini basati su misure di similarità calcolare tra utenti o tra item.
+- **model-based** dove le raccomandazioni vengono tratte come task di rpedizioni, e quindi ci si basa su algoritmi di ML/DL per costruire un modello predittivo che possa generalizzare le preferenze degli utenti e fare previsioni su nuovi dati.
+
+### Memory-based Collaborative Filtering
+
+Analizziamo il modello **memory-based** che si basa su varie fasi:
+
+1. creazione del grafo bipartito e proiezione
+2. costruzione della nearest neighbors network
+3. processo di raccomandazione
+4. valutazione del sistema di raccomandazione
+
+#### Creazione del grafo bipartito e proiezione
 
 Il processo inizia convertendo i dati di valutazione in una matrice di utilità, dove le righe rappresentano l'elenco degli utenti e le colonne l'elenco degli elementi. Il dataset viene modellato come un **grafo bipartito** $G = (U \cup I, E)$ dove l'insieme dei vertici è diviso in due classi disgiunte:
 
@@ -125,7 +186,7 @@ Una volta ottenute le proiezioni, si applicano algoritmi di **Graph Clustering**
 
 L'approccio ideale prevede la creazione di sistemi isolati per ogni tipo di interazione (es. un grafo per i "click", uno per i "purchase") da integrare successivamente in un **sistema ibrido**. Questo permette di pesare diversamente i segnali "deboli" (visualizzazioni) rispetto a quelli "forti" (acquisti) prima del calcolo finale della raccomandazione.
 
-### Costruzione della Nearest Neighbors Network
+#### Costruzione della Nearest Neighbors Network
 
 Il passo successivo nel processo di raccomandazione consiste nel calcolare le somiglianze tra gli elementi (utenti, articoli o entrambi) e nel costruire la **rete dei vicini più prossimi (Nearest Neighbors)**.
 
@@ -138,9 +199,9 @@ A differenza dell'approccio *content-based*, nei metodi basati sul vicinato le i
 
 La procedura segue tre step fondamentali:
 
-1.  **Selezione della funzione di somiglianza:** Identificare una metrica (es. **Coseno di Somiglianza**) per calcolare le distanze tra elementi omogenei nel grafo.
-2.  **Rappresentazione Vettoriale:** Rappresentare ogni elemento in un formato adatto alla funzione scelta (Vector Space Model - VSM).
-3.  **Calcolo e Memorizzazione:** Eseguire il calcolo e memorizzare i valori di somiglianza direttamente nel grafo.
+1. **Selezione della funzione di somiglianza:** Identificare una metrica (es. **Coseno di Somiglianza**) per calcolare le distanze tra elementi omogenei nel grafo.
+2. **Rappresentazione Vettoriale:** Rappresentare ogni elemento in un formato adatto alla funzione scelta (Vector Space Model - VSM).
+3. **Calcolo e Memorizzazione:** Eseguire il calcolo e memorizzare i valori di somiglianza direttamente nel grafo.
 
 Il grafo offre la flessibilità di estrarre vettori per entrambi gli approcci tramite semplici query, ma l'efficienza computazionale dipende dalla natura del vettore:
 
@@ -186,14 +247,14 @@ Questo processo non si limita a preparare i dati per la raccomandazione finale, 
 2. **Segmentazione degli Utenti:** Gli stessi algoritmi, applicati alla rete $k$-NN degli utenti, permettono di definire segmenti di clientela con gusti omogenei.
 3. **Ricerca di Prodotti Simili:** La rete $k$-NN degli item è di per sé un asset prezioso. Se un utente visualizza un prodotto specifico, il sistema può interrogare il grafo e restituire istantaneamente una lista di articoli correlati seguendo la relazione di `SIMILARITY`. Grazie alla struttura a grafi, questa operazione è estremamente performante.
 
-### Processo di raccomandazione
+#### Processo di raccomandazione
 
 L'ultima fase del processo di raccomandazione consiste nel fornire una lista di suggerimenti all'utente nel momento in cui questa risulta necessaria o di valore. L'output del processo produce due tipologie di dati:
 
 * **Punteggi di Rilevanza (Relevance Scores):** Predizioni numeriche che indicano il grado di gradimento (quanto un utente potrebbe apprezzare o meno un determinato articolo).
 * **Raccomandazioni (Top-N List):** Una lista di $N$ articoli suggeriti. Questa lista non deve contenere articoli che l'utente ha già acquistato, a meno che non si tratti di prodotti a consumo ricorrente.
 
-#### Approccio User-based
+##### Approccio User-based
 
 Nell'approccio **User-based**, dato un utente attivo, il grafo bipartito delle interazioni e la rete dei vicini più prossimi, il sistema calcola una predizione per ogni prodotto $p$ che l'utente non ha ancora visto. La predizione si basa sui feedback (rating) forniti dai "peer users" (gli utenti nella rete $k$-NN dell'utente attuale). Il presupposto di questo metodo è che:
 
@@ -217,7 +278,7 @@ In questo caso, $r_{b,p}$ è 1 se il vicino $b$ ha acquistato il prodotto $p$, e
 
 !!!tip Una volta costruita la rete $k$-NN nel tuo database a grafi, il calcolo della raccomandazione diventa un'operazione di aggregazione locale sui vicini del nodo utente. È un sistema estremamente scalabile se la rete dei vicini viene aggiornata in modo intelligente (magari in batch) mentre le query di raccomandazione avvengono in tempo reale.
 
-#### Approccio Item-based
+##### Approccio Item-based
 
 I siti di e-commerce su larga scala utilizzano tecniche diverse. Le raccomandazioni **item-based** sono tra queste, poiché consentono il calcolo dei suggerimenti in tempo reale anche per matrici di rating molto grandi.
 
@@ -249,6 +310,14 @@ $$\text{score}(a, p) = \sum_{q \in \text{purchasedItem}(a)} \text{sim}(q, p) \cd
 In questo caso, il calcolo è più semplice poiché non abbiamo rating da pesare. Il risultato indica quanto l'articolo $p$ sia "vicino" agli acquisti passati dell'utente $a$.
 
 Dal punto di vista dell'ingegneria del software, l'approccio **item-based** è spesso preferito perché le relazioni tra gli articoli sono molto più stabili rispetto alle preferenze degli utenti, che possono variare repentinamente. Questo consente di calcolare la matrice di somiglianza item-item **offline** e di utilizzarla per query fulminee **online**.
+
+### Model-based Collaborative Filtering
+
+Il **Model-based Collaborative Filtering (CF)**  addestra un modello predittivo per stimare i rating mancanti.L'idea centrale è che le preferenze degli utenti possano essere spiegate da un numero ridotto di **fattori latenti**. Invece di operare su matrici enormi e sparse, il sistema proietta utenti e item in uno spazio vettoriale di dimensione $k$.
+
+I modelli model-based sono molto più robusti rispetto alla scarsità dei dati (*data sparsity*). Mentre i metodi memory-based faticano a trovare "vicini" quando ci sono pochi rating, i modelli estraggono pattern globali dal dataset, riuscendo a generalizzare meglio anche per coppie utente-item mai viste.
+
+Una volta trainati, i modelli model-based sono estremamente efficienti in fase di inferenza. La raccomandazione per un utente specifico si riduce a un semplice prodotto scalare tra il vettore latente dell'utente e quello dell'item, consentendo risposte in tempo reale anche su dataset di grandi dimensioni.
 
 ## Problema del Cold-Start
 
