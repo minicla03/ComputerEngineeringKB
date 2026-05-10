@@ -54,14 +54,14 @@ created: 2026-02-12
 - [[7_2_Neo4j]] - _Guida architetturale all'uso di Neo4j._
 - [[7_2_1_Cypher]] - _Linguaggio di query Cypher._
 
-### In-Memory Analytics (Elaborazione Vettoriale)
-
-
 ## Graph Machine Learning
 
-*Estensione dei concetti topologici verso reti neurali e rappresentazioni latenti.*
+- [[8_Graph_ml]] - _Introduzione al Graph Machine Learning._
+- [[8_1_Operative_approach]] - _Approccio operativo per progetti di Graph ML._
 
-- *(Placeholder per futuri appunti su GNN, Node Embeddings come Node2Vec, ecc.)*
+### Algoritmi di Graph ML
+
+-[[9_Recomendation_system]] - _Sistemi di raccomandazione basati su grafi._
 
 ---
 

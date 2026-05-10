@@ -86,7 +86,7 @@ Le componenti principali di questa architettura sono:
 - **Serving Layer**: indicizza e rende disponibili i dati elaborati dal batch layer per rispondere rapidamente alle query.
 - **Speed Layer**: elabora i dati in real-time per fornire risultati a bassa latenza compensando la latenza del batch layer.
 
-![alt text](image-22.png)
+![alt text](image-22.png){height="50%"}
 
 **Flusso dei dati**
 

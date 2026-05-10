@@ -65,7 +65,7 @@ Un problema che si può incontrare è che i grafi eccessivamente densi diventano
 * Edge Crossing: L'elevato numero di incroci impedisce di seguire un cammino da un nodo all'altro.
 * Perdita di insight: Non è possibile identificare comunità o nodi influenti poiché tutto appare come una massa uniforme di "peli".
 
-![alt text](image-38.png){width="70%"}
+![alt text](image-38.png){width="70%" height="50%"}
 
 Invece, se abbiamo dei grafi scarsamente popolati, la visualizzazione potrebbe non essere in grado di comunicare efficacemente le informazioni, poiché i pattern potrebbero non essere evidenti o potrebbero essere difficili da identificare. Ciò porta alle visualizzazioni "**snowstorms**", che sono grafo che hanno un numero elevanto di componenti connesse, ma con pochi nodi e archi, risultando in una rappresentazione visiva che sembra una tempesta di neve, dove i nodi e gli archi sono sparsi e difficili da distinguere. Un'altra tipologia di grafo è quella dei "**starbursts**", grafi in cui ci sono pochi nodi hub con un numero elevato di connessioni, creando una rappresentazione visiva che ricorda un'esplosione di stelle, dove i nodi hub sono al centro e le connessioni si irradiano verso l'esterno.
 
