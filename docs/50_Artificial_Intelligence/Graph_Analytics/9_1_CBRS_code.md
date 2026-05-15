@@ -219,10 +219,6 @@ L'obiettivo è calcolare la similarità tra tutte le coppie di film (usando la *
 
 ### 1 Costruzione della Rete k-NN (Batch Processing)
 
-*Disclaimer*: In uno scenario di produzione reale (es. milioni di nodi), per calcolare similarità pairwise non si usa Cypher grezzo, ma si fa girare l'algoritmo KNN ottimizzato della **Graph Data Science (GDS) Library** di Neo4j  
-
-Ecco come materializzare le similarità vettoriali pre-calcolate (presupponendo che i film abbiano già le relazioni `HAS_FEATURE` e la proprietà `movieNorm` come visto nell'Approccio 2).
-
 ```cypher
 CALL apoc.periodic.iterate(
   "MATCH (m1:Movie) RETURN m1",
@@ -259,9 +255,9 @@ CALL {
 
 ### 2 Motore di Raccomandazione (Real-time)
 
-Avendo pre-calcolato la topologia k-NN, la query in tempo reale diventa un fulmine. [cite_start]Implementiamo l'approccio avanzato: il punteggio di un film candidato ($p$) è la sommatoria delle similarità con i film ($i$) che l'utente ($u$) ha già nello storico [cite: 1272-1275].
+Avendo pre-calcolato la topologia k-NN, la query in tempo reale diventa un fulmine. Il punteggio di un film candidato ($p$) è la sommatoria delle similarità con i film ($i$) che l'utente ($u$) ha già nello storico.
 
-[cite_start]Formula applicata: $interest(u,p)=\sum_{i\in Items(u)}sim(i,p)$ [cite: 1275]
+Formula applicata: $interest(u,p)=\sum_{i\in Items(u)}sim(i,p)$
 
 ```cypher
 // 1. Parti dall'utente target e naviga verso i film che ha visto/votato
