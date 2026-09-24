@@ -582,3 +582,300 @@ MATCH p = allShortestPaths((r1)-[*]-(r2))
 WITH length(p) AS lunghezzaPercorso
 RETURN max(lunghezzaPercorso) AS DiametroDelGrafo
 ```
+
+# Social
+
+```mermaid
+graph LR
+    %% Definizione Classi per Styling Professionale
+    classDef user fill:#e1f5fe,stroke:#01579b,stroke-width:2px,color:#01579b;
+    classDef recipe fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#e65100;
+    classDef review fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#4a148c;
+    classDef step fill:#fafafa,stroke:#212121,stroke-width:2px,color:#212121;
+    classDef ingredient fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px,color:#1b5e20;
+    classDef tool fill:#eceff1,stroke:#263238,stroke-width:2px,color:#263238;
+    classDef diet fill:#fbe9e7,stroke:#bf360c,stroke-width:2px,color:#bf360c;
+
+    %% Nodi con Proprietà Incolonnate
+    U(("<b>:User</b><br/><i>username, name,</i><br/><i>joined_at, country</i>")):::user
+    R(("<b>:Recipe</b><br/><i>title, category,</i><br/><i>prep_time_min, difficulty</i>")):::recipe
+    RV(("<b>:Review</b><br/><i>rating, comment,</i><br/><i>created_at</i>")):::review
+    I(("<b>:Instruction</b><br/><i>step_id, description")):::step
+    T(("<b>:Tool</b><br/><i>name, type,")):::tool
+    ING(("<b>:Ingredient</b><br/><i>name, category,</i><br/><i>calories_100g, </i>")):::ingredient
+    D(("<b>:Diet</b><br/><i>name, description</i>")):::diet
+
+    %% Relazioni con Proprietà (Edges)
+    U -- "CREATE {year}" --> R
+    U -- "VOTES" --> RV
+    U -- "WRITES" --> RV
+    U -- "ALLERGY_TO" --> ING
+    
+    R -- "CONTAINS {quantity, unit}" --> ING
+    R -- "HAS" --> RV
+    R -- "START_WITH" --> I
+    
+    I -- "NEXT_STEP {wait_time}" --> I
+    I -- "REQUIRES" --> T
+    
+    ING -- "SUITABLE_FOR" --> D
+    ING -- "SUBSTITUTE_FOR {match_ratio}" --> ING
+```
+
+1. Restituire le ricette ordinate per tempo di preparazione.
+
+   ```cypher
+   MATCH (r:Recipe)
+   RETURN r.title, r.difficulty, r.prep_time_min
+   ORDER BY r.prep_time_min ASC;
+   ```
+
+2. Estrarre gli ingredienti necessari per il Risotto. 
+
+   ```cypher
+   MATCH (r:Recipe {title: 'Risotto alla Milanese'})-[c:CONTAINS]->(i:Ingredient)
+   RETURN i.name, c.quantity, c.unit;
+   ```
+
+3. Identificare tutti gli ingredienti marcati come potenzialmente allergenici.
+
+   ```cypher
+   MATCH (i:Ingredient {is_allergen: true})
+   RETURN i.name, i.category;
+   ```
+
+4. Listare gli utenti alle ricette che hanno creato.
+
+   ```cypher
+   MATCH (u:User)-[c:CREATE]->(r:Recipe)
+   RETURN u.username, r.title, c.year;
+   ```
+
+5. Calcolare la media dei voti ricevuti.
+
+    ```cypher
+   MATCH (r:Recipe)-[:HAS]->(rv:Review)
+   RETURN r.title, avg(rv.rating) AS average_rating, count(rv) AS total_reviews
+   ORDER BY average_rating DESC;
+   ```
+
+6. Trova se un utente è esposto a un allergene in una specifica ricetta.
+
+   ```cypher
+   MATCH (u:User)-[:ALLERGY_TO]->(i:Ingredient)<-[:CONTAINS]-(r:Recipe)
+   RETURN u.username, r.title, collect(i.name) AS allergeni_esposti;
+   ```
+
+7. Contare il numero totale di step previsti per ogni ricetta.
+
+   ```cypher
+   MATCH (r:Recipe)-[:START_WITH]->(:Instruction)-[:NEXT_STEP*0..]->(steps:Instruction)
+   RETURN r.title, count(DISTINCT steps) AS numero_operazioni;
+   ```
+
+8. Estraerre la lista univoca degli utensili richiesti da una ricetta.
+
+   ```cypher
+   MATCH (r:Recipe)-[:START_WITH|NEXT_STEP*0..]->(s:Instruction)-[:REQUIRES]->(t:Tool)
+   RETURN r.title, collect(DISTINCT t.name) AS utensili_necessari;
+   ```
+
+9. Identificare gli ingredienti più utilizzati nel dataset.
+
+    ```cypher
+    MATCH (i:Ingredient)<-[:CONTAINS]-(r:Recipe)
+    RETURN i.name, count(r) AS degree
+    ORDER BY degree DESC LIMIT 5;
+    ```
+
+10. Calcolare le calorie derivanti dagli ingredienti misurati in grammi per ciascuna ricetta.
+
+    ```cypher
+    MATCH (r:Recipe)-[c:CONTAINS]->(i:Ingredient)
+    WHERE c.unit = 'g'
+    RETURN r.title, sum((c.quantity * i.calories_100g) / 100.0) AS calorie_totali_solidi;
+    ```
+
+11. Suggerire ingredienti alternativi con relativo indice di confidenza (match ratio).
+
+    ```cypher
+    MATCH (i:Ingredient)-[r:SUBSTITUTE_FOR]->(alternatives:Ingredient)
+    RETURN i.name, [alternatives.name, r.match_ratio]
+    ```
+
+12. Restituire solo le ricette che *non* contengono ingredienti a cui l'utente Pierre è allergico.
+
+    ```cypher
+    MATCH (u:User {username: 'pierre_paris'}), (r:Recipe)
+    WHERE NOT (r)-[:CONTAINS]->(i:Ingredient)<-[:ALLERGY_TO]-(u)
+    RETURN r.title AS ricette_sicure;
+    ```
+
+    o
+
+    ```cypher
+    MATCH (u:User {username: 'pierre_paris'}), (r:Recipe)
+    WHERE NOT EXISTS {
+    (r)-[:CONTAINS]->(:Ingredient)<-[:ALLERGY_TO]-(u)
+    }
+    RETURN r.title AS ricette_sicure;
+    ```
+
+13. Raggruppa le recensioni per livello di difficoltà della ricetta e calcola la media dei voti per ciascun gruppo, ordinando i risultati in modo decrescente.
+
+    ```cypher
+    MATCH (r:Recipe)-[:HAS]->(rv:Review)
+    RETURN r.difficulty, avg(rv.rating) AS avg_rating, count(rv) AS sample_size
+    ORDER BY avg_rating DESC;
+    ```
+
+14. Trova il tempo di attesa passivo massimo all'interno delle procedure.
+
+    ```cypher
+    MATCH (s1:Instruction)-[n:NEXT_STEP]->(s2:Instruction)
+    RETURN s1.step_id AS step_precedente, s2.step_id AS step_successivo, n.wait_time AS latenza_minuti
+    ORDER BY latenza_minuti DESC;
+    ```
+
+15. Calcolare la densità di allergeni all'interno di ogni ricetta per stabilire una metrica di rischio intrinseco.
+
+    ```cypher
+    MATCH (r:Recipe)-[:CONTAINS]->(i:Ingredient)
+    WITH r, count(i) AS total_ingredients, sum(CASE WHEN i.is_allergen THEN 1 ELSE 0 END) AS allergen_count
+    RETURN r.title, (allergen_count * 1.0 / total_ingredients) AS densita_allergeni
+    ORDER BY densita_allergeni DESC;
+    ```
+
+16. Trova coppiere di utenti che hanno valutato positivamente (rating $\geq$ 4) le stesse ricette.
+
+    ```cypher
+    MATCH (u1:User)-[:WRITES]->(rv1:Review)<-[:HAS]-(r:Recipe)-[:HAS]->(rv2:Review)<-[:WRITES]-(u2:User)
+    WHERE elementId(u1) < elementId(u2) AND rv1.rating >= 4 AND rv2.rating >= 4
+    RETURN u1.username, u2.username, count(r) AS ricette_in_comune
+    ORDER BY ricette_in_comune DESC;
+    ```
+
+17. Una ricetta può essere considerata strettamente vegana se e solo se *tutti* i suoi ingredienti hanno una relazione esplicita verso la dieta vegana.
+
+    ```cypher
+    MATCH (r:Recipe)-[:CONTAINS]->(i:Ingredient)
+    WITH r, collect(i) AS ingredients
+    WHERE ALL(ing IN ingredients WHERE EXISTS((ing)-[:SUITABLE_FOR]->(:Diet {name: 'Vegan'})))
+    RETURN r.title AS StrictlyVeganRecipe;
+    ```
+
+18. Identifica potenziali frodi nel sistema di rating, ovvero utenti che hanno scritto recensioni per le ricette che loro stessi hanno creato.
+
+    ```cypher
+    MATCH (u:User)-[:CREATE]->(r:Recipe)-[:HAS]->(rv:Review)<-[:WRITES]-(u)
+    RETURN u.username AS suspected_user, r.title AS recipe, rv.rating AS self_rating, rv.comment AS comment;
+    ```
+
+19. Calcolare il tempo totale stimato di una ricetta sommando il tempo di preparazione base ai tempi di attesa specifici tra i vari passaggi della pipeline di istruzioni.
+
+    ```cypher
+    MATCH path = (r:Recipe)-[:START_WITH]->(first:Instruction)-[:NEXT_STEP*]->(last:Instruction)
+    UNWIND relationships(path) AS rel
+    WITH r, sum(rel.wait_time) AS total_wait_time
+    RETURN r.title, r.prep_time_min AS active_time, total_wait_time AS passive_time, (r.prep_time_min + total_wait_time) AS estimated_total_time
+    ORDER BY estimated_total_time DESC;
+    ```
+
+
+# RoboVision Ops
+
+
+## 1. Il Contesto: "RoboVision Ops"
+Immagina di dover gestire l'infrastruttura dati di un sistema di assistenza chirurgica. Il sistema monitora quali **Chirurghi** utilizzano quali **Strumenti Robotici** durante specifiche **Fasi** di un intervento. Fondamentale è il tracciamento dei **Modelli AI** (come la tua U-Net o Swin-Unet) che analizzano il flusso video in tempo reale, segnalando eventuali **Emorragie**.
+
+### Requisiti del Dominio:
+* Un **Intervento** è composto da più **Fasi** temporali.
+* Ogni fase è monitorata da una specifica istanza di un **Modello AI**.
+* Il modello produce delle **Analisi** (Inferenze) che hanno metriche di latenza (FPS) e confidenza.
+* Gli **Strumenti** sono fisicamente manovrati dai chirurghi
+
+```mermaid
+graph LR
+    %% Definizione Classi per Styling Professionale
+    classDef Chirurgo;
+    classDef Intervento;
+    classDef Fasi;
+    classDef StrumentoRobotico;
+    classDef ModelloAI;
+    classDef Analisi;
+
+    %% Nodi con Proprietà Incolonnate
+    Chirurgo((":Chirurgo<br/>---------<br/>• nome: String<br/>• specializzazione: String")):::Chirurgo
+    Intervento((":Intervento<br/>---------<br/>• id: String<br/>• data: Date<br/>• type: string")):::Intervento
+    Fasi((":Fasi<br/>---------<br/>• nome: String<br/>• durata_min: Int")):::Fasi
+    StrumentoRobotico((":StrumentoRobotico<br/>---------<br/>• nome: String<br/>• modello: String")):::StrumentoRobotico
+    ModelloAI((":ModelloAI<br/>---------<br/>• nome: String<br/>• version: String")):::ModelloAI
+    Analisi((":Analisi<br/>---------<br/>• tipo: String<br/>• risultato: String")):::Analisi
+
+    %% Relazioni con Proprietà (Edges)
+    Intervento -- "COMPOSED_OF {duration_min}" --> Fasi
+    Fasi -- "REQUIRES" --> StrumentoRobotico
+    Fasi -- "UTILIZES" --> ModelloAI
+    ModelloAI -- "PERFORMS_ANALYSIS" --> Analisi
+    Chirurgo -- "PERFORMS" --> Intervento
+    Chirurgo -- "MANEUVER" --> StrumentoRobotico
+```
+
+## 3. Esercitazioni di Modellazione e Query
+
+### Task 1: Schema e Vincoli (Dati Strutturali)
+Il sistema deve garantire l'integrità dei dati.
+* Crea un **indice** sulla proprietà `name` dei chirurghi per velocizzare la ricerca.
+* Imponi un **vincolo di unicità** sull'ID degli strumenti (`INS_XX`).
+
+```cypher
+CREATE INDEX FOR (c:Chirurgo) on c.name
+CREATE INDEX FOR (st:StrumentoRobotico) on sr.id
+```
+
+### Task 2: Espansione del Modello (Creazione)
+Durante la fase di "Dissection" (`P2`), è stata attivata la pipeline di tracking dell'emorragia.
+* Crea un nuovo nodo `Inference` che rappresenta un evento di rilevamento.
+* Collega il modello `Swin-Surgical` a questa inferenza con una relazione `GENERATED`.
+* Collega l'inferenza alla fase `P2` con una relazione `OCCURRED_IN`.
+* Aggiungi all'inferenza le proprietà: `latency_ms: 28` e `confidence: 0.94`.
+
+```cypher
+CREATE (inf:ANALISI{risultato: 'Rilevamento'})
+
+MERGE (inf)<-[PERFORMS_ANALYSIS]-(ma:ModelloAI{name: 'Swin-Surgical'})
+MERGE (inf)-[:OCCURRED_IN]->(:FASE{name: 'P2'})
+```
+
+### Task 3: Aggiornamento e Ottimizzazione (Proprietà)
+Abbiamo ottimizzato il modello `HemoSeg-Unet` usando TensorRT.
+* Trova il nodo del modello e aggiungi/aggiorna la proprietà `optimization: "TensorRT"`.
+* Imposta un nuovo attributo `target_fps: 30` a tutti i modelli che hanno una versione superiore alla 1.0.
+
+```cypher
+MATCH (m:AIModel {name: "HemoSeg-Unet"})
+SET m.optimization = "TensorRT"
+RETURN m
+
+MATCH (m:AIModel)
+WHERE toFloat(m.version) > 1.0
+SET m.target_fps = 30
+RETURN m.name, m.version, m.target_fps
+```
+
+### Task 4: Analisi delle Performance (Query di Interrogazione)
+Scrivi una query per estrarre il seguente report:
+* Trova il nome del chirurgo, il tipo di intervento e il nome del modello AI utilizzato, ma solo per gli interventi dove la latenza dell'inferenza è stata inferiore a 30ms.
+
+```cypher
+MATCH (c:Chirurgo)-[:PERFORMS]->(i:Intervento),
+(c)-[:]
+```
+
+### Task 5: Pathfinding (Complessità)
+Supponiamo che un chirurgo (`S01`) abbia segnalato un ritardo nel feedback visivo.
+* Scrivi una query che partendo dal chirurgo trovi tutti i modelli AI "collegati" a lui attraverso la catena: `Surgeon -> Procedure -> Phase -> Inference -> AIModel`.
+* Calcola la media della latenza di questi modelli.
+
+```cypher
+```

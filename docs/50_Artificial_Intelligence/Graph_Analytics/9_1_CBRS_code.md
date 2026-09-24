@@ -16,7 +16,7 @@ Questa operazione "materializza" la conoscenza nel grafo. Utilizziamo una soglia
 ```cypher
 CALL apoc.periodic.iterate(
   "MATCH (u:User) RETURN u", 
-  "MATCH (u)-[:WATCHED|RATED]->(m:Movie)-[:ACTS_IN|WRITED|DIRECTED|PRODUCED|HAS]-(f)
+  "MATCH (u)-[:WATCHED|RATED]->(m:Movie)-[:ACTS_IN|WRITTEN|DIRECTED|PRODUCED|HAS]-(f)
    WITH u, f, count(*) AS occurrences
    WHERE occurrences > 2
    MERGE (u)-[:INTERESTED_IN]->(f)",
@@ -267,7 +267,7 @@ MATCH (u:User {userId: "2"})-[:WATCHED|RATED]->(seen:Movie)
 MATCH (seen)-[s:SIMILAR_TO]-(candidate:Movie)
 
 // 3. Assicurati di non suggerire film che ha già visto
-WHERE NOT (u)-[:WATCHED|RATED]->(candidate)
+WHERE NOT EXISTS { (u)-[:WATCHED|RATED]->(candidate)}
 
 // 4. Somma i pesi delle similarità per generare lo score globale
 WITH candidate, sum(s.weight) AS interest_score
@@ -296,6 +296,8 @@ YIELD graphName, nodeCount, relationshipCount, memoryUsage;
 ```
 
 ora lanciamo l'algoritmo di similarità. La GDS analizzerà tutti i nodi Movie, confronterà le loro feature e scriverà direttamente sul database transazionale i k collegamenti più forti.
+
+
 
 ```cypher
 CALL gds.nodeSimilarity.write(
@@ -327,3 +329,33 @@ ORDER BY interest_score DESC
 RETURN candidate.title, interest_score
 LIMIT 10
 ```
+
+--- 
+
+// 2. Calcolo di FastRP e scrittura dell'array sul nodo Movie
+CALL gds.fastRP.write(
+  'movie_features_embed_graph',
+  {
+    writeProperty: 'embedding', // La proprietà richiesta poi da KNN
+    embeddingDimension: 128,     // Dimensione del vettore (tipicamente tra 64 e 256)
+    iterationWeights: [0.0, 1.0, 0.7], // Peso dato ai cammini di lunghezza 0, 1, 2...
+    nodeLabels: ['Movie']       // Calcola e scrive l'embedding solo per i Film
+  }
+)
+YIELD nodePropertiesWritten, computeMillis;
+
+CALL gds.knn.write(
+  'movie_embeddings_graph',
+  {
+    nodeProperties: ['embedding'],
+    writeRelationshipType: 'SIMILAR_TO_KNN',
+    writeProperty: 'weight',
+    topK: 10,
+    similarityCutoff: 0.5,
+    sampleRate: 1.0,      // 1.0 significa calcolo esatto. Valori minori attivano l'approssimazione per grafi enormi
+    deltaThreshold: 0.001,
+    nodeLabels: ['Movie'],
+    similarityMetric: 'COSINE' // Specifica la metrica coerente con il Vector Space Model
+  }
+)
+YIELD nodesCompared, relationshipsWritten, computeMillis;

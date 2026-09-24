@@ -2,9 +2,9 @@
 
 Parent: [[0_Graph_Analytics_MOC]]
 
-La fraud detection può essere visto com un problema di anomaly detection o rimozione degli outliers. Quindi si vanno ad individuare quei punti che differiscono in modo particolare daglia altri che hanno un comportamento simile.
+La fraud detection può essere visto com un problema di anomaly detection o rimozione degli outliers. Quindi si vanno ad individuare quei punti che differiscono in modo particolare dagli altri che hanno un comportamento simile.
 
-La **frode**, può essere considerata come, un crimine non comune, ben considerato, in evoluzione nel tempo, organizzato con cura e impercettibilmente nascosto che appare in molti tipi e forme diverse. Queststa definizione evidenzia alcune caratteristiche utili alla modellazione del problema:
+La **frode**, può essere considerata come, un crimine non comune, ben considerato, in evoluzione nel tempo, organizzato con cura e impercettibilmente nascosto che appare in molti tipi e forme diverse. Questa definizione evidenzia alcune caratteristiche utili alla modellazione del problema:
 
 * **Non comune (Sbilanciamento dei dati):** Le frodi costituiscono una porzione minima del dataset complessivo. Questo forte sbilanciamento delle classi rende complessa sia la fase di *detection* che l'addestramento dei modelli di Machine Learning basati sullo storico.
 * **Pianificate e Organizzate:** Non si tratta di anomalie casuali. Le frodi sono crimini premeditati e strutturati, spesso eseguiti da team con ruoli specifici e architetture di rete complesse (come nel caso del riciclaggio di denaro).
@@ -46,7 +46,7 @@ Tramite l'analisi delle reti sociali si possono anche individuare le comunità d
 
 ## Trovare il punto di compromissione
 
-un primo scenario di applicazione è quello in cui gli user che posseggono le carte di credito effettuano degli acquisti e ad un certo punto i dettagli della carta di credito vengono rubati. I truffatori usano le credenziali rubate per acquistare qualcosa o per trasferire denaro tra conti. Tipicamente testano i dettagli della carta acquistando qualcosa a basso costo e poi fanno alcuni acquisti importanti prima di scomparire.
+Un primo scenario di applicazione è quello in cui gli user che posseggono le carte di credito effettuano degli acquisti e ad un certo punto i dettagli della carta di credito vengono rubati. I truffatori usano le credenziali rubate per acquistare qualcosa o per trasferire denaro tra conti. Tipicamente testano i dettagli della carta acquistando qualcosa a basso costo e poi fanno alcuni acquisti importanti prima di scomparire.
 
 L'obiettivo di questo scenario è identificare in una sequenza di transazioni da parte di più utenti il punto in cui i dettagli della carta di credito sono stati rubati. Se consideriamo la sequenza di transazioni da parte di molti utenti, possiamo identificare comunalità—negozi o siti di e-commerce—e  cosa che con un sola transazione sarebbe più difficile da capire. Questo approccio, noto come analisi del **Common Point of Purchase (CPP)**, si basa sul presupposto che entità apparentemente non correlate condividano una dipendenza latente nel passato.
 
@@ -67,9 +67,28 @@ La superiorità del modello a grafi in questo scenario risiede nella capacità d
 
 Abbiamo bisogno di considerare la sequenza delle transazioni, mettendole in relazione con altri utenti per trovare il punto in cui i dettagli della carta di credito sono stati rubati. Possiamo ordinare le transazioni utilizzando le informazioni sui timestamp, ma questo approccio renderebbe difficile navigarle e trovare un pattern comune. Pertanto, il passo successivo nella modellazione è quello di aggiungere una relazione tra le transazioni per memorizzare esplicitamente l'ordine tra di esse.
 
+```cypher
+// 1. Raccogli gli utenti e le transazioni collegate
+MATCH (u:User)-[:MAKES]->(tx:Transaction)
+
+// 2. Ordina le transazioni prima per utente e poi per data crescente
+WITH u, tx 
+ORDER BY id(u), tx.date
+
+// 3. Aggrega le transazioni ordinate in una lista per ciascun utente
+WITH u, collect(tx) AS txList
+
+// 4. Itera sugli indici della lista fino al penultimo elemento
+UNWIND range(0, size(txList) - 2) AS i
+WITH txList[i] AS currentTx, txList[i+1] AS nextTx
+
+// 5. Crea la relazione temporale tra la transazione corrente e la successiva
+MERGE (currentTx)-[:HAS_NEXT]->(nextTx)
+```
+
 ![alt text](image-54.png){height="50%"}
 
-In questo modo possiamo indentificare facilmente i pattern comuni tra le transazioni e inidividuare in queste chain di transazioni i negozi comuni, che potrebbero essere il punto di compromissione. Ma un'analisi superficiale di questi risultati potrebbe essere fuorviante perchè i negozi più comuni, come Amazon, appaiono costantemente nella lista, ma questo non significa necessariamente che siano coinvolti in attività fraudolente. Dobbiamo invece concentrarci sui negozi che sono **insolitamente comuni** all'interno del set di transazioni selezionate, poiché sono quelli con maggiori probabilità di essere collegati alla frode.Per identificare i negozi insolitamente comuni, consideriamo due distinti set di transazioni:
+In questo modo possiamo indentificare facilmente i pattern comuni tra le transazioni e inidividuare in queste chain di transazioni i negozi comuni, che potrebbero essere il punto di compromissione. Ma un'analisi superficiale di questi risultati potrebbe essere fuorviante perchè i negozi più comuni, come Amazon, appaiono costantemente nella lista, ma questo non significa necessariamente che siano coinvolti in attività fraudolente. Dobbiamo invece concentrarci sui negozi che sono **insolitamente comuni** all'interno del set di transazioni selezionate, poiché sono quelli con maggiori probabilità di essere collegati alla frode. Per identificare i negozi insolitamente comuni, consideriamo due distinti set di transazioni:
 
 * **Il set globale (Background set):** contiene i dati di tutte le transazioni, non solo quelle degli utenti vittime di frode. Questo dataset rappresenta il nostro "rumore di fondo". Da qui estrarremo le statistiche sulle frequenze dei merchant da inserire nella nostra formula.
 * **Il set delle vittime (Foreground set):** comprende le transazioni recenti effettuate da chi ha segnalato un addebito fraudolento. Questo dataset rappresenta il nostro vero target.
