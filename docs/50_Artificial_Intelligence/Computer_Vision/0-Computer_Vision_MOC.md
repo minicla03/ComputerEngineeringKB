@@ -23,6 +23,7 @@ created: 2026-02-12
 - [[4_CNN]] - _Reti Neurali Convoluzionali per la Computer Vision._
 - [[6_Attention_Mechanism]] - _Meccanismi di attenzione per migliorare le prestazioni dei modelli di Computer Vision._
 - [[7_ViT]] - _Vision Transformer: un'architettura basata su Transformer per la Computer Vision._
+- [[11_Unified_Language_Vision_Models]] - _Modelli unificati per la comprensione del linguaggio e delle immagini._
 
 ## Feature extraction
 
@@ -34,3 +35,14 @@ created: 2026-02-12
 ## 3D Geometry
 
 - [[9_3D_Geometry]] - _Rappresentazione e manipolazione della geometria 3D._
+- [[9_1_Camera_Model]] - _Modello di proiezione della fotocamera._
+
+## Video Analysis
+
+- [[10_Motion]] - _Analisi del movimento e stima del flusso ottico._
+- [[10_1_Video_Understanding]] - _Comprensione dei video e riconoscimento delle azioni._
+- [[13_Tracking]] - _Tracciamento degli oggetti nei video._
+
+## Facial Analysis
+
+- [[14_Face_Recognition]] - _Riconoscimento facciale e analisi delle espressioni._

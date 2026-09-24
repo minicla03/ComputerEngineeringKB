@@ -178,6 +178,10 @@ For every spatial location in the output map, the operation performs a **3D dot 
 !!!danger 2D convolution
     When we refer to "2D convolution" in the context of CNNs, we are actually performing a 3D convolution operation on a 3D input (height, width, channels). The term "2D" is used because the convolution is applied spatially across the height and width dimensions, while the depth dimension (channels) is processed simultaneously.
 
+## 3D Convolution
+
+see: [[10_1_Video_Understanding]]
+
 ## Pooling operation
 
 Pooling operation are used to extract the most important information from the feature maps.

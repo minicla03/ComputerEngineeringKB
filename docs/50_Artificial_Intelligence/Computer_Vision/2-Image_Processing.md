@@ -2,24 +2,21 @@
 
 Parent: [[0-Computer_Vision_MOC]]
 
-![alt text](./assetsimage-10.png)
+![alt text](./assets/image-10.png){height=50%}
 
-Image processing focuses on transforming images—inputting an image and outputting a modified version. Its primary goals include improving image quality (e.g., noise reduction, contrast enhancement), resizing, and extracting low-level features. It uses mathematical operations and algorithms that do not necessarily "learn" from data.
-
-There are three main type of operation that differ each other based on the spatial scope of the input pixels used to compute each output pixel.
+_Image processing_ focuses on transforming to improve quality (e.g., noise reduction, contrast enhancement), resizing, and extracting low-level features. It uses mathematical operations and/or algorithms that do not necessarily "learn" from data. There are three main type of operation that differ each other based on the spatial scope of the input pixels used to compute each output pixel.
 
 1. **Point operators**: where each output pixel’s value depends on only corresponding value. The output value $I'(x,y)$ depends solely on the input value $I(x,y)$. For videos, an **(M+1) D structure**, point operators $I_t'(x) = h(I_t(x))$ are applied frame-by-frame, often to adjust brightness or contrast over the **time dimension**.
 2. **Local (Neighborhood) operators** involve a "kernel" or mask that moves over the image, mathematically combining a pixel with its neighbors
 3. **Global operators**: require information from every pixel in the image to determine the value of a single output pixel. (e.g., Fourier transform)
 
-## Linear point operator
+## Point operator
 
 A linear point operator is a function that take one or more input image and produce an output image.
 
 $$g\left(x\right)=h\left(f\left(x\right)\right) \text{ or } g\left(x\right)=h\left(f\_{0}\left(x\right),…,f\_{n}\left(x\right)\right)$$
 
-where x is in D-dimensional domain of input and output function $f()$ and $g()$, which operate over some _range_, which can be scalar or vector. While \_
-$h()$ is the operator that transforms an image to another image after an image processing operation. If the $h()$ transformation is linear they obey the superposition principle
+where $x$ is in D-dimensional domain of input and output function $f()$ and $g()$, which operate over some _range_, which can be scalar or vector. While $h()$ is the operator that transforms an image to another image after an image processing operation. If the $h()$ transformation is linear they obey the superposition principle
 
 $$h\left(f_{0}+f_{1}\right)=h\left(f_{0}\right)+h\left(f_{1}\right)$$
 
@@ -29,8 +26,8 @@ $$g\left(x\right)=h\left(f\left(x\right)\right)=s \cdot f\left(x\right)+k$$
 
 where:
 
-- s is the **scale factor**, often called also _gain or_ **_contrast_**
-- k is the **shifting constant** often called also bias or **brightness**
+- $s$ is the **scale factor**, often called also _gain or_ **_contrast_**
+- $k$ is the **shifting constant** often called also bias or **brightness**
 
 <div align=center>
 
@@ -38,17 +35,17 @@ where:
 
 </div>
 
-and this is the **Luminance Variation** **operation**. Increasing brightness moves the entire histogram toward the right, while changing the gain expands or narrows the **dynamic range**
+This is the **Luminance Variation operation**. Increasing brightness moves the entire histogram toward the right, while changing the gain expands or narrows the **dynamic range**. Because the change is linear, the relative distribution of pixels remains the same, though they occupy different "bins" in the histogram.
 
-Because the change is linear, the relative distribution of pixels remains the same, though they occupy different "bins" in the histogram.
+### Linear Blending
 
-**Linear Blending** is a point operator used to combine two images into a single output. It is a weighted average of pixel values, where the resulting image $I'$ is a linear combination of two source images, $I1$ and $I2$. Th equation is:
+**Linear Blending** is a point operator used to combine two images into a single output. It is a weighted average of pixel values, where the resulting image $I'$ is a linear combination of two source images, $I1$ and $I2$. The equation is:
 
 $$g\left(x\right)=h\left(f_{0}(x), f_{1}(x)\right)=\left(1-α\right)f_{0}\left(x\right)+αf_{1}\left(x\right)$$
 
-**Contrast Stretching** (**normalization**) is a **point operator** used to expand the **dynamic range** of an image. The goal is to take a "low-contrast" image — where the pixels are clustered in a narrow portion of the histogram — and stretch them to occupy the full range of available values (e.g., $0$ to $255$ for an 8-bit image).
+### Contrast Stretching
 
-If the original pixel values range from $[min, max]$, the linear transformation for each pixel $I(x,y)$ is:
+**Contrast Stretching** (**normalization**) is a **point operator** used to expand the **dynamic range** of an image. The goal is to take a "low-contrast" image — where the pixels are clustered in a narrow portion of the histogram — and stretch them to occupy the full range of available values (e.g., $0$ to $255$ for an 8-bit image). If the original pixel values range from $[min, max]$, the linear transformation for each pixel $I(x,y)$ is:
 
 $$I'(x,y)=(I(x,y)-min) \cdot \frac{L-1}{max-min}$$
 
@@ -56,23 +53,29 @@ $$I'(x,y)=(I(x,y)-min) \cdot \frac{L-1}{max-min}$$
 - $\frac{L-1}{max-min}$: Scales the values so the highest value reaches the maximum limit L-1 (e.g., 255).
 - Scale Factor = $\frac{L-1}{max-min}$
 
-![Image: image_009](./assets/image_009.png)
+<div align=center>
+
+![Image: image_009](./assets/image_009.png){height=50%}
+
+</div>
 
 Maintains the original "shape" of the distribution thing that equalization does not.
+
+### Histogram Equalization
 
 **Histogram Equalization** is a non-linear point operator designed to improve image contrast by redistributing pixel intensities so that they follow a uniform distribution. It is based on PDF and CDF relationship. The CDF acts as a mapping function. By applying the CDF to each pixel value, the algorithm "stretches" the most frequent intensity levels (peaks in the histogram) and "compresses" the less frequent ones.
 
 <div align=center>
 
-![alt text](./assets/image-30.png)
+![alt text](./assets/image-30.png){height=50%}
 
 </div>
 
-This process modifies entire image. In same case can be useful apply different kind of equalization in different region of image. Dividing a image into pieces is not a good idea because the resulting image is a blocking artifact. Instead, we can use a **moving window**, to recompute the histogram, and even if it is a sloe process, the resulting image is clearer and uniform. This is a **neighbourhood operation**.
+This process modifies entire image. In same case can be useful apply different kind of equalization in different region of image. Dividing a image into pieces is not a good idea because the resulting image is a blocking artifact. Instead, we can use a **moving window**, to recompute the histogram, and even if it is a slow process, the resulting image is clearer and uniform. This is a **neighbourhood operation**.
 
 <div align=center>
 
-![alt text](./assets/image-31.png)
+![alt text](./assets/image-31.png){height=50%}
 
 </div>
 
@@ -80,7 +83,7 @@ Because equalization attempts to create a uniform distribution, it often over-st
 
 <div align=center>
 
-![Image: image_013](./assets/image_013.png)
+![Image: image_013](./assets/image_013.png){height=50%}
 
 </div>
 
@@ -105,6 +108,8 @@ The good threshold is one that
 
 - **Minimizing within-group variance** $\sigma^2_W(T)$ (maximizing internal homogeneity).
 - **Maximizing between-group variance** $\sigma^2_B(T)$ (maximizing the separation between classes).
+
+**Steps**
 
 1. First, we compute the normalized histogram of the image. For an 8-bit image with $L=256$ intensity levels, the probability of occurrence of each intensity level $i$ is defined as:$$P(i) = \frac{n_i}{n}$$ Where $n_i$ is the number of pixels with intensity $i$ and $n$ is the total number of pixels in the image.
 2. For a chosen threshold $t$, the pixels are divided into two classes: $C_1$ (intensities $[0, t]$) and $C_2$ (intensities $[t+1, L-1]$). The weights $q_1(t)$ and $q_2(t)$ represent the probability that a pixel belongs to the respective class:
@@ -155,8 +160,6 @@ for i in range(0, 255):
 threshold
 ```
 
-![alt text](image-11.png)
-
 ### Adaptive thresholding
 
 It is local operator used to binarize images that suffer from **non-uniform lighting conditions**, such as shadows or gradients. Unlike global methods, adaptive thresholding calculates a unique threshold for every pixel based on its surrounding neighborhood.
@@ -173,7 +176,9 @@ Common methods for calculating the local threshold $T$ include:
 
 </div>
 
-In practice, simply using the mean often captures too much noise in uniform areas. The refined formula is:$$T = \text{mean}(W) - C$$$C$ (Constant): A fine-tuning parameter (determined by the global noise floor). It acts as a "safety margin" to ensure that slightly dark background pixels aren't mistakenly classified as objects due to local variance.
+In practice, simply using the mean often captures too much noise in uniform areas. The refined formula is:$$T = \text{mean}(W) - C$$ where: 
+
+- $C$ (Constant): A fine-tuning parameter (determined by the global noise floor). It acts as a "safety margin" to ensure that slightly dark background pixels aren't mistakenly classified as objects due to local variance.
 
 Adaptive thresholding is used when illumination is not uniform across an image. Instead of using a single global threshold $T$, it computes $T$ locally within a window $W(i, j)$ centered at each pixel.
 

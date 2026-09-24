@@ -4,11 +4,11 @@ Parent: [[0-Computer_Vision_MOC]]
 
 Geometric primitives are the fundamental building blocks used to describe shapes in 2D and 3D space.
 
-* **2D Primitives:** Points $(x, y)$ and lines[cite: 3].
-* **3D Primitives:** Points $(x, y, z)$ and planes[cite: 3].
-* **Euclidean Geometry:** Describes geometry in the Cartesian plane[cite: 9]. 
+* **2D Primitives:** Points $(x, y)$ and lines.
+* **3D Primitives:** Points $(x, y, z)$ and planes.
+* **Euclidean Geometry:** Describes geometry in the Cartesian plane. 
 
-While it serves as a mental model for human perception, it has limitations in computer vision: it cannot easily represent parallel lines intersecting at infinity or handle perspective and point-of-view transformations efficiently[cite: 10].
+While it serves as a mental model for human perception, it has limitations in computer vision: it cannot easily represent parallel lines intersecting at infinity or handle perspective and point-of-view transformations efficiently.
 
 Human see objects in an euclidean space, but this for machine is not enoough to represent the world. For example, euclidean spcae can not represent all 3D primitives, such as parallel lines that intersect at infinity.
 
@@ -19,7 +19,7 @@ Point in this space are represented using **homogeneous coordinates**.This trans
 - A 2D point $(x, y)$ is represented in the projective plane $P^2$ as a 3D vector $\tilde{x} = (\tilde{x}, \tilde{y}, \tilde{w})$.
 - A 3D point $(x, y, z)$ is represented in the projective space $P^3$ as a 4D vector $\tilde{x} = (\tilde{x}, \tilde{y}, \tilde{z}, \tilde{w})$
 
-![alt text](image-44.png){width="70%" height="70%"}
+![alt text](image-44.png){width="70%" height="50%"}
 
 So, to move into projective space, we add a another dimension coordinate $w=1$, transforming the point into a (N+1)D vector:$$(x, y) \Rightarrow \begin{bmatrix} x \\ y \\ 1 \end{bmatrix}$$This specific form $[x, y, 1]^T$ is the **augmented vector**.
 
@@ -27,7 +27,15 @@ In the $P^N$ space, vectors are different only by a scale factor. So we can pass
 
 Points where $w=0$ are "ideal points" representing directions at infinity, which cannot be expressed in standard Euclidean coordinates.
 
-Mathematically, two vectors $\tilde{\mathbf{x}}$ and $\tilde{\mathbf{y}}$ represent the same point if there exists a non-zero scalar $\lambda$ such that:$$\tilde{\mathbf{x}} = \lambda \tilde{\mathbf{y}}$$For example, the Euclidean point $(2, 3)$ can be represented in projective space as:$[2, 3, 1]^T$ (the standard augmented vector)$[4, 6, 2]^T$ (where $\lambda = 2$)$[20, 30, 10]^T$ (where $\lambda = 10$)All these vectors are considered equivalent.
+Mathematically, two vectors $\tilde{\mathbf{x}}$ and $\tilde{\mathbf{y}}$ represent the same point if there exists a non-zero scalar $\lambda$ such that:$$\tilde{\mathbf{x}} = \lambda \tilde{\mathbf{y}}$$
+
+!!!note Example
+    For example, the Euclidean point $(2, 3)$ can be represented in projective space as:
+    - $[2, 3, 1]^T$ (the standard augmented vector)
+    - $[4, 6, 2]^T$ (where $\lambda = 2$)
+    - $[20, 30, 10]^T$ (where $\lambda = 10$)
+
+    All these vectors are considered equivalent.
 
 !!!warning When we mapping from Cartesian to homogeneous coordinates, we have not a one-to-one mapping, but a one-to-many mapping, because all the vectors that differ by a non-zero scalar represent the same point in projective space.
 
@@ -37,7 +45,9 @@ The activity of applying a transformation to an image is called **warping**. War
 - **forward warping**
 - **inverse warping**
 
-The **forward warping** approache apply at each pixel of source image the trasformation and the copy the this to the destination image. The problem of this procedure is that passing from a discrete grid (source image) to another discrete grid (destination image) can lead to holes in the output image, due to the rounded operation, where no pixel value is assigned. A better solution is the **inverse warping** which for each pixel of target image, compute the source pixel, multiply the point for the inverse of the transformation, and assign the value of the source pixel to the target pixel. This way we ensure that all pixels in the target image are assigned a value, avoiding holes. When pixel came from non-integer coordinates, we can use interpolation techniques (e.g., bilinear interpolation) to compute the pixel value based on the surrounding pixels in the source image.
+The **forward warping** approach applies a spatial transformation to each pixel in the source image, mapping its value to the destination image. However, mapping between two discrete grids often creates "holes" (unassigned pixels) in the output image due to coordinate rounding operations.
+
+A more robust solution is **inverse warping**. Instead of projecting forward, this method iterates through every pixel in the target image and applies the inverse transformation to find its corresponding location in the source image. This guarantees that every target pixel receives a value, completely eliminating holes. Because the inversely mapped coordinates typically fall on non-integer locations, interpolation techniques (such as bilinear interpolation) are used to compute the final pixel value from the surrounding source pixels.
 
 All this operation can be apply also for 3D space, but with a $4 \times 4$ matrix instead of $3 \times 3$. Moreover, all this trasformatio can be apply together, by multiplying the corresponding matrices, to create a single transformation that combines multiple effects (e.g., rotation followed by translation and scaling). The order with which transformations are applied matters, as matrix multiplication is not commutative.
 
@@ -89,17 +99,14 @@ In Euclidean, Similarity, and Affine transformations, the bottom row of the matr
 
 In a **Projective** transformation, the bottom row $[h_{31}, h_{32}, h_{33}]$ is not constrained. This means $w'$ will typically not be 1, requiring the final de-homogenization step ($x' / w', y' / w'$) to map the point back to the image plane. This division is what mathematically creates the "foreshortening" effect seen in perspective.
 
-It represents the projection of one plane onto another from a specific point of view (perspective).
+It represents the projection of one plane onto another from a specific point of view (perspective). Homografy, is a projective transformation that maps points from one plane to another. It is widely used in computer vision for tasks such as image stitching, perspective correction, and camera calibration.
+
+![alt text](image-46.png){width="70%" height="50%"}
 
 * **Degrees of Freedom (8):** The matrix has 9 elements, but since it operates in projective space, it is defined up to a scale factor. Thus, we normalize it (usually $h_{33} = 1$), leaving 8 independent parameters.
 * **Matrix Representation:**
     $$H_P = \begin{bmatrix} h_{11} & h_{12} & h_{13} \\ h_{21} & h_{22} & h_{23} \\ h_{31} & h_{32} & h_{33} \end{bmatrix}$$
 * **Invariants:** The only property strictly preserved is the **straightness of lines** (collinearity). Parallel lines in the source image will generally meet at a vanishing point in the destination.
-
-!!!note Homography
-    So, homografy, is a projective transformation that maps points from one plane to another. It is widely used in computer vision for tasks such as image stitching, perspective correction, and camera calibration. 
-    ![alt text](image-46.png)
-
 
 #### How estimate a homography matrix
 
@@ -134,24 +141,28 @@ Thsi process involves projecting 3D points onto a 2D image plane and can be done
 - **orthographic projection**
 - **perspective projection**
 
-In **orthographic projection**, the projection rays are parallel to each other and perpendicular to the image plane. It "ignores" the distance from the camera.
-A 3D point $P = (X, Y, Z)$ is mapped to $p = (x, y)$ by discarding the $Z$ component.
+In **orthographic projection**, the projection rays are parallel to each other and perpendicular to the image plane. It "ignores" the distance from the camera. A 3D point $P = (X, Y, Z)$ is mapped to $p = (x, y)$ by discarding the $Z$ component.
 
-![alt text](image-48.png){width="60%" height="50%"}
+![alt text](image-122.png){height="40%" width="40%"}
 
-![alt text](image-50.png){width="60%" height="50%"}
+$$\tilde{\mathbf{x}} = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} \tilde{\mathbf{p}}, \\
+
+\mathbf{x} = [\mathbf{I}_{2 \times 2} | \mathbf{0}] \mathbf{p}$$
 
 **Properties**
 
-- Preserves Parallelism: Parallel lines in 3D remain parallel in 2D.
-- Preserves Scale: The size of an object does not change as it moves further from the camera.
-- No Vanishing Points: There is no sense of depth or foreshortening.
-- loss of Depth Information: The $Z$ coordinate is discarded, so depth information is lost and objects do not appear smaller as they move further away.
+- **Preserves Parallelism**: Parallel lines in 3D remain parallel in 2D.
+- **Preserves Scale**: The size of an object does not change as it moves further from the camera.
+- **No Vanishing Points**: There is no sense of depth or foreshortening.
+- **Loss of Depth Information**: The $Z$ coordinate is discarded, so depth information is lost and objects do not appear smaller as they move further away.
 
 While, in the **perspective projection** the projection rays converge at a single point called the center of projection (the camera). The position of a point in the image depends on its distance $(Z)$ from the camera. The further an object is, the smaller it appears.
 
 Parallel lines that are not parallel to the image plane appear to converge at a single point.
 
-![alt text](image-49.png){width="60%" height="50%"}
+![alt text](image-49.png){height="40%" width="40%"}
 
-![alt text](image-51.png){width="60%" height="50%"}
+$$
+\tilde{\mathbf{x}} = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} \tilde{\mathbf{p}}, \\
+
+\bar{\mathbf{x}} = \mathcal{P}_z(\mathbf{p}) = \begin{bmatrix} x/z \\ y/z \\ 1 \end{bmatrix}$$

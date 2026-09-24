@@ -6,22 +6,22 @@ An image can be defined in many ways:
 
 1. **2D signal:** image is a discrete representation of a 2D continuous function _I(x,y)._ It can be considered as a signal and take advantage of the techniques of signal processing for 1D signal.
    ![alt text](./assets/image-29.png)
-   $$I(x)=f(x,y): R2 \rightarrow R$$ The image is defined over a squared interval and the value of the function is sampled and digitalized
+   $$I(x)=f(x,y): R^2 \rightarrow R$$ The image is defined over a squared interval and the value of the function is sampled and digitalized
 2. **matrix of pixel:** image is a 2D matrix of digital pixels and thus, image processing is an application of mathematical functions or algorithmic procedures working on images.This can come from the quantization of image signal, where eache values of matrix represent the characteristics of image in a certain point. Each row can be represented graphically by using **histogram**.
 3. **2D or 3D tensor** in dl field
 
 There are different ways to represent the images:
 
-1. **grayscale Images:** Represented as a 2D matrix where each pixel value typically ranges from 0 (black) to 255 (white).256 levels of grey are not useful so we can normalize into a [0,1] interval and still be able to recognize the objects.
+1. **grayscale Images:** Represented as a 2D matrix where each pixel value typically ranges from 0 (black) to 255 (white). 256 levels of grey are not useful so we can normalize into a [0,1] interval and still be able to recognize the objects.
 2. **color Images:** Typically represented as a 3D tensor (Width x Height x Channels). The most common model is **RGB** (Red, Green, Blue) where ate each pixel is associated a number that corresponds a triplet value [r, g, b] that give colour a certain pixel.
 3. **HSV/HSL (Hue, Saturation, Value/Hue, Saturation, Lightness)** designed to align more closely with human perception differently by RGB that is hardware oriented. These models describe colour using three intuitive dimensions:
    1. **Hue (H):** Represents the "type" of colour (e.g., Red, Blue, or Yellow). It is typically expressed as an angle from **0° to 360°** on a colour wheel.
    2. **Saturation (S):** Describes the "vibrancy" or purity of the colour. A saturation of 0% results in a shade of grey, while 100% is the most intense version of that hue.
-   3. **Value (V) / Lightness (L):** \* **Value (in HSV):** Represents the "intensity" or brightness of the light.
-      1. **Lightness (in HSL):** Represents the amount of white or black mixed with the colour.
+   3. **Value (V) / Lightness (L):** 
+      1.  **Value (in HSV):** Represents the "intensity" or brightness of the light.
+      2. **Lightness (in HSL):** Represents the amount of white or black mixed with the colour.
 
 The fundamental building block of a digital image is how it captures light from a 3D scene and projects it into a 2D space.
-
 Each pixel represents the **luminance intensity** (**brightness**) of a specific point in a 3D scene, that depends on various factor as projected in the 2D space, depending on the luminance of the object, the reflectivity, the background luminance, the sensor… and determinate the **pixel value**.
 
 - **PHOTOMETRY**: This field studies brightness measurements. It focuses on the energy distribution of the source and sensor sensitivity rather than wavelength, providing a physical meaning to the numerical image values.
@@ -61,7 +61,7 @@ For another point of view, histogram can be viewed a discrete **probability dens
 
 </div>
 
-Given an image $I$ di $n=N x M$ pixels with $L$ levels
+Given an image $I$ with $n=N \times M$ pixels with $L$ levels
 
 $$H(j)=p(j)=\frac{\#\{x:I(x)=j\}}{n} \text{ where } 0\leq j \leq L-1$$
 
@@ -78,11 +78,11 @@ A limited Dynamic Range may indicate that the sensor has not been sensitive enou
 
 For the PDF we can determinate **Cumulative Distribution Function** (**CDF**) by summing probabilities up to a specific intensity level $l$.
 
-![Image: image_006](./assets/image_006.png)
-$$cdf_{x}=p\left(x\leq l\right)=\sum_{j=0}^{k}p\left(j\right)$$
-It represents the percentage of pixels in an image that are equal to or darker than a specific grey level.
+![Image: image_006](./assets/image_006.png){width=70% height=70%}
 
-By mapping the original CDF of an image onto this diagonal, we redistribute the intensities to use the full **dynamic range** more efficiently. This gives a clear **physical meaning** to the enhancement: we are spreading out the most frequent intensity levels to occupy more of the available bins.
+$$cdf_{x}=p\left(x\leq l\right)=\sum_{j=0}^{k}p\left(j\right)$$
+
+It represents the percentage of pixels in an image that are equal to or darker than a specific grey level. By mapping the original CDF of an image onto this diagonal, we redistribute the intensities to use the full **dynamic range** more efficiently. This gives a clear **physical meaning** to the enhancement: we are spreading out the most frequent intensity levels to occupy more of the available bins.
 
 The CDF is utilized for:
 
@@ -96,7 +96,6 @@ By viewing the histogram as a PDF, you can calculate **statistical moments** to 
 - **Variance** ($σ^{2}$)**:** A measure of image contrast.
 - **Skewness:** Measures the asymmetry of the intensity distribution (e.g., is the image mostly dark with a few highlights?).
 - **Entropy:** Measures the "information content" or randomness. A high-entropy image has a flat, uniform histogram, while a low-entropy image is predictable (like a binarized image).
-
   $$Entropy(I) = -\sum_{j}^{}p(j) \log p(j)$$
 
 Rappresentation of feature image: [[5_Visual_feature_extraction]]

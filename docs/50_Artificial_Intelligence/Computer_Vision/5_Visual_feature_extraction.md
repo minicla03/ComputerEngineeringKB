@@ -241,4 +241,3 @@ If two distributions share zero overlapping domains, metrics like Kullback-Leibl
 The main disadvantage of EMD is the severe computational complexity at $\mathcal{O}(N^3 \log N)$ where $N$ is the number of bins. This makes standard EMD expensive for high-dimensional, real-time machine learning pipelines.
 
 > To bypass the extreme computational cost, AI engineers use the **Sinkhorn approximation**, which adds an entropic regularization term to make the optimization highly parallelizable on GPUs.
-

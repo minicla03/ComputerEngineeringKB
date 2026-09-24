@@ -70,7 +70,7 @@ This is a **linear filter** because the output pixel value is a linear combinati
 
 Liner filters are defined as:
 $$g(x,y)= \sum_{s=-a}^a \sum_{t=-b}^b f(x+s, y+t)w(s,t) $$ or in a more compact form: $ g = f \otimes w$. This operation is called **correlation**, while, in signale processing, the operation is called **convolution**, defined as:
-$$g(x,y) = \sum*{s=-a}^a \sum*{t=-b}^b f(x-s, y-t)w(s,t)= \sum*{s=-a}^a \sum*{t=-b}^b f(s, t)w(x-s,y-t)$$ or in a more compact form: $g = f * w$. The difference between the two is that in convolution the kernel is flipped both horizontally and vertically before being applied to the image, while in correlation it is not.
+$$g(x,y)= \sum_{s=-a}^a \sum_{t=-b}^b f(x-s, y-t)w(s,t) $$ or in a more compact form: $g = f * w$. The difference between the two is that in convolution the kernel is flipped both horizontally and vertically before being applied to the image, while in correlation it is not.
 
 The mathematical definition of convolution confirms its role as a fundamental **Linear Time-Invariant (LTI)**—or in 2D, **Linear Shift-Invariant (LSI)**—operation. By using the properties of the Dirac delta function, we can see exactly why the impulse response defines the system's behavior.
 
@@ -82,7 +82,7 @@ $$(f * h)(t) = \int_{-\infty}^{\infty} f(\tau)h(t - \tau) d\tau$$
 2. **Shift:** Offset the flipped kernel by $t$ to get $h(t - \tau)$.
 3. **Multiply & Integrate:** Find the area under the product of $f(\tau)$ and the shifted kernel.
 
-![alt text](./assets/image-2.png)
+![alt text](./assets/image-2.png){height=50%}
 
 The kernel $h$ is termed the "impulse response" because it represents the output of the system when the input is a Dirac delta function $\delta(t)$.
 
@@ -111,7 +111,7 @@ $$(h_2 * (h_1 * f)) = (h_2 * h_1) * f$$
 Correlation and convolution can both be written as a matrix vector multiplication, if we first convert the two dimensional images $f(i , j)$ and $h(i, j)$ into raster ordered vectors $f $and $g$, given $H$ as a sparse matrix
 $g = \bold{H}f$.
 
-![alt text](./assets/image-4.png)
+![alt text](./assets/image-4.png){height=50%}
 
 ### Boundary Effects and Padding
 
@@ -139,9 +139,7 @@ This operation can be speed up if the kernel is **separable**, meaning that conv
       If only the first singular value $\sigma_0$ is non-zero, the kernel is separable and $\sqrt{\sigma_0}u_0$ and $\sqrt{\sigma_0}v_0^T$ provide the vertical and horizontal kernels.
 
 For 2D kernels, it can be rewritten as the product of two 1D kernels:
-$$K(x, y) = vh^T$$ where $v$ is a column vector representing the vertical kernel and $h^T$ is a row vector representing the horizontal kernel.
-
-If kernels is not separable we can use more terms of SVD relation series (i.e., summing up a number of separable convolutions).
+$$K(x, y) = vh^T$$ where $v$ is a column vector representing the vertical kernel and $h^T$ is a row vector representing the horizontal kernel. If kernels is not separable we can use more terms of SVD relation series (i.e., summing up a number of separable convolutions).
 
 ### Smooting Filters
 
@@ -175,17 +173,12 @@ $$G(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}$$
 - **Small $\sigma$:** Subtle smoothing; preserves fine details.
 - **Large $\sigma$:** Heavy blurring; removes noise but also obscures edges and structures.
 
-![alt text](./assets/image-6.png)
+![alt text](./assets/image-6.png){height=50%}
 
 It blurs the image equally in all directions, whereas a Box filter tends to favor horizontal and vertical directions.
 In the frequency domain, the Fourier transform of a Gaussian is another Gaussian. This means it has no "ripples" or oscillations, avoiding the artifacts often seen with a Moving Average filter.
 
-One of the properties of the Gaussian filter is that it is **separable**. A 2D Gaussian convolution can be performed by applying a 1D Gaussian filter horizontally, followed by a 1D Gaussian filter vertically.
-
-- **Standard 2D Convolution:** Requires $M \times N$ multiplications per pixel (for an $M \times N$ kernel).
-- **Separable Convolution:** Requires only $M + N$ multiplications per pixel.
-
-This makes Gaussian blurring extremely efficient for large kernels (e.g., a $25 \times 25$ kernel becomes significantly faster).
+One of the properties of the Gaussian filter is that it is **separable**. A 2D Gaussian convolution can be performed by applying a 1D Gaussian filter horizontally, followed by a 1D Gaussian filter vertically. This makes Gaussian blurring extremely efficient for large kernels (e.g., a $25 \times 25$ kernel becomes significantly faster).
 
 ##### Averaging vs Gaussian Smoothing Averaging
 
@@ -214,7 +207,7 @@ Better performance can be obtained by using a non-linear combination of neighbor
 
 A better filter to use in this case is the **median filter**, which selects the median value from each pixel’s neighborhood.
 
-![alt text](./assets/image-5.png)
+![alt text](./assets/image-5.png){height=50%}
 
 Since the shot noise value usually lies well outside the true values in the neighborhood, the median filter is able to filter away such bad pixels.
 
@@ -234,9 +227,7 @@ It helps bridge small gaps in bright objects.
 
 While the **Min Filter** (**Erosion**) replaces the intensity of the central pixel with the minimum intensity value found in its neighborhood. It is defined as: $$g(x, y) = \min_{(i, j) \in W} \{f(i, j)\}$$
 
-It makes dark areas expand and bright areas "erode" or shrink, reducing small white spikes (high intensity) by replacing them with the darker values of the background.
-
-It can be used to disconnect two bright objects that are touching by a thin "bridge" of pixels.
+It makes dark areas expand and bright areas "erode" or shrink, reducing small white spikes (high intensity) by replacing them with the darker values of the background. It can be used to disconnect two bright objects that are touching by a thin "bridge" of pixels.
 
 #### Bilateral Filter
 

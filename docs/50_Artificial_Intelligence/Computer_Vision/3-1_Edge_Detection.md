@@ -6,7 +6,7 @@ Edge detection involve identifying points in a image where the brightness change
 
 !!!Note **Edge** is a _local_ properties of pixel and its neighbourhood that is characterizedby a rapid luminance change in the image.
 
-This change in intensity can be caused by various factors, such as changes in surface orientation, material properties, or lighting conditions. So, we can find edge in a oimage in differentes way, for example:
+This change in intensity can be caused by various factors, such as changes in surface orientation, material properties, or lighting conditions. So, we can find edge in a image in differentes way, for example:
 
 - **surface normal discontinuity**: that is the normal shape of the object, for example the edge of a cube.
 - **depth discontinuity**: that is the distance of the object from the camera, for example the edge of a person standing in front of a wall.
@@ -28,7 +28,7 @@ $$ J(x) = \nabla I(x) = \left( \frac{\partial I}{\partial x}, \frac{\partial I}{
 
 </div>
 
-$J$ is a vector field that points in the direction of $steepsdt ascent$ in the intensity function.
+$J$ is a vector field that points in the direction of $steeps dt ascent$ in the intensity function.
 The magnitude of the gradient is given by:
 $$ |J(x)| = \sqrt{\left( \frac{\partial I}{\partial x} \right)^2 + \left( \frac{\partial I}{\partial y} \right)^2} $$
 and indicate the strenght of the variation of the intenity, while the direction of the gradient is given by:
@@ -68,7 +68,7 @@ There are two approcies to detect edges:
 
 </div>
 
-Everything is very beautiful, but the problem is that the image is a discrete representation, so the derivative is not defined at every point, and we need same way to approximate the derivates. On e way to do this is to use **finite difference methods**, which approximate the derivative by taking the difference between adjacent pixel values. This approach is realised by computing:
+Everything is very beautiful, but the problem is that the image is a discrete representation, so the derivative is not defined at every point, and we need same way to approximate the derivates. One way to do this is to use **finite difference methods**, which approximate the derivative by taking the difference between adjacent pixel values. This approach is realised by computing:
 
 1. **forward difference**: $\Delta_h \left[f\right] = f(x+h) - f(x)$
 2. **backward difference**: $\nabla_h \left[f\right] = f(x) - f(x-h)$
@@ -236,7 +236,7 @@ The Laplacian ($\nabla^2$) is a second-order derivative operator that is extreme
 
 $$\nabla^2 I = \frac{\partial^2 I}{\partial x^2} + \frac{\partial^2 I}{\partial y^2}$$
 
-![alt text](./assets/image-25.png)
+![alt text](./assets/image-25.png){height=50%}
 By the property of convolution, these two steps can be combined into a single kernel,
 $$LoG(x, y) = -\frac{1}{\pi\sigma^4} \left[ 1 - \frac{x^2 + y^2}{2\sigma^2} \right] e^{-\frac{x^2 + y^2}{2\sigma^2}}$$
 

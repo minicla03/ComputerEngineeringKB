@@ -33,7 +33,6 @@ A 3D poin following a trajectory in the real world $P(t) = (X(t), Y(t), Z(t))$ m
 
 ![alt text](image-66.png)
 
-
 Using perspective relation:
 
 $$\mathbf{p} = f \frac{\mathbf{P}}{Z}$$
@@ -51,10 +50,9 @@ These equations mathematically prove three massive concepts in computer vision:
 
 1. **The $1/Z$ Depth Factor (Parallax):** Notice that $Z$ is in the denominator. This mathematically proves **Motion Parallax**. If an object is close to the camera (small $Z$), dividing by a small number makes the 2D velocity ($v_x, v_y$) very large. If the object is far away (large $Z$), the 2D velocity becomes tiny.
 2. **The Need for Calibration:** The focal length $f$ is multiplied directly against the physical velocities $V_x$ and $V_y$. Without calibrating the camera to find $f$, it is mathematically impossible to isolate the true physical speed of the target.
+3. **Pure Translation** means that the camera is moving through space without rotating or panning.
 
-**Pure Translation** means that the camera is moving through space without rotating or panning.
-
-If the camera is moving straight forward along the Z-axis, the lateral physical movements ($V_x$ and $V_y$) are zero. If you substitute $V_x = 0$ and $V_y = 0$ into the previous equations, they simplify drastically. The slide rewrites this relationship into a single vector equation:
+If the camera is moving straight forward along the Z-axis, the lateral physical movements ($V_x$ and $V_y$) are zero. If you substitute $V_x = 0$ and $V_y = 0$ into the previous equations, they simplify drastically.
 
 $$\mathbf{v} = \frac{1}{Z}(\mathbf{v}_0 - V_z\mathbf{p})$$
 
@@ -119,23 +117,19 @@ There are two fundamental families of algorithms used to calculate Optical Flow 
 
 ![alt text](image-68.png){height="50%"}
 
-### When Optical Flow and Motion Flow Are Not the Same
+!!!tip When Optical Flow and Motion Flow Are Not the Same
 
-There are a number of scenarios where motion in the image brightness does not correspond to the motion of the 3D points in the scene. Here there are some examples where it is unclear how motion should be defined:
+    There are a number of scenarios where motion in the image brightness does not correspond to the motion of the 3D points in the scene. Here there are some examples where it is unclear how motion should be defined:
 
-Rotating Lambertian sphere with a static illumination will produce no changes in the image. If the sphere is static, and the light source moves, we will see motion in spite of the sphere being static.
+    - Rotating Lambertian sphere with a static illumination will produce no changes in the image. If the sphere is static, and the light source moves, we will see motion in spite of the sphere being static.
+    - Moving in front of a textureless wall produces no change on the image.
+    - Waves in water: waves appear to move along the surface but the actual motion of the water is up and down (well, it is even more complicated than that).
+    - A rotating mirror will produce the appearance of a faster motion. And this will happen in general with any surface that has some specular component.
+    - A camera moving in front of a specular planar surface will not produce a motion field corresponding to a homography.
 
-Moving in front of a textureless wall produces no change on the image.
+    Motion estimation should not just measure pixel motion, it should also try to assign to each source of variation in the image the physical cause for that change. The models we will study in this chapter will not attempt to do this.
 
-Waves in water: waves appear to move along the surface but the actual motion of the water is up and down (well, it is even more complicated than that).
-
-A rotating mirror will produce the appearance of a faster motion. And this will happen in general with any surface that has some specular component.
-
-A camera moving in front of a specular planar surface will not produce a motion field corresponding to a homography.
-
-Motion estimation should not just measure pixel motion, it should also try to assign to each source of variation in the image the physical cause for that change. The models we will study in this chapter will not attempt to do this.
-
-### Dense optical flow methods
+### Mathematical Formulation of Optical Flow
 
 The flow field in optical flow predicts shifts in pixel locations.
 
@@ -193,10 +187,9 @@ As we established with the Aperture Problem, trying to minimize the error for a 
 
 #### Lucas-Kanade
 
-It works on two basic assumptions to calculate the values of u and v in the Optical Flow equation:
+Lucas-Kanade is a **local** and **sparse** method, meaning it only applies the Optical Flow Constraint Equation to a small, localized patch of pixels (e.g., $5 \times 5$) and only at specific feature points (corners). It works on two basic assumptions to calculate the values of u and v in the Optical Flow equation:
 
 1. Flow is smooth locally. It means that the motion of objects or points in a small, localized region of an image is relatively consistent and does not exhibit sudden or abrupt changes.
-
 2. Neighboring pixels have the same displacement. In other words, neighboring pixels in the selected region are assumed to have similar motion, allowing the algorithm to represent the overall motion with a single vector.
 
 Assume having 5 $\times$ 5 image patch, we have 25 pixels, and for each pixel we can write the Optical Flow Constraint Equation. This gives us 25 equations with only 2 unknowns (u and v).
@@ -243,5 +236,60 @@ $$u^{k+1} = \bar{u}^k - \frac{I_x(I_x \bar{u}^k + I_y \bar{v}^k + I_t)}{\alpha^2
 v^{k+1} = \bar{v}^k - \frac{I_y(I_x \bar{u}^k + I_y \bar{v}^k + I_t)}{\alpha^2 + I_x^2 + I_y^2}$$
 
 The algorithm iteratively updates every pixel's vector using the average of its neighbors until the entire field converges into a smooth map. It forces the computer to guess the interior motion, resulting in a 100% **Dense** flow field.
+
+![alt text](image-72.png){height="50%"}
+
+#### Farneback
+
+The algorithm approximates image motion by modeling the neighborhood of each pixel using **quadratic polynomials**. Tracking how these quadratic surfaces translate from one frame to the next yields the displacement field. Instead of exhaustive search or block matching, the method relies on a **polynomial expansion transform** to compute the approximations efficiently.
+The image intensity signal is expressed locally in a coordinate system using the following quadratic formulation:
+$$f(x) \sim x^T A x + b^T x + c$$
+
+$A$ is a symmetric matrix capturing structural details like edges and corners, $b$ represents the local gradient, and $c$ is the absolute intensity.
+
+### Dense optical flow DL methods
+
+Nowadays, we can use deep learning to estimate the optical flow. The idea is to train a neural network to predict the optical flow from a pair of images. The network is trained on a large dataset of image pairs with known optical flow, and it learns to generalize to new image pairs.
+
+One of the most popular architectures for dense optical flow estimation is the **FlowNet** an  encoder-decoder network, which consists of a convolutional neural network that takes two images as input and outputs a *dense flow field*. The network is trained using a combination of supervised and unsupervised loss functions to ensure accurate flow estimation.
+
+The first variant, **FlowNet Simple**, adopts an **early fusion strategy**. The two input images are concatenated along the channel dimension, forming a tensor of shape $(6, H, W)$, which is directly fed into the encoder. Consequently, the network learns both feature extraction and motion matching jointly from the very first convolutional layer.
+
+![alt text](image-73.png){height="50%"}
+
+By stacking raw pixels at the very beginning, the network has no hardcoded concept of two separate frames. It is a generic architecture where the network must implicitly deduce the concept of spatial matching.
+
+The second variant, **FlowNet Corr** (FlowNetC), introduces a **feature-level** (intermediate) **fusion strategy**. Instead of concatenating the images at the input, each image is first processed independently by two identical convolutional streams arranged in a Siamese architecture with shared weights. This design allows the network to learn feature representations separately before comparing them. The fusion between the two streams is performed by a correlation layer, which explicitly measures the similarity between local feature patches extracted from the two images. Given two feature maps $f_1$ and $f_2$, the correlation between patches centered at locations $x_1$ and $x_2$ is defined as:
+
+$$
+c(x_1, x_2) = \sum_{o \in [-k, k] \times [-k, k]} \langle f_1(x_1 + o), f_2(x_2 + o) \rangle
+$$
+
+where:
+
+$x_1, x_2$ are the centers of the compared patches;
+$o$ denotes the offset within the patch;
+$\langle \cdot,\cdot \rangle$ represents the dot product between feature vectors.
+
+![alt text](image-74.png){height="50%"}
+
+To be specific, for each location f1, the authors limit the range of f2 by computing correlations in a neighborhood of size $D = 2d+1$, and d is a given maximum displacement. The size of an output is $(w \times h \times D^2)$. Afterwards, the authors concatenate the feature map, which is extracted from f1 using convolution layer, with the output.
+
+By delaying the fusion until after feature extraction, the network first focuses purely on learning robust, invariant visual representations. The correlation layer then performs an explicit matching operation. It provides a strong geometric inductive bias tailored specifically for motion estimation. The Siamese branches only need to learn how to encode discriminative visual descriptors. The post-correlation layers do not have to learn how to compare data
+
+However, after a series of convolution layers and pooling layers, resolution has been reduced. Thus, the authors refine the coarse pooled representation by ‘upconvolution’ layers, consisting of unpooling and upconvolution. After upconvolutioning the feature maps, the authors concatenate it with corresponding feature maps and an upsampled coarse flow prediction.
+
+![alt text](image-81.png){height="50%"}
+
+The loss function of FlowNet is designed to handle the multi-scale nature of the network's refinement phase. Since the model predicts flow at several resolutions during upsampling, it doesn't just calculate loss at the final output but aggregates errors across different layers.
+The loss for each scale is the **Average Endpoint Error (EPE)**. It represents the Euclidean distance between the predicted flow vector $\mathbf{w}_{pred} = (u, v)$ and the ground truth vector $\mathbf{w}_{gt} = (u^*, v^*)$, averaged over all pixels $N$:
+
+$$EPE = \frac{1}{N} \sum_{i=1}^{N} \sqrt{(u_i - u_i^*)^2 + (v_i - v_i^*)^2}$$
+
+In a deep learning context, this acts as the $L_2$ loss on the displacement field.
+
+#### Difference between FlowNetS and FlowNetC
+
+The main difference between FlowNetS and FlowNetC is the way they fuse the two input images. 
 
 

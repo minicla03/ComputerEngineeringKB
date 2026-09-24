@@ -2,7 +2,7 @@
 
 The Vision Transformer (ViT) treats an image exactly like a sequence of words in Natural Language Processing, feeding it directly into a standard Transformer encoder.
 
-![alt text](assets/image-62.png){width=60% height=50%}
+![alt text](assets/image-62.png){width=60% height=40%}
 
 A standard Transformer expects a 1D sequence of token embeddings. To adapt a 2D image $x \in \mathbb{R}^{H \times W \times C}$, ViT divides the image into a grid of non-overlapping **patches**.
 

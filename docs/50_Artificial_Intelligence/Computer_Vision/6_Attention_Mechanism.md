@@ -75,7 +75,7 @@ Attention mechanisms take as input all the element of sequences of variable leng
 
 This allow to have an **infinite receptive field**: each output element can attend to all input elements, regardless of their position in the sequence. This is a significant advantage over traditional convolutional or recurrent architectures, which have limited receptive fields and may struggle to capture long-range dependencies.
 
-![alt text](./assets/image-61.png){width=100% height=50%}
+![alt text](./assets/image-61.png){width=100% height=20%}
 
 ## Positional Encodings
 

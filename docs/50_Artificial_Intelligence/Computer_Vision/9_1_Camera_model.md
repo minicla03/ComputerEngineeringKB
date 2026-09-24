@@ -25,7 +25,7 @@ The acquisition of image by camera is a physical process that start when a sourc
 
 ![alt text](image-53.png)
 
-Every point of object emits light rays in all direction that will be captured by camera thanks to a **film plane**, the surface where the image is formed. Capturing all rays is problem because we have not a single corrispondence between pixel and rays emits by that point, so the image will be blurred. 
+Every point of object emits light rays in all direction that will be captured by camera thanks to a **film plane**, the surface where the image is formed. Capturing all rays is problem because we have not a single corrispondence between pixel and rays emits by that point, so the image will be blurred.s
 
 ## Pinhole camera model
 
@@ -38,33 +38,42 @@ Depending on the pinhole dimensions the image can be blurred or not, if the pinh
 One caracteristic of the pinhole camera is that the image is inverted, because the rays pass through the pinhole and are projected onto the opposite side of the film plane. This means that objects that are closer to the camera will appear larger in the image, while objects that are farther away will appear smaller. 
 Instead we want the the **virtual image** to be upright.
 
-![alt text](image-57.png)
+The distance between the pinhole and the image plane is the **focal length** ($f$). The position of the pinhole is the **Center of Projection** (CoP) or optical center.
 
-The distance between the pinhole and the image plane is called the **focal length** (f). The position of the pinhole is called the **Center of Projection** (CoP).
+We can denote a 3D object point as $P_o = (X_o, Y_o, Z_o)$, where $Z_o$ is the depth of the scene relative to the camera. Its corresponding projection on the image plane is denoted as $p_i = (x_i, y_i, f)$.
 
-We can write the point using $P_0$ using a vector $r_0 = (x_0, y_0, z_0)$, where $z_0$ is the depth of the scene; and its image can be denoted as $r_i = (x_i, y_i, f)$. If consider the two triangles that are formed, these are similar triangles. From this similarity, we can derive the following relationship:
-$$\frac{r_i}{f} = \frac{r_o}{z_o} \Rrightarrow
-\frac{x_i}{f} = \frac{x_o}{z_o} \text{  and  }
-\frac{y_i}{f} = \frac{y_o}{z_o}$$
+By analyzing the similar triangles formed by the light rays intersecting the image plane and the object, we derive the following relationship:
 
-Since $z=f$, we can rewrite the equations as:
-$$x_i = \frac{f x_o}{z_o} \text{  and  }
-y_i = \frac{f y_o}{z_o}$$
+![alt text](image-57.png){height="50%"}
 
-This means that the coordinates of the image point $(x_i, y_i)$ are determined by the coordinates of the object point $(x_o, y_o)$ and the depth $z_o$ of the scene. The focal length $f$ acts as a scaling factor that affects how much the image is magnified or reduced based on the distance of the object from the camera.
+$$\frac{x_i}{f} = \frac{X_o}{Z_o} \quad \text{and} \quad \frac{y_i}{f} = \frac{Y_o}{Z_o}$$
 
-This is not a linear transformation due to the division by $z$, and often $f$ is not known and we can not reconstruct the 3D point from the image point without additional information. Hovewer, this equation are not linear, but we can make them linear by using homogeneous coordinates and rely on the *projective space*. Adding one the homogeneous coordinate, we can rewrite the equations as:
-$$\begin{bmatrix} fx \\ fy \\ z \end{bmatrix} = \begin{bmatrix} f & 0 & 0  & 0 \\ 0 & f & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} \begin{bmatrix} x_o \\ y_o \\ z_o \\ 1 \end{bmatrix}$$
+Isolating the image coordinates, we obtain the perspective projection equations:
 
-This is the projection equation in homogeneous coordinates, and in this way we can convert it back to normal 2D coordinates, by dividing by the last coordinate:
-$$ (fx, fy, z) \rightarrow \left( \frac{fx}{z}, \frac{fy}{z} \right)$$
+$$x_i = f \frac{X_o}{Z_o} \quad \text{and} \quad y_i = f \frac{Y_o}{Z_o}$$
 
-The properties of this rappresentation are that the proportion of the image is preserved, and that parallel lines in the 3D world will appear as parallel lines in the image, don't converge to a **vanishing point**. 
+The coordinates of the image point $(x_i, y_i)$ are determined by the 3D coordinates of the object and inversely proportional to its depth $Z_o$. The focal length $f$ acts as a scaling factor, defining the magnification of the projection. $Z$ controls the **perspective foreshortening** effect, where objects farther from the camera appear smaller than those closer to it.
+
+Because of the division by $Z_o$, this projection is a **non-linear transformation** in standard Euclidean space $\mathbb{R}^3 \rightarrow \mathbb{R}^2$. Furthermore, the loss of the depth parameter ($Z_o$) makes it an ill-posed problem: we cannot reconstruct the original 3D point from a single 2D image point without additional information..
+
+To linearize this operation and represent it as a matrix multiplication, we move to **projective space** ($\mathbb{P}^n$) using homogeneous coordinates. By adding an extra dimension, we can express the projection as:
+
+$$\begin{bmatrix} u' \\ v' \\ w \end{bmatrix} = \begin{bmatrix} f & 0 & 0 & 0 \\ 0 & f & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} \begin{bmatrix} X_o \\ Y_o \\ Z_o \\ 1 \end{bmatrix}$$
+
+Here, $w = Z_o$. To map this back to the discrete 2D Cartesian plane (the pixel grid), we perform the **perspective divide** (dividing by the homogeneous component $w$):
+
+$$(u', v', w) \rightarrow \left( \frac{u'}{w}, \frac{v'}{w} \right) = (x_i, y_i)$$
+
+The key properties of this perspective representation are:
+
+* **Scale Variation:** Objects appear smaller as their depth ($Z_o$) increases.
+* **Convergence of Parallel Lines:** Unlike orthographic projection, parallel lines in the 3D world (that are not parallel to the image plane) **do not** remain parallel in the image. They converge and intersect at a specific **vanishing point** (punto di fuga).
+* **Collinearity is Preserved:** Straight lines in the 3D world are guaranteed to project as straight lines in the 2D image.
 
 A special case is the **normalized camera model**, where the focal length is set to 1 and the principal point is at the origin. So the coordinates of the image point can be expressed as:
-$$x_i = \frac{x_o}{z_o} \text{  and  }
-y_i = \frac{y_o}{z_o}$$
+$$x_n = \frac{X_o}{Z_o} \quad \text{and} \quad y_n = \frac{Y_o}{Z_o}$$
 
+It applies when the object is relatively far from the camera, and its internal depth variation is very small compared to its total distance from the camera. 
 If $z \gt\gt f$, and the distance of the object from the camera is much greater than the focal length, we have the **orthographic perspective**. We have that the ratio $\frac{\delta z}{z_0} << 1$ that means that the depth variation is negligible compared to the distance of the object from the camera. In this case, we can approximate the projection as:
 $$x_i \approx \frac{f x_o}{z_0} \text{  and  }
 y_i \approx \frac{f y_o}{z_0}$$
@@ -72,8 +81,10 @@ y_i \approx \frac{f y_o}{z_0}$$
 ### Adding lens
 
 To resolve the problem of inverted image, we can add a **lens** to the pinhole camera. 
-Rays of light from the object pass through the lens in one single point, the *optical center* of the lens, at $f$ distance from pinhole, without deviate their direction and converging parallel rays that hit the lens to a single point on the image plane, creating an upright image. The lens allows us to focus the light rays and create an upright image on the film plane. 
-Howerver, depending on the *aperture* of the lens, the image can be blurred. If the aperture is too large, the image will be blurred due to multiple rays passing through it, while if the aperture is too small, the image will be blurred due to diffraction. The optimal size of the aperture depends on the wavelength of light and the distance between the lens and the image plane.
+
+![alt text](image-58.png)
+
+Rays of light from the object pass through the lens in one single point, the *optical center* of the lens, at $f$ distance from pinhole, without deviate their direction and converging parallel rays that hit the lens to a single point on the image plane, creating an upright image.
 
 Adding a **thin lens** to the pinhole camera model allows us to focus the light rays and create an upright image on the film plane. The thin lens is characterized by its focal length $f$, which determines how strongly it converges or diverges light rays. This relationship is described by the lens formula:
 $$\frac{1}{f} = \frac{1}{u} + \frac{1}{v}$$
@@ -83,14 +94,14 @@ Where:
 
 If an object is extremely far away ($u \rightarrow \infty$), the term $\frac{1}{u}$ becomes zero. In this specific case, $\frac{1}{f} = \frac{1}{v}$, meaning $v = f$. Therefore, the focal length $f$ is exactly equal to the distance between the lens and the image plane when focusing on infinitely distant objects.
 
-![alt text](image-58.png)
+Depending on the *aperture* of the lens, the image can be blurred. If the aperture is too large, the image will be blurred due to multiple rays passing through it, while if the aperture is too small, the image will be blurred due to diffraction. The optimal size of the aperture depends on the wavelength of light and the distance between the lens and the image plane.
 
 The aperture controls the amount of light that enters the camera and affects the **depth of field**, which is the range of distances within a scene that appear acceptably sharp in the image. 
 A wide aperture allow more rays to pass through the lens, resulting in a shallow depth of field, where only a small portion of the scene is in focus. Istead, a narrow aperture allows fewer rays to pass through, resulting in a greater depth of field, where more of the scene is in focus.
 
 Moving the lens closer to or further from the sensor changes the geometry of the light rays that are allowed to hit it.
 When the lens is placed very close to the sensor, so $f$ is small, the light rays that pass through the lens are more divergent, resulting in a wider field of view and a shallower depth of field. With a $f$ bigger, the light rays are more convergent, resulting in a narrower field of view and a deeper depth of field.
-The Field of View (angle $\alpha$) is calculated using trigonometry based on the sensor dimension ($d$) and the focal length ($f$):$$\alpha = 2 \arctan\left(\frac{d}{2f}\right)$$Because $f$ is in the denominator, as $f$ increases, the angle $\alpha$ decreases.
+The **Field of View** (angle $\alpha$) is calculated using trigonometry based on the sensor dimension ($d$) and the focal length ($f$):$$\alpha = 2 \arctan\left(\frac{d}{2f}\right)$$Because $f$ is in the denominator, as $f$ increases, the angle $\alpha$ decreases.
 
 #### Distortion
 
